@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://clydxjt8wj3yg"]
+
+[ext_resource type="Texture2D" uid="uid://b311goh8hyyod" path="res://Sprites/Icons/puzzle.png" id="1_ahnpa"]
+[ext_resource type="Script" path="res://scripts/skill_check_helper.gd" id="1_q8iin"]
+[ext_resource type="Texture2D" uid="uid://dhywwaekmnei" path="res://Sprites/Icons/award.png" id="2_r2bkk"]
+[ext_resource type="Texture2D" uid="uid://re03faq7m00k" path="res://Sprites/Icons/sword.png" id="3_cigey"]
+[ext_resource type="Texture2D" uid="uid://vc4xqv2p2ps7" path="res://Sprites/Icons/shield.png" id="4_5g8ly"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_gu1ju"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr01y"]
+
+[sub_resource type="Theme" id="Theme_pcwax"]
+HScrollBar/icons/decrement = SubResource("ImageTexture_gu1ju")
+HScrollBar/icons/decrement_highlight = SubResource("ImageTexture_gu1ju")
+HScrollBar/icons/decrement_pressed = SubResource("ImageTexture_gu1ju")
+HScrollBar/icons/increment = SubResource("ImageTexture_gu1ju")
+HScrollBar/icons/increment_highlight = SubResource("ImageTexture_gu1ju")
+HScrollBar/icons/increment_pressed = SubResource("ImageTexture_gu1ju")
+HScrollBar/styles/grabber = SubResource("StyleBoxEmpty_vr01y")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_vr01y")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_vr01y")
+HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_vr01y")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_vr01y")
+VScrollBar/icons/decrement = SubResource("ImageTexture_gu1ju")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_gu1ju")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_gu1ju")
+VScrollBar/icons/increment = SubResource("ImageTexture_gu1ju")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_gu1ju")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_gu1ju")
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_vr01y")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_vr01y")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_vr01y")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_vr01y")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_vr01y")
+
+[node name="actions_descriptions" type="ScrollContainer" node_paths=PackedStringArray("text", "buttons")]
+offset_left = 3.0
+offset_right = 756.0
+offset_bottom = 215.0
+theme = SubResource("Theme_pcwax")
+script = ExtResource("1_q8iin")
+text = NodePath("content/text")
+buttons = NodePath("content/buttons")
+
+[node name="content" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="buttons" type="VBoxContainer" parent="content"]
+layout_mode = 2
+
+[node name="action1" type="TextureButton" parent="content/buttons"]
+texture_filter = 2
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_ahnpa")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="action2" type="TextureButton" parent="content/buttons"]
+texture_filter = 2
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("2_r2bkk")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="action3" type="TextureButton" parent="content/buttons"]
+texture_filter = 2
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_cigey")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="action4" type="TextureButton" parent="content/buttons"]
+texture_filter = 2
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_5g8ly")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="text" type="RichTextLabel" parent="content"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "- rtgbdfdfgdfgdfgdfgdfgdfgdf dfg dfg dfg dfgdfgdfgdfgdfgdfg
+- rtgbdfdfgdfgdfgdfgdfgdfgdf dfg dfg dfg dfgdfgdfgdfgdfgdfg
+- rtgbdfdfgdfgdfgdfgdfgdfgdf dfg dfg dfg dfgdfgdfgdfgdfgdfg
+- rtgbdfdfgdfgdfgdfgdfgdfgdf dfg dfg dfg dfgdfgdfgdfgdfgdfg"
+
+[connection signal="pressed" from="content/buttons/action1" to="." method="select_action" binds= [0]]
+[connection signal="pressed" from="content/buttons/action2" to="." method="select_action" binds= [1]]
+[connection signal="pressed" from="content/buttons/action3" to="." method="select_action" binds= [2]]
+[connection signal="pressed" from="content/buttons/action4" to="." method="select_action" binds= [3]]

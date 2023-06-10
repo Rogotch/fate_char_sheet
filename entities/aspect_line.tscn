@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcar4yym7i47s"]
+
+[ext_resource type="Script" path="res://scripts/aspect_line.gd" id="1_e7xxm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qo8l6"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2b5du"]
+font_size = 24
+
+[node name="aspect_line" type="HBoxContainer" node_paths=PackedStringArray("aspect_edit_line", "aspect_type_edit_line", "aspect_line", "aspect_type_line", "delete_button", "line_label", "edit", "change")]
+custom_minimum_size = Vector2(0, 40)
+offset_right = 311.0
+offset_bottom = 32.0
+script = ExtResource("1_e7xxm")
+aspect_edit_line = NodePath("texts/edit/LineEdit")
+aspect_type_edit_line = NodePath("texts/edit/LineEdit2")
+aspect_line = NodePath("texts/labels/Label")
+aspect_type_line = NodePath("texts/labels/Control/Label2")
+delete_button = NodePath("delete_button")
+editabled = true
+line_label = NodePath("texts/labels")
+edit = NodePath("texts/edit")
+change = NodePath("Edit_button")
+
+[node name="delete_button" type="Button" parent="."]
+visible = false
+layout_mode = 2
+text = "delete
+"
+
+[node name="texts" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="labels" type="VBoxContainer" parent="texts"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="texts/labels"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Аспект"
+label_settings = SubResource("LabelSettings_qo8l6")
+vertical_alignment = 2
+
+[node name="Control" type="Control" parent="texts/labels"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="texts/labels/Control"]
+modulate = Color(0.654902, 0.654902, 0.654902, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Тип аспекта"
+label_settings = SubResource("LabelSettings_2b5du")
+
+[node name="edit" type="VBoxContainer" parent="texts"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="LineEdit" type="LineEdit" parent="texts/edit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Аспект"
+
+[node name="LineEdit2" type="LineEdit" parent="texts/edit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Тип аспекта"
+
+[node name="Edit_button" type="Button" parent="."]
+layout_mode = 2
+text = "edit
+"
+
+[connection signal="pressed" from="delete_button" to="." method="_on_delete_button_pressed"]

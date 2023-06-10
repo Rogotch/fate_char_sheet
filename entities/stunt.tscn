@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgs6rjryy4laq"]
+
+[ext_resource type="Script" path="res://scripts/stunt.gd" id="1_gkgyd"]
+[ext_resource type="Texture2D" uid="uid://br43d1hbfcwjg" path="res://Sprites/Icons/cursor_down.png" id="2_ab83y"]
+[ext_resource type="Texture2D" uid="uid://h0rejwyqm7ho" path="res://Sprites/Icons/cursor_up.png" id="3_5a0l8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xe7rv"]
+font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdan6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56hem"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hdrat"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eibt1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sq353"]
+
+[sub_resource type="Theme" id="Theme_vgt58"]
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/decrement_pressed = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/icons/increment_pressed = null
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_tdan6")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_56hem")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_hdrat")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_eibt1")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sq353")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey22d"]
+
+[node name="stunt" type="VBoxContainer" node_paths=PackedStringArray("stunt_edit_line", "stunt_description_edit_line", "stunt_line", "stunt_description_line", "stunt_description", "delete_button", "expand_button", "line_label", "edit", "change")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gkgyd")
+stunt_edit_line = NodePath("name/name_edit")
+stunt_description_edit_line = NodePath("description/scroll/holder/descr_edit")
+stunt_line = NodePath("name/name")
+stunt_description_line = NodePath("description/scroll/holder/descr")
+stunt_description = NodePath("description/scroll")
+delete_button = NodePath("name/delete_button")
+expand_button = NodePath("name/expand")
+expand_down_texture = ExtResource("2_ab83y")
+expand_up_texture = ExtResource("3_5a0l8")
+editabled = true
+line_label = NodePath("name/name")
+edit = NodePath("name/name_edit")
+change = NodePath("name/edit_button")
+
+[node name="name" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="delete_button" type="Button" parent="name"]
+visible = false
+layout_mode = 2
+text = "delete
+"
+
+[node name="name" type="Label" parent="name"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+label_settings = SubResource("LabelSettings_xe7rv")
+autowrap_mode = 3
+
+[node name="name_edit" type="LineEdit" parent="name"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+theme_override_font_sizes/font_size = 32
+
+[node name="edit_button" type="Button" parent="name"]
+layout_mode = 2
+text = "edit"
+
+[node name="expand" type="Button" parent="name"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_5a0l8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="description" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="scroll" type="ScrollContainer" parent="description"]
+layout_mode = 2
+theme = SubResource("Theme_vgt58")
+horizontal_scroll_mode = 0
+
+[node name="holder" type="VBoxContainer" parent="description/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="descr" type="Label" parent="description/scroll/holder"]
+layout_mode = 2
+text = "Приветы и покаты"
+label_settings = SubResource("LabelSettings_ey22d")
+autowrap_mode = 3
+
+[node name="descr_edit" type="TextEdit" parent="description/scroll/holder"]
+visible = false
+layout_mode = 2
+placeholder_text = "Описание трюка"
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[connection signal="pressed" from="name/delete_button" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="name/expand" to="." method="expand_button_press"]
+[connection signal="resized" from="description/scroll/holder/descr_edit" to="." method="_on_descr_edit_resized"]

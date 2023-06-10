@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6vcwqrnfs2tt"]
+
+[ext_resource type="Texture2D" uid="uid://o2xpategpha2" path="res://Sprites/Icons/d6_outline.png" id="1_ylogp"]
+[ext_resource type="Script" path="res://scripts/fate_dice.gd" id="2_dkdt5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_478uc"]
+font_size = 64
+
+[node name="fate_dice" type="TextureRect" node_paths=PackedStringArray("txt")]
+texture_filter = 2
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1120.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 2
+texture = ExtResource("1_ylogp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_dkdt5")
+txt = NodePath("txt")
+
+[node name="txt" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -11.0
+offset_right = 2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_478uc")
+horizontal_alignment = 1
+vertical_alignment = 1
