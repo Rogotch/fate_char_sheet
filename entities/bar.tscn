@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbk8rdqkccp1y"]
+
+[ext_resource type="Script" path="res://scripts/bar.gd" id="1_8bfan"]
+[ext_resource type="PackedScene" uid="uid://02s1f33rfyc6" path="res://entities/slider.tscn" id="2_2rtgp"]
+
+[node name="bar" type="Control" node_paths=PackedStringArray("slider_left", "slider_right")]
+custom_minimum_size = Vector2(0, 396)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1020.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8bfan")
+slider_left = NodePath("HBoxContainer/slider_left")
+slider_right = NodePath("HBoxContainer/slider_right")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="slider_left" parent="HBoxContainer" instance=ExtResource("2_2rtgp")]
+layout_mode = 2
+slider_alignment = "left"
+
+[node name="separation" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="slider_right" parent="HBoxContainer" instance=ExtResource("2_2rtgp")]
+layout_mode = 2
+
+[connection signal="change_value" from="HBoxContainer/slider_left" to="." method="_on_slider_left_change_value"]
+[connection signal="change_value" from="HBoxContainer/slider_right" to="." method="_on_slider_right_change_value"]

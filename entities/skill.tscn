@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxok4bvmaau5m"]
+
+[ext_resource type="Script" path="res://scripts/skill.gd" id="1_0d7bc"]
+[ext_resource type="Texture2D" uid="uid://n414uyf666t8" path="res://Sprites/Icons/iconography.png" id="2_lmxil"]
+[ext_resource type="Texture2D" uid="uid://bmnj2sfend6yy" path="res://Sprites/Icons/token_add.png" id="2_slyfc"]
+[ext_resource type="Texture2D" uid="uid://d2s552sxm3o28" path="res://Sprites/Icons/token_subtract.png" id="3_7ahbf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0up75"]
+atlas = ExtResource("2_lmxil")
+region = Rect2(2886, 2184, 292, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5n5w"]
+atlas = ExtResource("2_lmxil")
+region = Rect2(2216, 2207, 312, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c348l"]
+atlas = ExtResource("2_lmxil")
+region = Rect2(2886, 2184, 292, 293)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xnndv"]
+font_size = 32
+
+[node name="skill" type="HBoxContainer" node_paths=PackedStringArray("points", "buttons", "name_label", "delete_button")]
+offset_right = 160.0
+offset_bottom = 21.0
+theme_override_constants/separation = 0
+script = ExtResource("1_0d7bc")
+points = NodePath("points")
+buttons = NodePath("skill_name/buttons")
+name_label = NodePath("skill_name/name")
+delete_button = NodePath("skill_name/delete_button")
+cross = SubResource("AtlasTexture_0up75")
+check = SubResource("AtlasTexture_k5n5w")
+
+[node name="skill_name" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="delete_button" type="TextureButton" parent="skill_name"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.823529, 0, 0, 1)
+texture_filter = 2
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_c348l")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="name" type="Label" parent="skill_name"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Охота"
+label_settings = SubResource("LabelSettings_xnndv")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="buttons" type="HBoxContainer" parent="skill_name"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="add_point" type="TextureButton" parent="skill_name/buttons"]
+texture_filter = 2
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture_normal = ExtResource("2_slyfc")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="substract_point" type="TextureButton" parent="skill_name/buttons"]
+texture_filter = 2
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture_normal = ExtResource("3_7ahbf")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="points" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[connection signal="pressed" from="skill_name/delete_button" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="skill_name/buttons/add_point" to="." method="_on_add_point_pressed"]
+[connection signal="pressed" from="skill_name/buttons/substract_point" to="." method="_on_substract_point_pressed"]

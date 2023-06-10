@@ -1,0 +1,15 @@
+[gd_resource type="FontVariation" load_steps=10 format=3 uid="uid://bisl8vi4byipa"]
+
+[ext_resource type="FontFile" uid="uid://c5xvgpjwoe5j3" path="res://Fonts/SofiaSans-Regular.ttf" id="1_7sp6i"]
+[ext_resource type="FontFile" uid="uid://btgvkmijpojai" path="res://Fonts/SofiaSans-Bold.ttf" id="2_mtjkx"]
+[ext_resource type="FontFile" uid="uid://lnodmlcs6gr8" path="res://Fonts/SofiaSans-ExtraBold.ttf" id="3_aadg8"]
+[ext_resource type="FontFile" uid="uid://wwtn2lub47yh" path="res://Fonts/SofiaSans-Black.ttf" id="4_rqhhj"]
+[ext_resource type="FontFile" uid="uid://dpw76pieuknjw" path="res://Fonts/SofiaSans-ExtraLight.ttf" id="5_utjaa"]
+[ext_resource type="FontFile" uid="uid://da2qsrnuks2bv" path="res://Fonts/SofiaSans-Light.ttf" id="6_cfv7v"]
+[ext_resource type="FontFile" uid="uid://e5frvi6uijj7" path="res://Fonts/SofiaSans-Medium.ttf" id="7_a5abl"]
+[ext_resource type="FontFile" uid="uid://cftue384ygmkh" path="res://Fonts/SofiaSans-SemiBold.ttf" id="8_pxldj"]
+[ext_resource type="FontFile" uid="uid://c60nntwgcy1j3" path="res://Fonts/SofiaSans-Thin.ttf" id="9_xj160"]
+
+[resource]
+resource_local_to_scene = true
+fallbacks = Array[Font]([ExtResource("1_7sp6i"), ExtResource("2_mtjkx"), ExtResource("3_aadg8"), ExtResource("4_rqhhj"), ExtResource("5_utjaa"), ExtResource("6_cfv7v"), ExtResource("7_a5abl"), ExtResource("8_pxldj"), ExtResource("9_xj160")])

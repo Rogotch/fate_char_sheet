@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://02s1f33rfyc6"]
+
+[ext_resource type="Script" path="res://scripts/slider.gd" id="1_0ftk5"]
+
+[node name="slider" type="HBoxContainer" node_paths=PackedStringArray("v_slider", "numbers")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ftk5")
+max_value = 13
+min_value = -4
+slider_alignment = "right"
+v_slider = NodePath("slider/VSlider")
+numbers = NodePath("numbers")
+
+[node name="slider" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="VSlider" type="VSlider" parent="slider"]
+layout_mode = 2
+min_value = -4.0
+max_value = 13.0
+
+[node name="numbers" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[connection signal="value_changed" from="slider/VSlider" to="." method="_on_v_slider_value_changed"]

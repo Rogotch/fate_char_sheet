@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cru2bb2rsku6p"]
+
+[ext_resource type="FontFile" uid="uid://dbrugsff7dakj" path="res://Fonts/cc.yal.6w3.ttf" id="1_21bvo"]
+
+[resource]
+base_font = ExtResource("1_21bvo")
+opentype_features = {
+1667329140: 0
+}

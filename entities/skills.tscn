@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c37tj6cmi34qp"]
+
+[ext_resource type="Script" path="res://scripts/skills.gd" id="1_wtt5d"]
+
+[node name="skills" type="Container"]
+offset_right = 624.0
+offset_bottom = 473.0
+script = ExtResource("1_wtt5d")

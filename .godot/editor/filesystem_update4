@@ -1,0 +1,7 @@
+res://entities/stunt.tscn
+res://scripts/stunt.gd
+res://entities/bar.tscn
+res://ui/character_list.tscn
+res://entities/editing_line.tscn
+res://entities/aspect_line.tscn
+res://entities/skill.tscn

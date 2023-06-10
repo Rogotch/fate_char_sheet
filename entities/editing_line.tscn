@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bevofxsd70c2"]
+
+[ext_resource type="Script" path="res://scripts/classes/editing_line.gd" id="1_cl5bc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
+font_size = 32
+
+[node name="editing_line" type="HBoxContainer" node_paths=PackedStringArray("line_label", "edit", "change")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cl5bc")
+editabled = true
+line_label = NodePath("line_label")
+edit = NodePath("edit")
+change = NodePath("change")
+
+[node name="change" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "edit"
+
+[node name="line_label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_3qe26")
+
+[node name="edit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32

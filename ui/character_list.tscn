@@ -1,0 +1,174 @@
+[gd_scene load_steps=10 format=3 uid="uid://twa5dbcfk637"]
+
+[ext_resource type="PackedScene" uid="uid://dbk8rdqkccp1y" path="res://entities/bar.tscn" id="1_3i6yc"]
+[ext_resource type="Script" path="res://scripts/character_list.gd" id="1_ag6tl"]
+[ext_resource type="PackedScene" uid="uid://bevofxsd70c2" path="res://entities/editing_line.tscn" id="2_0rgqi"]
+[ext_resource type="PackedScene" uid="uid://clydxjt8wj3yg" path="res://entities/skill_check_helper.tscn" id="3_b4j05"]
+[ext_resource type="PackedScene" uid="uid://bcar4yym7i47s" path="res://entities/aspect_line.tscn" id="4_awtn0"]
+[ext_resource type="PackedScene" uid="uid://c37tj6cmi34qp" path="res://entities/skills.tscn" id="4_c0feu"]
+[ext_resource type="PackedScene" uid="uid://cgs6rjryy4laq" path="res://entities/stunt.tscn" id="5_ex4xd"]
+[ext_resource type="PackedScene" uid="uid://d1axx6nxihide" path="res://entities/roller.tscn" id="5_okjfn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
+font_size = 32
+
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ag6tl")
+actions_descriptions = NodePath("content/skills/actions_descriptions")
+skills = NodePath("content/skills/skills_holder/ScrollContainer/skills")
+bar = NodePath("content/skills/VBoxContainer/bar")
+roller = NodePath("content/skills/VBoxContainer/roller")
+
+[node name="content" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="character" type="HBoxContainer" parent="content"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="portret" type="TextureRect" parent="content/character"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+tooltip_text = "Иконка вашего персонажа"
+
+[node name="ColorRect" type="ColorRect" parent="content/character/portret"]
+show_behind_parent = true
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.717647)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="content/character"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="content/character/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="content/character/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Имя: "
+label_settings = SubResource("LabelSettings_mi3tg")
+
+[node name="editing_line" parent="content/character/VBoxContainer/HBoxContainer" instance=ExtResource("2_0rgqi")]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="concept" type="Label" parent="content/character/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_vertical = 1
+text = " Побирушник-вор"
+label_settings = SubResource("LabelSettings_mi3tg")
+
+[node name="tabs" type="HBoxContainer" parent="content/character/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="content/character/VBoxContainer/tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Навыки и аспекты"
+
+[node name="Button2" type="Button" parent="content/character/VBoxContainer/tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skills"
+
+[node name="Button3" type="Button" parent="content/character/VBoxContainer/tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skills"
+
+[node name="skills" type="HBoxContainer" parent="content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="skills_holder" type="VBoxContainer" parent="content/skills"]
+layout_mode = 2
+
+[node name="add_skill" type="Button" parent="content/skills/skills_holder"]
+layout_mode = 2
+text = "+Добавить"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="content/skills/skills_holder"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="skills" parent="content/skills/skills_holder/ScrollContainer" instance=ExtResource("4_c0feu")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="aspects" type="VBoxContainer" parent="content/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="aspect_line" parent="content/skills/aspects" instance=ExtResource("4_awtn0")]
+layout_mode = 2
+
+[node name="aspect_line2" parent="content/skills/aspects" instance=ExtResource("4_awtn0")]
+layout_mode = 2
+
+[node name="aspect_line3" parent="content/skills/aspects" instance=ExtResource("4_awtn0")]
+layout_mode = 2
+
+[node name="stunts" type="VBoxContainer" parent="content/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stunt" parent="content/skills/stunts" instance=ExtResource("5_ex4xd")]
+layout_mode = 2
+
+[node name="stunt2" parent="content/skills/stunts" instance=ExtResource("5_ex4xd")]
+layout_mode = 2
+
+[node name="stunt3" parent="content/skills/stunts" instance=ExtResource("5_ex4xd")]
+layout_mode = 2
+
+[node name="stunt4" parent="content/skills/stunts" instance=ExtResource("5_ex4xd")]
+layout_mode = 2
+
+[node name="stunt5" parent="content/skills/stunts" instance=ExtResource("5_ex4xd")]
+layout_mode = 2
+
+[node name="stunt6" parent="content/skills/stunts" instance=ExtResource("5_ex4xd")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="content/skills"]
+visible = false
+layout_mode = 2
+
+[node name="bar" parent="content/skills/VBoxContainer" instance=ExtResource("1_3i6yc")]
+custom_minimum_size = Vector2(90, 396)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="roller" parent="content/skills/VBoxContainer" instance=ExtResource("5_okjfn")]
+custom_minimum_size = Vector2(90, 70)
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="actions_descriptions" parent="content/skills" instance=ExtResource("3_b4j05")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="select_skill" from="content/skills/skills_holder/ScrollContainer/skills" to="." method="_on_skills_select_skill"]
+[connection signal="result" from="content/skills/VBoxContainer/bar" to="." method="_on_bar_result"]
+[connection signal="roll" from="content/skills/VBoxContainer/roller" to="." method="_on_roller_roll"]

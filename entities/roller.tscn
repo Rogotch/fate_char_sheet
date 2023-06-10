@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1axx6nxihide"]
+
+[ext_resource type="Script" path="res://scripts/roller.gd" id="1_m8wvp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kp421"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2h614"]
+font_size = 32
+
+[node name="roller" type="VBoxContainer" node_paths=PackedStringArray("pool", "info", "text")]
+custom_minimum_size = Vector2(180, 70)
+offset_right = 180.0
+offset_bottom = 70.0
+alignment = 1
+script = ExtResource("1_m8wvp")
+pool = NodePath("content/pool")
+info = NodePath("content/info")
+text = NodePath("results/text")
+
+[node name="content" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="info" type="Label" parent="content"]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PRESS_FOR_ROLL_KEY"
+label_settings = SubResource("LabelSettings_kp421")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="pool" type="HBoxContainer" parent="content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="transparent_button" type="TextureButton" parent="content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="results" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="text" type="Label" parent="results"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_2h614")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="content/transparent_button" to="." method="_on_transparent_button_pressed"]

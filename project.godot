@@ -1,0 +1,39 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="fate_table"
+config/features=PackedStringArray("4.0")
+config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
+SignalsBus="*res://scripts/signals_bus.gd"
+
+[gui]
+
+theme/custom_font="res://Fonts/cc.yal.6w3.tres"
+theme/default_font_antialiasing=0
+common/drop_mouse_on_gui_input_disabled=true
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/fate_localization.ru.translation", "res://Localization/fate_localization.en.translation")
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+environment/default_environment="res://default_env.tres"
