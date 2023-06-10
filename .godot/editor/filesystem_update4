@@ -5,3 +5,6 @@ res://ui/character_list.tscn
 res://entities/editing_line.tscn
 res://entities/aspect_line.tscn
 res://entities/skill.tscn
+res://Localization/fate_localization.ru.translation
+res://Localization/fate_localization.en.translation
+res://Fonts/cc.yal.6w3.tres
