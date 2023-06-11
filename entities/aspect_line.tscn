@@ -78,6 +78,7 @@ theme_override_font_sizes/font_size = 24
 placeholder_text = "Тип аспекта"
 
 [node name="Edit_button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "edit
 "

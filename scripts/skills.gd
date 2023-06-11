@@ -16,7 +16,7 @@ func _ready() -> void:
 	add_skill("Ловкость", 1)
 	add_skill("Ловкость", 1)
 	add_skill("Златоуст")
-	select_upgradable_skills()
+#	select_upgradable_skills()
 	pass
 
 func add_skill(skill_name : String, value = 0):

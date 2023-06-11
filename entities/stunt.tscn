@@ -67,6 +67,7 @@ text = "delete
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
+text = "Трюк"
 label_settings = SubResource("LabelSettings_xe7rv")
 autowrap_mode = 3
 
@@ -76,8 +77,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 32
+placeholder_text = "Трюк"
 
 [node name="edit_button" type="Button" parent="name"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "edit"
 
@@ -105,7 +108,6 @@ size_flags_vertical = 3
 
 [node name="descr" type="Label" parent="description/scroll/holder"]
 layout_mode = 2
-text = "Приветы и покаты"
 label_settings = SubResource("LabelSettings_ey22d")
 autowrap_mode = 3
 
