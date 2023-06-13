@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtkcq3xldi68s"]
+
+[ext_resource type="Script" path="res://scripts/classes/editing_line.gd" id="1_v4n2t"]
+[ext_resource type="PackedScene" uid="uid://crfbho4mk0gvo" path="res://entities/stress_box.tscn" id="2_go2gr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
+font_size = 32
+
+[node name="stress_counter" type="HBoxContainer" node_paths=PackedStringArray("line_label", "edit", "change")]
+offset_right = 133.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+script = ExtResource("1_v4n2t")
+editabled = true
+line_label = NodePath("VBoxContainer/editing_line/line_label")
+edit = NodePath("VBoxContainer/editing_line/edit")
+change = NodePath("VBoxContainer2/change")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="editing_line" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="line_label" type="Label" parent="VBoxContainer/editing_line"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Стресс силы"
+label_settings = SubResource("LabelSettings_3qe26")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="edit" type="LineEdit" parent="VBoxContainer/editing_line"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+expand_to_text_length = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="box" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+layout_mode = 2
+
+[node name="box2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+layout_mode = 2
+
+[node name="box3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+layout_mode = 2
+
+[node name="box4" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="change" type="Button" parent="VBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "edit"

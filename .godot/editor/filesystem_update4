@@ -4,5 +4,7 @@ res://entities/editing_line.tscn
 res://entities/aspect_line.tscn
 res://entities/stunt.tscn
 res://entities/skill.tscn
-res://scripts/skill.gd
-res://scripts/skills.gd
+res://scripts/stress_box.gd
+res://entities/stress_box.tscn
+res://entities/stress_counter.tscn
+res://scripts/classes/editing_line.gd

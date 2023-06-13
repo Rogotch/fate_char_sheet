@@ -19,6 +19,12 @@ config/icon="res://icon.png"
 Global="*res://scripts/global.gd"
 SignalsBus="*res://scripts/signals_bus.gd"
 
+[display]
+
+window/size/viewport_width=2304
+window/size/viewport_height=1296
+window/stretch/scale=2.0
+
 [gui]
 
 theme/custom_font="res://Fonts/cc.yal.6w3.tres"

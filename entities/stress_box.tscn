@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://crfbho4mk0gvo"]
+
+[ext_resource type="Texture2D" uid="uid://o2xpategpha2" path="res://Sprites/Icons/d6_outline.png" id="1_utyw6"]
+[ext_resource type="Script" path="res://scripts/stress_box.gd" id="2_ltgie"]
+[ext_resource type="Texture2D" uid="uid://da3wgn4aa8cbd" path="res://Sprites/Icons/tick.png" id="2_vkded"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u152f"]
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="box" type="TextureRect" node_paths=PackedStringArray("check", "value", "edit")]
+custom_minimum_size = Vector2(24, 24)
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("1_utyw6")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_ltgie")
+check = NodePath("margin/check")
+value = NodePath("center_point/value")
+edit = NodePath("edit")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="check" type="TextureRect" parent="margin"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_vkded")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="center_point" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -3.0
+offset_top = 1.0
+offset_right = -3.0
+offset_bottom = 1.0
+grow_horizontal = 0
+
+[node name="value" type="Label" parent="center_point"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -3.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 14.0
+grow_horizontal = 0
+text = "4"
+label_settings = SubResource("LabelSettings_u152f")
+
+[node name="button_node" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="edit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+alignment = 1
+select_all_on_focus = true
+caret_blink = true
+
+[connection signal="pressed" from="button_node" to="." method="pressed"]
+[connection signal="text_submitted" from="edit" to="." method="submitted"]

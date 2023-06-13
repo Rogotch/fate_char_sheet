@@ -1,4 +1,4 @@
-extends BoxContainer
+extends Control
 class_name editing_line
 
 signal editing
@@ -12,10 +12,6 @@ signal set_new_text
 var focused := false
 var redacted_mode := false
 
-
-func _init():
-	aspect
-	pass
 
 func _ready():
 	change.connect("pressed", Callable(self,"press_button"))
