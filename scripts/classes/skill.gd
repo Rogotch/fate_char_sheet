@@ -13,3 +13,7 @@ func _init(new_name : String, new_value : int):
 	name   = new_name
 	value  = new_value
 	pass
+
+func change_name(new_name : String):
+	name = new_name
+	pass

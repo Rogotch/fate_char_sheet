@@ -1,3 +1,4 @@
+LineEdit
 HBoxContainer
 VBoxContainer
 TextureButton
@@ -5,7 +6,6 @@ Button
 add_button
 RichTextLabel
 TextEdit
-LineEdit
 Label
 ScrollContainer
 editing_line

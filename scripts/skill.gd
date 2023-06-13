@@ -5,6 +5,8 @@ signal select(flag : bool)
 @export var points          : HBoxContainer
 @export var buttons         : HBoxContainer
 @export var name_label      : Label
+@export var edit_label      : LineEdit
+@export var edit_button     : TextureButton
 @export var delete_button   : TextureButton
 @export var skill_name      : HBoxContainer
 
@@ -18,9 +20,12 @@ var skill_params : skill
 
 var delete_flag := false
 var selecting_flag := false
+var editing_flag := false
 
 
 func _ready() -> void:
+	edit_button.self_modulate = Color.ORANGE
+	
 #	set_skill_value(5)
 	pass
 
@@ -78,9 +83,11 @@ func _input(event: InputEvent) -> void:
 		if get_global_rect().has_point(get_global_mouse_position()):
 			buttons.modulate = Color.WHITE
 			delete_button.modulate = Color.WHITE
+			edit_button.modulate = Color.WHITE
 		else:
 			buttons.modulate = Color.TRANSPARENT
 			delete_button.modulate = Color.TRANSPARENT
+			edit_button.modulate = Color.TRANSPARENT
 			change_delete_flag(false)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
@@ -115,7 +122,6 @@ func change_delete_flag(new_flag : bool):
 	pass
 
 func set_select(flag : bool):
-	
 	selecting_flag = flag
 	name_label.modulate = Color.ORANGE if flag else Color.WHITE
 	pass
@@ -126,4 +132,18 @@ func set_label_modulate(selected_color : Color):
 
 func modulate_off():
 	name_label.modulate = Color.ORANGE if selecting_flag else Color.WHITE
+	pass
+
+func set_edit():
+	editing_flag = !editing_flag
+	name_label.visible = !editing_flag
+	edit_label.visible =  editing_flag
+	edit_label.custom_minimum_size =  name_label.get_combined_minimum_size() + Vector2(20, 0)
+	if editing_flag:
+		edit_button.self_modulate = Color.FOREST_GREEN
+		edit_label.text = name_label.text
+		edit_label.grab_focus()
+	else:
+		edit_button.self_modulate = Color.ORANGE
+		name_label.text = edit_label.text
 	pass
