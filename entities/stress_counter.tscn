@@ -1,29 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtkcq3xldi68s"]
+[gd_scene load_steps=10 format=3 uid="uid://dtkcq3xldi68s"]
 
-[ext_resource type="Script" path="res://scripts/classes/editing_line.gd" id="1_v4n2t"]
+[ext_resource type="Script" path="res://scripts/stress_counter.gd" id="1_6ipmv"]
 [ext_resource type="PackedScene" uid="uid://crfbho4mk0gvo" path="res://entities/stress_box.tscn" id="2_go2gr"]
+[ext_resource type="Texture2D" uid="uid://cneue66sphgl" path="res://Sprites/Icons/notepad.png" id="3_bfcfn"]
+[ext_resource type="Texture2D" uid="uid://dvtlykyesp6xd" path="res://Sprites/Icons/settings_3.png" id="4_fils6"]
+[ext_resource type="Texture2D" uid="uid://2f053bw6qcup" path="res://Sprites/Icons/Icons.png" id="5_47m10"]
+[ext_resource type="PackedScene" uid="uid://cvrdnq2kte0on" path="res://entities/params.tscn" id="6_25kqv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
 font_size = 32
 
-[node name="stress_counter" type="HBoxContainer" node_paths=PackedStringArray("line_label", "edit", "change")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qra5"]
+atlas = ExtResource("5_47m10")
+region = Rect2(112, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mc5u"]
+atlas = ExtResource("5_47m10")
+region = Rect2(0, 96, 16, 16)
+
+[node name="stress_counter" type="VBoxContainer"]
 offset_right = 133.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
-script = ExtResource("1_v4n2t")
-editabled = true
+
+[node name="stress_counter" type="HBoxContainer" parent="." node_paths=PackedStringArray("settings", "line_label", "edit", "change")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_6ipmv")
+settings = NodePath("VBoxContainer2/settings")
 line_label = NodePath("VBoxContainer/editing_line/line_label")
 edit = NodePath("VBoxContainer/editing_line/edit")
-change = NodePath("VBoxContainer2/change")
+change = NodePath("VBoxContainer2/edit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="separator" type="Control" parent="stress_counter"]
+visible = false
+custom_minimum_size = Vector2(18, 0)
 layout_mode = 2
 
-[node name="editing_line" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="stress_counter"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="editing_line" type="HBoxContainer" parent="stress_counter/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="line_label" type="Label" parent="VBoxContainer/editing_line"]
+[node name="line_label" type="Label" parent="stress_counter/VBoxContainer/editing_line"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -34,7 +56,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="edit" type="LineEdit" parent="VBoxContainer/editing_line"]
+[node name="edit" type="LineEdit" parent="stress_counter/VBoxContainer/editing_line"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -43,26 +65,71 @@ expand_to_text_length = true
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="stress_counter/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="box" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="box2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box2" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="box3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box3" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="box4" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box4" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="stress_counter"]
+layout_mode = 2
+alignment = 1
+
+[node name="edit" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("3_bfcfn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="settings" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("4_fils6")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="add" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = SubResource("AtlasTexture_2qra5")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="remove" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = SubResource("AtlasTexture_0mc5u")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="additionals" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="change" type="Button" parent="VBoxContainer2"]
-modulate = Color(1, 1, 1, 0)
+[node name="all_params" type="VBoxContainer" parent="additionals"]
 layout_mode = 2
-text = "edit"
+
+[node name="params" parent="additionals/all_params" instance=ExtResource("6_25kqv")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="additionals"]
+layout_mode = 2
+text = "Добавить условия"

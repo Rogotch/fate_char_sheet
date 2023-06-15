@@ -32,26 +32,16 @@ VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sq353")
 
 [sub_resource type="LabelSettings" id="LabelSettings_ey22d"]
 
-[node name="stunt" type="VBoxContainer" node_paths=PackedStringArray("stunt_edit_line", "stunt_description_edit_line", "stunt_line", "stunt_description_line", "stunt_description", "delete_button", "expand_button", "line_label", "edit", "change")]
+[node name="stunt" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gkgyd")
-stunt_edit_line = NodePath("name/name_edit")
-stunt_description_edit_line = NodePath("description/scroll/holder/descr_edit")
-stunt_line = NodePath("name/name")
-stunt_description_line = NodePath("description/scroll/holder/descr")
-stunt_description = NodePath("description/scroll")
-delete_button = NodePath("name/delete_button")
-expand_button = NodePath("name/expand")
 expand_down_texture = ExtResource("2_ab83y")
 expand_up_texture = ExtResource("3_5a0l8")
 editabled = true
-line_label = NodePath("name/name")
-edit = NodePath("name/name_edit")
-change = NodePath("name/edit_button")
 
 [node name="name" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 20)

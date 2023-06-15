@@ -8,20 +8,12 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_2b5du"]
 font_size = 24
 
-[node name="aspect_line" type="HBoxContainer" node_paths=PackedStringArray("aspect_edit_line", "aspect_type_edit_line", "aspect_line", "aspect_type_line", "delete_button", "line_label", "edit", "change")]
+[node name="aspect_line" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 offset_right = 311.0
 offset_bottom = 32.0
 script = ExtResource("1_e7xxm")
-aspect_edit_line = NodePath("texts/edit/LineEdit")
-aspect_type_edit_line = NodePath("texts/edit/LineEdit2")
-aspect_line = NodePath("texts/labels/Label")
-aspect_type_line = NodePath("texts/labels/Control/Label2")
-delete_button = NodePath("delete_button")
 editabled = true
-line_label = NodePath("texts/labels")
-edit = NodePath("texts/edit")
-change = NodePath("Edit_button")
 
 [node name="delete_button" type="Button" parent="."]
 visible = false

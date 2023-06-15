@@ -3,7 +3,9 @@ extends Resource
 class_name skill
 
 @export var name        : String
-@export var value       : int 
+@export var value       : int
+@export var id          : int
+
 @export var overcome    : String
 @export var advantage   : String
 @export var attack      : String

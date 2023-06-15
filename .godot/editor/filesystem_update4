@@ -1,10 +1,14 @@
+res://entities/stress_counter.tscn
 res://entities/bar.tscn
 res://ui/character_list.tscn
 res://entities/editing_line.tscn
 res://entities/aspect_line.tscn
 res://entities/stunt.tscn
 res://entities/skill.tscn
-res://scripts/stress_box.gd
 res://entities/stress_box.tscn
-res://entities/stress_counter.tscn
-res://scripts/classes/editing_line.gd
+res://entities/params.tscn
+res://scripts/stress_params.gd
+res://scripts/stress_box.gd
+res://scripts/classes/stress_counter_settings.gd
+res://scripts/classes/skill.gd
+res://scripts/stress_counter.gd

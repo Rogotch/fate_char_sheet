@@ -7,7 +7,7 @@ signal set_new_text
 @export var editabled  : bool
 @export var line_label : Control
 @export var edit       : Control
-@export var change     : Button
+@export var change     : BaseButton
 
 var focused := false
 var redacted_mode := false
@@ -22,15 +22,11 @@ func _input(event: InputEvent) -> void:
 		if get_global_rect().has_point(get_global_mouse_position()):
 			prints(!focused, editabled)
 			if !focused && editabled:
-				focused = true
-#				change.visible = true
-				change.modulate = Color.WHITE
+				select(true)
 			pass
 		else:
 			if  focused && !redacted_mode:
-				focused = false
-#				change.visible = false
-				change.modulate = Color.TRANSPARENT
+				select(false)
 	pass
 
 func press_button():
@@ -55,4 +51,9 @@ func set_text_from_edit():
 func set_text(new_text):
 	line_label.text = new_text
 	emit_signal("set_new_text")
+	pass
+
+func select(flag):
+	focused = flag
+	change.modulate = Color.WHITE if flag else Color.TRANSPARENT 
 	pass

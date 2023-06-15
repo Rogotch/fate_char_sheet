@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
 font_size = 32
 
-[node name="editing_line" type="HBoxContainer" node_paths=PackedStringArray("line_label", "edit", "change")]
+[node name="editing_line" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,9 +15,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_cl5bc")
 editabled = true
-line_label = NodePath("line_label")
-edit = NodePath("edit")
-change = NodePath("change")
 
 [node name="change" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
