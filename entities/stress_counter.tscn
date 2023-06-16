@@ -18,19 +18,24 @@ region = Rect2(112, 80, 16, 16)
 atlas = ExtResource("5_47m10")
 region = Rect2(0, 96, 16, 16)
 
-[node name="stress_counter" type="VBoxContainer"]
+[node name="stress_counter" type="VBoxContainer" node_paths=PackedStringArray("all_params", "base_boxes", "params_boxes", "settings_button", "all_buttons", "line_label", "edit", "change")]
 offset_right = 133.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
+script = ExtResource("1_6ipmv")
+all_params = NodePath("additionals/all_params")
+base_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/base_boxes")
+params_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/params_boxes")
+settings_button = NodePath("stress_counter/all_buttons/settings")
+all_buttons = NodePath("stress_counter/all_buttons")
+editabled = true
+line_label = NodePath("stress_counter/VBoxContainer/editing_line/line_label")
+edit = NodePath("stress_counter/VBoxContainer/editing_line/edit")
+change = NodePath("stress_counter/all_buttons/edit")
 
-[node name="stress_counter" type="HBoxContainer" parent="." node_paths=PackedStringArray("settings", "line_label", "edit", "change")]
+[node name="stress_counter" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("1_6ipmv")
-settings = NodePath("VBoxContainer2/settings")
-line_label = NodePath("VBoxContainer/editing_line/line_label")
-edit = NodePath("VBoxContainer/editing_line/edit")
-change = NodePath("VBoxContainer2/edit")
 
 [node name="separator" type="Control" parent="stress_counter"]
 visible = false
@@ -69,23 +74,30 @@ caret_blink_interval = 0.5
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="box" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="base_boxes" type="HBoxContainer" parent="stress_counter/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="box2" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box" parent="stress_counter/VBoxContainer/HBoxContainer/base_boxes" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="box3" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box2" parent="stress_counter/VBoxContainer/HBoxContainer/base_boxes" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="box4" parent="stress_counter/VBoxContainer/HBoxContainer" instance=ExtResource("2_go2gr")]
+[node name="box3" parent="stress_counter/VBoxContainer/HBoxContainer/base_boxes" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="stress_counter"]
+[node name="params_boxes" type="HBoxContainer" parent="stress_counter/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="box5" parent="stress_counter/VBoxContainer/HBoxContainer/params_boxes" instance=ExtResource("2_go2gr")]
+layout_mode = 2
+
+[node name="all_buttons" type="VBoxContainer" parent="stress_counter"]
 layout_mode = 2
 alignment = 1
 
-[node name="edit" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+[node name="edit" type="TextureButton" parent="stress_counter/all_buttons"]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -94,7 +106,7 @@ texture_normal = ExtResource("3_bfcfn")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="settings" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+[node name="settings" type="TextureButton" parent="stress_counter/all_buttons"]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -103,7 +115,7 @@ texture_normal = ExtResource("4_fils6")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="add" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+[node name="add" type="TextureButton" parent="stress_counter/all_buttons"]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -112,7 +124,7 @@ texture_normal = SubResource("AtlasTexture_2qra5")
 ignore_texture_size = true
 stretch_mode = 3
 
-[node name="remove" type="TextureButton" parent="stress_counter/VBoxContainer2"]
+[node name="remove" type="TextureButton" parent="stress_counter/all_buttons"]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -122,6 +134,7 @@ ignore_texture_size = true
 stretch_mode = 3
 
 [node name="additionals" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="all_params" type="VBoxContainer" parent="additionals"]
@@ -130,6 +143,21 @@ layout_mode = 2
 [node name="params" parent="additionals/all_params" instance=ExtResource("6_25kqv")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="additionals"]
+[node name="HBoxContainer" type="HBoxContainer" parent="additionals"]
 layout_mode = 2
+
+[node name="add_params" type="Button" parent="additionals/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Добавить условия"
+
+[node name="apply_params" type="Button" parent="additionals/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Принять"
+
+[connection signal="pressed" from="stress_counter/all_buttons/settings" to="." method="change_settings"]
+[connection signal="pressed" from="stress_counter/all_buttons/add" to="." method="add_box" binds= [1]]
+[connection signal="pressed" from="stress_counter/all_buttons/remove" to="." method="add_box" binds= [-1]]
+[connection signal="pressed" from="additionals/HBoxContainer/add_params" to="." method="add_params"]
+[connection signal="pressed" from="additionals/HBoxContainer/apply_params" to="." method="apply_params"]

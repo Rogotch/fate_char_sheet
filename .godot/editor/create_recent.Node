@@ -1,11 +1,11 @@
+HBoxContainer
+TextureButton
 Button
 VBoxContainer
 LineEdit
 OptionButton
 Label
-HBoxContainer
 Control
-TextureButton
 GraphNode
 GraphEdit
 MarginContainer

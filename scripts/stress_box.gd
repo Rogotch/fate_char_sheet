@@ -4,6 +4,7 @@ extends TextureRect
 @export var value         : Label
 @export var edit          : LineEdit
 
+var edit_mode_flag := false
 var check_flag := false
 var edit_flag  := false
 var stress_value : String
@@ -19,8 +20,10 @@ func _process(delta: float) -> void:
 
 
 func pressed() -> void:
-	edit_mode(!edit_flag)
-#	set_check(!check_flag)
+	if edit_mode_flag:
+		edit_mode(!edit_flag)
+	else:
+		set_check(!check_flag)
 pass # Replace with function body.
 
 func set_check(flag) -> void:
@@ -33,6 +36,7 @@ func set_value(new_value):
 	pass
 
 func edit_mode(flag):
+	z_index = 2 if flag else 0
 	edit_flag = flag
 	value.visible = !flag
 	edit.visible  =  flag

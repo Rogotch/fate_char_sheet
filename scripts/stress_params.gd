@@ -64,3 +64,8 @@ func _on_options_item_selected(index: int) -> void:
 func accept_skill_params():
 #	accept_params.emit(stress_params.new())
 	pass
+
+
+func _on_delete_button_delete() -> void:
+	queue_free()
+	pass # Replace with function body.

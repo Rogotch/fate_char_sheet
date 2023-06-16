@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://o2xpategpha2" path="res://Sprites/Icons/d6_outline.png" id="1_utyw6"]
 [ext_resource type="Script" path="res://scripts/stress_box.gd" id="2_ltgie"]
-[ext_resource type="Texture2D" uid="uid://da3wgn4aa8cbd" path="res://Sprites/Icons/tick.png" id="2_vkded"]
+[ext_resource type="Texture2D" uid="uid://bgg08a11ehjdb" path="res://Sprites/Icons/cross.png" id="3_d4yqu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u152f"]
 font_size = 32
@@ -36,7 +36,7 @@ theme_override_constants/margin_bottom = 5
 [node name="check" type="TextureRect" parent="margin"]
 visible = false
 layout_mode = 2
-texture = ExtResource("2_vkded")
+texture = ExtResource("3_d4yqu")
 expand_mode = 1
 stretch_mode = 5
 
@@ -61,7 +61,6 @@ offset_top = -11.0
 offset_right = 11.0
 offset_bottom = 14.0
 grow_horizontal = 0
-text = "4"
 label_settings = SubResource("LabelSettings_u152f")
 
 [node name="button_node" type="TextureButton" parent="."]
