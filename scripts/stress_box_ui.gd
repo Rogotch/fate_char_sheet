@@ -1,23 +1,41 @@
 extends TextureRect
 
+signal updated
+
 @export var check         : TextureRect
 @export var value         : Label
 @export var edit          : LineEdit
 
-var edit_mode_flag := false
-var check_flag := false
-var edit_flag  := false
-var stress_value : String
+var edit_mode_flag  := false
+var check_flag      := false
+var edit_flag       := false
+var stress_value    : String
+var params          : stress_box
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+#func _ready() -> void:
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
+#	pass
+
+func set_params(selected_params : stress_box):
+	params = selected_params
+	update()
 	pass
 
+func update():
+	check.visible = params.checked
+	value.text    = params.value
+	updated.emit()
+	pass
+
+func new_params(value := "", checked := false):
+	params = stress_box.new(value, checked)
+	update()
+	pass
 
 func pressed() -> void:
 	if edit_mode_flag:
@@ -27,12 +45,14 @@ func pressed() -> void:
 pass # Replace with function body.
 
 func set_check(flag) -> void:
+	params.checked = flag
 	check_flag = flag
-	check.visible = flag
+	update()
 	pass
 
 func set_value(new_value):
-	value.text = str(new_value)
+	params.value = str(new_value)
+	update()
 	pass
 
 func edit_mode(flag):
@@ -45,6 +65,7 @@ func edit_mode(flag):
 		edit.grab_focus()
 	else:
 		value.text =  edit.text
+	update()
 	pass
 
 

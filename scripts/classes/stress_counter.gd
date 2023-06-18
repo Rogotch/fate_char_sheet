@@ -1,0 +1,19 @@
+extends Resource
+class_name stress_counter
+
+@export var name  : String
+@export var boxes : Array[stress_box]
+@export var terms : Array[stress_term]
+
+func add_box(new_value := "", checked_flag := false):
+	boxes.append(stress_box.new(new_value, checked_flag))
+	pass
+
+func remove_box(index : int):
+	boxes.remove_at(index)
+	pass
+
+func remove_last_box():
+	if boxes.size() > 0:
+		boxes.remove_at(boxes.size() - 1)
+	pass

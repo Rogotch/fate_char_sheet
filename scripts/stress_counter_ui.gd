@@ -12,10 +12,12 @@ extends editing_line
 
 var box_counts : int
 var edit_mode  := false
+var my_params : stress_counter
 
 func _ready() -> void:
-	box_counts = base_boxes.get_child_count()
-	
+	my_params = stress_counter.new()
+	box_counts = my_params.boxes.size()
+	update_boxes()
 	pass
 
 func select(flag):
@@ -35,18 +37,16 @@ func apply_params() -> void:
 
 func add_box(count):
 	box_counts += count
-	var actual_boxes = base_boxes.get_child_count()
+	var actual_boxes = my_params.boxes.size()
 	while actual_boxes != box_counts:
 		if box_counts < 0:
 			break
 		if actual_boxes > box_counts:
-			base_boxes.get_child(base_boxes.get_child_count() - 1).queue_free()
-			actual_boxes -= 1
+			my_params.remove_last_box()
 		else:
-			var new_box = stress_box_class.instantiate()
-			base_boxes.add_child(new_box)
-			actual_boxes += 1
-		pass
+			my_params.add_box()
+		actual_boxes = my_params.boxes.size()
+	update_boxes()
 	pass
 
 func change_settings():
@@ -56,3 +56,17 @@ func change_settings():
 	for box in base_boxes.get_children():
 		box.edit_mode_flag = edit_mode
 	pass
+
+func update_boxes():
+	Global.delete_children(base_boxes)
+	for box in my_params.boxes:
+		box = box as stress_box
+		var new_box = stress_box_class.instantiate()
+		base_boxes.add_child(new_box)
+		new_box.set_params(box)
+		new_box.edit_mode_flag = edit_mode
+	pass
+
+func _on_set_new_text():
+	my_params.name = line_label.text
+	pass # Replace with function body.

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://crfbho4mk0gvo"]
 
 [ext_resource type="Texture2D" uid="uid://o2xpategpha2" path="res://Sprites/Icons/d6_outline.png" id="1_utyw6"]
-[ext_resource type="Script" path="res://scripts/stress_box.gd" id="2_ltgie"]
+[ext_resource type="Script" path="res://scripts/stress_box_ui.gd" id="2_l2tu8"]
 [ext_resource type="Texture2D" uid="uid://bgg08a11ehjdb" path="res://Sprites/Icons/cross.png" id="3_d4yqu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u152f"]
@@ -16,7 +16,7 @@ size_flags_vertical = 4
 texture = ExtResource("1_utyw6")
 expand_mode = 1
 stretch_mode = 5
-script = ExtResource("2_ltgie")
+script = ExtResource("2_l2tu8")
 check = NodePath("margin/check")
 value = NodePath("center_point/value")
 edit = NodePath("edit")
