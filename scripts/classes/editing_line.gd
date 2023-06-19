@@ -14,7 +14,7 @@ var redacted_mode := false
 
 
 func _ready():
-	change.connect("pressed", Callable(self,"press_button"))
+	change.pressed.connect(press_button)
 	pass
 
 func _input(event: InputEvent) -> void:

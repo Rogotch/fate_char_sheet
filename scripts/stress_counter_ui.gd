@@ -15,7 +15,17 @@ var edit_mode  := false
 var my_params : stress_counter
 
 func _ready() -> void:
-	my_params = stress_counter.new()
+	
+	pass
+
+func new_params():
+	my_params  = stress_counter.new()
+	box_counts = my_params.boxes.size()
+	update_boxes()
+	pass
+
+func set_params(new_params : stress_counter):
+	my_params  = new_params
 	box_counts = my_params.boxes.size()
 	update_boxes()
 	pass
@@ -65,6 +75,17 @@ func update_boxes():
 		base_boxes.add_child(new_box)
 		new_box.set_params(box)
 		new_box.edit_mode_flag = edit_mode
+	pass
+
+func update_params_boxes():
+	Global.delete_children(params_boxes)
+	for term in my_params.terms:
+		term = term as stress_term
+		var box = term.final_box as stress_box
+		var new_box = stress_box_class.instantiate()
+		base_boxes.add_child(new_box)
+		new_box.set_params(box)
+#		new_box.edit_mode_flag = edit_mode
 	pass
 
 func _on_set_new_text():

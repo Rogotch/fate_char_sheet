@@ -9,23 +9,20 @@ var selected_node = null
 func _ready() -> void:
 	add_skill("Сила", 3)
 	add_skill("Ловкость", 2)
-	add_skill("Ловкость", 2)
-	add_skill("Ловкость", 1)
-	add_skill("Ловкость", 1)
-	add_skill("Ловкость", 1)
-	add_skill("Ловкость", 1)
-	add_skill("Ловкость", 1)
 	add_skill("Златоуст")
+	var selected_skill = CharactersSystem.main_character.skills[2]
+#	print("skill", selected_skill.id)
 #	select_upgradable_skills()
 	pass
 
-func add_skill(skill_name : String, value = 0):
+func add_skill(skill_name : String, value := 0):
+	var skill_data = CharactersSystem.main_character.add_skill(skill_name, value)
 	var new_skill = skill_class.instantiate()
 	add_child(new_skill)
 	new_skill.size.y = new_skill.get_combined_minimum_size().y
 	new_skill.size.x = get_combined_minimum_size().x
 	new_skill.resized.connect(Callable(self, "set_childs_positions"))
-	new_skill.set_skill(skill_name, value)
+	new_skill.set_skill_params(skill_data)
 	new_skill.select.connect(Callable(self, "select_skill_node").bind(new_skill))
 	pass
 
@@ -83,12 +80,14 @@ func select_upgradable_skills():
 #				nex_broken_flag = false
 				broken_skills.append(i)
 				continue
-			if i != 0 && (i != 1 && skills[i-1].size() - skills[i].size() <= 0):
+			if i != 0 && (i != 1 && skills[i-1].size() - skills[i].size() < 0):
 				broken_skills.append(i)
+				pass
 			elif i == 0 || (i != 0 && skills[i-1].size() - skills[i].size() >= 2):
 				upgradable_skills.append(0 if i == 0 else i-1)
 		else:
 			next_broken_flag = true
+#			pass
 	
 	for key in keys:
 		for _skill in skills[key]:

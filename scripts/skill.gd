@@ -37,11 +37,17 @@ func set_name_size(value : float):
 	skill_name.custom_minimum_size.x = value
 	pass
 
-func set_skill(skill_name : String, skill_value : int):
-	skill_params = skill.new(skill_name, skill_value)
-	name_label.text = skill_name
-	set_skill_value(skill_value)
+func set_skill_params(new_skill_params : skill):
+	skill_params = new_skill_params
+	name_label.text = skill_params.name
+	set_skill_value(skill_params.value)
 	pass
+
+#func set_skill(skill_name : String, skill_value : int):
+#	skill_params = skill.new(skill_name, skill_value)
+#	name_label.text = skill_name
+#	set_skill_value(skill_value)
+#	pass
 
 func set_skill_value(new_value : int):
 	skill_params.value = new_value
