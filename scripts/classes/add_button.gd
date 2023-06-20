@@ -1,14 +1,20 @@
 extends Button
 class_name add_button
 
-@export var what  : PackedScene
-@export var where : Control
+@export var what         : PackedScene
+@export var where        : Control
+@export var straight_add : bool
 
 func _ready() -> void:
-	pressed.connect(Callable(self, "button_press"))
+	pressed.connect(straight_add_entity)
 	pass
 
-func button_press():
+func straight_add_entity():
+	if straight_add:
+		add()
+	pass
+
+func add():
 	var new_entity = what.instantiate()
 	where.add_child(new_entity)
 	pass

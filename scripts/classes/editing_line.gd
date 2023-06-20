@@ -15,12 +15,14 @@ var redacted_mode := false
 
 func _ready():
 	change.pressed.connect(press_button)
+	if edit.has_signal("text_submitted"):
+		edit.text_submitted.connect(subbmit_text)
 	pass
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if get_global_rect().has_point(get_global_mouse_position()):
-			prints(!focused, editabled)
+#			prints(!focused, editabled)
 			if !focused && editabled:
 				select(true)
 			pass
@@ -39,9 +41,14 @@ func press_button():
 	redacted_mode = !redacted_mode
 	pass
 
+func subbmit_text(new_text : String):
+	press_button()
+	pass
+
 func set_edit_mod(flag):
 	line_label.visible = !flag
 	edit.visible = flag
+	edit.grab_focus()
 	pass
 
 func set_text_from_edit():

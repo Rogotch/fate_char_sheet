@@ -11,12 +11,20 @@ var params : stress_term
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_options(CharactersSystem.main_character.skills)
+	box.edit_mode_flag = true
 #	update_params()
 	pass # Replace with function body.
 
 func new_params():
-	params = stress_term.new(0, 0, box.stress_value)
+	params = stress_term.new()
 	box.set_params(params.final_box)
+	update()
+	pass
+
+func update():
+	box.set_params(params.final_box)
+	edit.text = params.stress_value
+#	options.select(params.skill_id)
 	pass
 
 #func update_params():
@@ -29,6 +37,8 @@ func new_params():
 func set_params(new_params : stress_term):
 	params           = new_params
 	box.set_params(params.final_box)
+	update()
+#	box.edit_flag = true
 #	box.stress_value = new_params.stress_value
 	pass
 

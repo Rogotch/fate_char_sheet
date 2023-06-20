@@ -6,12 +6,27 @@ extends editing_line
 @export var aspect_type_line        : Label
 @export var delete_button           : Button
 
-var delete_flag := false
+var delete_flag   := false
+var my_params     : aspect 
 
 func set_text_from_edit():
 	set_text(aspect_edit_line.text)
 	set_text_aspect_type(aspect_type_edit_line.text)
+	update()
 	pass
+
+
+func set_params(aspect_data : aspect):
+	my_params = aspect_data
+	pass
+
+func update():
+	aspect_line.text             = my_params.name
+	aspect_edit_line.text        = my_params.name
+	aspect_type_line.text        = my_params.effect
+	aspect_type_edit_line.text   = my_params.effect
+	pass
+
 
 func set_edit_mod(flag):
 	super.set_edit_mod(flag)
@@ -21,12 +36,12 @@ func set_edit_mod(flag):
 	pass
 
 func set_text(new_text):
-	aspect_line.text = new_text
+	my_params.name = new_text
 	emit_signal("set_new_text")
 	pass
 
 func set_text_aspect_type(new_text):
-	aspect_type_line.text = new_text
+	my_params.effect = new_text
 	emit_signal("set_new_text")
 	pass
 

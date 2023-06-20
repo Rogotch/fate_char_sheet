@@ -21,7 +21,7 @@ region = Rect2(2886, 2184, 292, 293)
 [sub_resource type="LabelSettings" id="LabelSettings_xnndv"]
 font_size = 32
 
-[node name="skill" type="HBoxContainer" node_paths=PackedStringArray("points", "buttons", "name_label", "edit_label", "edit_button", "delete_button", "skill_name")]
+[node name="skill" type="HBoxContainer" node_paths=PackedStringArray("points", "buttons", "name_label", "edit_label", "edit_button", "_delete_button", "skill_name")]
 offset_right = 160.0
 offset_bottom = 21.0
 theme_override_constants/separation = 0
@@ -31,7 +31,7 @@ buttons = NodePath("skill_name/buttons")
 name_label = NodePath("skill_name/name")
 edit_label = NodePath("skill_name/edit_skill")
 edit_button = NodePath("skill_name/edit_button")
-delete_button = NodePath("skill_name/delete_button")
+_delete_button = NodePath("skill_name/delete_button")
 skill_name = NodePath("skill_name")
 cross = SubResource("AtlasTexture_0up75")
 check = SubResource("AtlasTexture_k5n5w")

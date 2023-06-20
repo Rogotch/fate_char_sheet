@@ -5,7 +5,8 @@ class_name character
 var name                        : String
 var aspects                     : Array[aspect]
 var skills                      : Array[skill]
-var additional_stress_term      : Array[stress_term]
+var stunts                      : Array[stunt]
+var stresses                    : Array[stress_counter]
 
 
 func _ready() -> void:

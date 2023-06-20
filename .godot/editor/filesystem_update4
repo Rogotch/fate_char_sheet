@@ -1,4 +1,4 @@
-res://entities/bar.tscn
+res://scripts/character_list.gd
 res://ui/character_list.tscn
 res://entities/stunt.tscn
 res://entities/skill.tscn
@@ -6,10 +6,13 @@ res://entities/stress_counter.tscn
 res://entities/stress_box.tscn
 res://entities/params.tscn
 res://entities/skill_check_helper.tscn
-res://scripts/characters_system.gd
-res://scripts/classes/character.gd
-res://scripts/skills.gd
-res://scripts/skill.gd
-res://scripts/classes/editing_line.gd
 res://entities/editing_line.tscn
-res://scripts/stress_counter_ui.gd
+res://scripts/stunt.gd
+res://scripts/classes/stunt.gd
+res://scripts/aspect_line.gd
+res://entities/aspect_line.tscn
+res://scripts/classes/aspect.gd
+res://scripts/skill.gd
+res://scripts/skills.gd
+res://entities/skills.tscn
+res://scripts/global.gd

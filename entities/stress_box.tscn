@@ -61,6 +61,7 @@ offset_top = -11.0
 offset_right = 11.0
 offset_bottom = 14.0
 grow_horizontal = 0
+text = "2"
 label_settings = SubResource("LabelSettings_u152f")
 
 [node name="button_node" type="TextureButton" parent="."]

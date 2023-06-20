@@ -7,7 +7,7 @@ signal select(flag : bool)
 @export var name_label      : Label
 @export var edit_label      : LineEdit
 @export var edit_button     : TextureButton
-@export var delete_button   : TextureButton
+@export var _delete_button  : TextureButton
 @export var skill_name      : HBoxContainer
 
 @export var offset  : int
@@ -29,8 +29,13 @@ func _ready() -> void:
 #	set_skill_value(5)
 	pass
 
+func update():
+	name_label.text = skill_params.name
+	set_skill_value(skill_params.value)
+	pass
+
 func get_name_size():
-	return buttons.get_rect().size.x + name_label.get_rect().size.x + delete_button.get_rect().size.x + offset
+	return buttons.get_rect().size.x + name_label.get_rect().size.x + _delete_button.get_rect().size.x + offset
 	pass
 
 func set_name_size(value : float):
@@ -88,21 +93,21 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if get_global_rect().has_point(get_global_mouse_position()):
 			buttons.modulate = Color.WHITE
-			delete_button.modulate = Color.WHITE
+			_delete_button.modulate = Color.WHITE
 			edit_button.modulate = Color.WHITE
 		else:
 			buttons.modulate = Color.TRANSPARENT
-			delete_button.modulate = Color.TRANSPARENT
+			_delete_button.modulate = Color.TRANSPARENT
 			edit_button.modulate = Color.TRANSPARENT
 			change_delete_flag(false)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
-			var delete_button_rect = delete_button.get_global_rect()
+			var _delete_button_rect = _delete_button.get_global_rect()
 			var buttons_rect       = buttons.get_global_rect()
 			
 			var mouse_position = get_global_mouse_position()
 			
-			var buttons_flag = !delete_button_rect.has_point(mouse_position) && !buttons_rect.has_point(mouse_position)
+			var buttons_flag = !_delete_button_rect.has_point(mouse_position) && !buttons_rect.has_point(mouse_position)
 			if get_global_rect().has_point(mouse_position) && buttons_flag:
 #				call_deferred("emit_signal", "select", !selecting_flag)
 				select.emit(!selecting_flag)
@@ -113,7 +118,7 @@ func _input(event: InputEvent) -> void:
 	pass
 
 
-func _on_delete_button_pressed() -> void:
+func _on__delete_button_pressed() -> void:
 	if delete_flag:
 		set_select(false)
 		queue_free()
@@ -123,8 +128,8 @@ func _on_delete_button_pressed() -> void:
 
 func change_delete_flag(new_flag : bool):
 	delete_flag = new_flag
-	delete_button.texture_normal = cross if !delete_flag else check
-#	delete_button.texture_normal = 
+	_delete_button.texture_normal = cross if !delete_flag else check
+#	_delete_button.texture_normal = 
 	pass
 
 func set_select(flag : bool):

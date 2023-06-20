@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtkcq3xldi68s"]
+[gd_scene load_steps=8 format=3 uid="uid://dtkcq3xldi68s"]
 
 [ext_resource type="Script" path="res://scripts/stress_counter_ui.gd" id="1_2ko8x"]
-[ext_resource type="PackedScene" uid="uid://crfbho4mk0gvo" path="res://entities/stress_box.tscn" id="2_go2gr"]
 [ext_resource type="Texture2D" uid="uid://cneue66sphgl" path="res://Sprites/Icons/notepad.png" id="3_bfcfn"]
 [ext_resource type="Texture2D" uid="uid://dvtlykyesp6xd" path="res://Sprites/Icons/settings_3.png" id="4_fils6"]
 [ext_resource type="Texture2D" uid="uid://2f053bw6qcup" path="res://Sprites/Icons/Icons.png" id="5_47m10"]
-[ext_resource type="PackedScene" uid="uid://cvrdnq2kte0on" path="res://entities/params.tscn" id="6_25kqv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
 font_size = 32
@@ -18,15 +16,16 @@ region = Rect2(112, 80, 16, 16)
 atlas = ExtResource("5_47m10")
 region = Rect2(0, 96, 16, 16)
 
-[node name="stress_counter" type="VBoxContainer" node_paths=PackedStringArray("all_params", "base_boxes", "params_boxes", "settings_button", "all_buttons", "line_label", "edit", "change")]
+[node name="stress_counter" type="VBoxContainer" node_paths=PackedStringArray("all_params", "base_boxes", "params_boxes", "settings_button", "additionals", "all_buttons", "line_label", "edit", "change")]
 offset_right = 133.0
 offset_bottom = 40.0
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 script = ExtResource("1_2ko8x")
 all_params = NodePath("additionals/all_params")
 base_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/base_boxes")
 params_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/params_boxes")
 settings_button = NodePath("stress_counter/all_buttons/settings")
+additionals = NodePath("additionals")
 all_buttons = NodePath("stress_counter/all_buttons")
 editabled = true
 line_label = NodePath("stress_counter/VBoxContainer/editing_line/line_label")
@@ -77,20 +76,7 @@ size_flags_vertical = 3
 [node name="base_boxes" type="HBoxContainer" parent="stress_counter/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="box" parent="stress_counter/VBoxContainer/HBoxContainer/base_boxes" instance=ExtResource("2_go2gr")]
-layout_mode = 2
-
-[node name="box2" parent="stress_counter/VBoxContainer/HBoxContainer/base_boxes" instance=ExtResource("2_go2gr")]
-layout_mode = 2
-
-[node name="box3" parent="stress_counter/VBoxContainer/HBoxContainer/base_boxes" instance=ExtResource("2_go2gr")]
-layout_mode = 2
-
 [node name="params_boxes" type="HBoxContainer" parent="stress_counter/VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="box5" parent="stress_counter/VBoxContainer/HBoxContainer/params_boxes" instance=ExtResource("2_go2gr")]
 layout_mode = 2
 
 [node name="all_buttons" type="VBoxContainer" parent="stress_counter"]
@@ -140,9 +126,6 @@ layout_mode = 2
 [node name="all_params" type="VBoxContainer" parent="additionals"]
 layout_mode = 2
 
-[node name="params" parent="additionals/all_params" instance=ExtResource("6_25kqv")]
-layout_mode = 2
-
 [node name="HBoxContainer" type="HBoxContainer" parent="additionals"]
 layout_mode = 2
 
@@ -152,6 +135,7 @@ size_flags_horizontal = 3
 text = "Добавить условия"
 
 [node name="apply_params" type="Button" parent="additionals/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Принять"

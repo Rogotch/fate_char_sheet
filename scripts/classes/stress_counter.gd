@@ -1,7 +1,7 @@
 extends Resource
 class_name stress_counter
 
-@export var name  : String
+@export var name  := tr("STRESS_KEY")
 @export var boxes : Array[stress_box]
 @export var terms : Array[stress_term]
 

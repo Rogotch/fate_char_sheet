@@ -1,7 +1,7 @@
-HBoxContainer
-TextureButton
 Button
 VBoxContainer
+HBoxContainer
+TextureButton
 LineEdit
 OptionButton
 Label

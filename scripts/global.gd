@@ -3,6 +3,14 @@ extends Node
 enum ACTION_TYPE   {OVERCOME, ADVANTAGE, ATTACK, DEFEND}
 enum OUTCOMES_TYPE {FAIL, TIE, SUCCEED, SUCCEED_STILE}
 
+func _ready() -> void:
+	get_viewport().files_dropped.connect(drop_file)
+	pass
+
+func drop_file(files):
+	print_debug(files[0])
+	pass
+
 func get_outcome_type_by_value(result_value : int):
 	
 	var outcome_result

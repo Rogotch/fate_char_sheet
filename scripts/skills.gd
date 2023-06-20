@@ -26,6 +26,16 @@ func add_skill(skill_name : String, value := 0):
 	new_skill.select.connect(Callable(self, "select_skill_node").bind(new_skill))
 	pass
 
+func load_skill(skill_data : skill):
+	var new_skill = skill_class.instantiate()
+	add_child(new_skill)
+	new_skill.size.y = new_skill.get_combined_minimum_size().y
+	new_skill.size.x = get_combined_minimum_size().x
+	new_skill.resized.connect(Callable(self, "set_childs_positions"))
+	new_skill.set_skill_params(skill_data)
+	new_skill.select.connect(Callable(self, "select_skill_node").bind(new_skill))
+	pass
+
 func set_min_size():
 	var min_size
 	var all_skills = get_children()
@@ -76,14 +86,16 @@ func select_upgradable_skills():
 	var next_broken_flag = false
 	for i in range(0, keys[-1] + 1, 1):
 		if skills.has(i):
+#			if skills.has(i-1):
+#				print_debug(i != 0, i != 1, skills[i-1].size() - skills[i].size())
 			if next_broken_flag:
-#				nex_broken_flag = false
+				next_broken_flag = false
 				broken_skills.append(i)
 				continue
-			if i != 0 && (i != 1 && skills[i-1].size() - skills[i].size() < 0):
+			if i != 0 && (i != 1 && (skills[i-1].size() - skills[i].size()) < 0):
 				broken_skills.append(i)
 				pass
-			elif i == 0 || (i != 0 && skills[i-1].size() - skills[i].size() >= 2):
+			elif i == 0 || (i != 0 && (skills[i-1].size() - skills[i].size()) >= 2):
 				upgradable_skills.append(0 if i == 0 else i-1)
 		else:
 			next_broken_flag = true

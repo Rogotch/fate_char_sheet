@@ -23,6 +23,7 @@ var params          : stress_box
 
 func set_params(selected_params : stress_box):
 	params = selected_params
+	check_flag = params.checked
 	update()
 	pass
 
@@ -45,8 +46,8 @@ func pressed() -> void:
 pass # Replace with function body.
 
 func set_check(flag) -> void:
-	params.checked = flag
 	check_flag = flag
+	params.checked = flag
 	update()
 	pass
 
@@ -64,7 +65,7 @@ func edit_mode(flag):
 		edit.text  = value.text
 		edit.grab_focus()
 	else:
-		value.text =  edit.text
+		params.value = edit.text
 	update()
 	pass
 

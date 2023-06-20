@@ -1,20 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://twa5dbcfk637"]
+[gd_scene load_steps=9 format=3 uid="uid://twa5dbcfk637"]
 
 [ext_resource type="PackedScene" uid="uid://dbk8rdqkccp1y" path="res://entities/bar.tscn" id="1_3i6yc"]
 [ext_resource type="Script" path="res://scripts/character_list.gd" id="1_ag6tl"]
 [ext_resource type="PackedScene" uid="uid://bevofxsd70c2" path="res://entities/editing_line.tscn" id="2_0rgqi"]
 [ext_resource type="PackedScene" uid="uid://clydxjt8wj3yg" path="res://entities/skill_check_helper.tscn" id="3_b4j05"]
 [ext_resource type="Texture2D" uid="uid://srh566rjau4r" path="res://Sprites/Icons/info.png" id="3_qy2i2"]
-[ext_resource type="PackedScene" uid="uid://bcar4yym7i47s" path="res://entities/aspect_line.tscn" id="4_awtn0"]
 [ext_resource type="PackedScene" uid="uid://c37tj6cmi34qp" path="res://entities/skills.tscn" id="4_c0feu"]
-[ext_resource type="PackedScene" uid="uid://cgs6rjryy4laq" path="res://entities/stunt.tscn" id="5_ex4xd"]
-[ext_resource type="Script" path="res://scripts/classes/add_button.gd" id="5_kl1uq"]
 [ext_resource type="PackedScene" uid="uid://d1axx6nxihide" path="res://entities/roller.tscn" id="5_okjfn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
 font_size = 32
 
-[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller")]
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "aspects_holder", "stunts_holder", "stresses_holder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +23,11 @@ actions_descriptions = NodePath("content/skills/actions_descriptions")
 skills = NodePath("content/skills/skills_holder/ScrollContainer/skills")
 bar = NodePath("content/skills/VBoxContainer/bar")
 roller = NodePath("content/skills/VBoxContainer/roller")
+stresses = NodePath("content/skills/stresses")
+skills_container = NodePath("content/skills/skills_holder/ScrollContainer/skills")
+aspects_holder = NodePath("content/skills/aspects/aspects_holder")
+stunts_holder = NodePath("content/skills/stunts/stunts_holder")
+stresses_holder = NodePath("content/skills/stresses/stresses_holder")
 
 [node name="content" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -138,12 +140,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="add_button" type="Button" parent="content/skills/aspects" node_paths=PackedStringArray("where")]
+[node name="add_aspect" type="Button" parent="content/skills/aspects"]
 layout_mode = 2
 text = "Add aspect"
-script = ExtResource("5_kl1uq")
-what = ExtResource("4_awtn0")
-where = NodePath("../aspects_holder")
 
 [node name="aspects_holder" type="VBoxContainer" parent="content/skills/aspects"]
 layout_mode = 2
@@ -153,14 +152,23 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="add_button" type="Button" parent="content/skills/stunts" node_paths=PackedStringArray("where")]
+[node name="add_stunt" type="Button" parent="content/skills/stunts"]
 layout_mode = 2
 text = "Add stunt"
-script = ExtResource("5_kl1uq")
-what = ExtResource("5_ex4xd")
-where = NodePath("../stunts_holder")
 
 [node name="stunts_holder" type="VBoxContainer" parent="content/skills/stunts"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stresses" type="VBoxContainer" parent="content/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="add_stress" type="Button" parent="content/skills/stresses"]
+layout_mode = 2
+text = "Add stress"
+
+[node name="stresses_holder" type="VBoxContainer" parent="content/skills/stresses"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -185,8 +193,12 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="pressed" from="content/skills/skills_holder/HBoxContainer/add_skill" to="." method="add_skill"]
 [connection signal="mouse_entered" from="content/skills/skills_holder/HBoxContainer/show_up" to="content/skills/skills_holder/ScrollContainer/skills" method="select_upgradable_skills"]
 [connection signal="mouse_exited" from="content/skills/skills_holder/HBoxContainer/show_up" to="content/skills/skills_holder/ScrollContainer/skills" method="clear_all_modulate"]
 [connection signal="select_skill" from="content/skills/skills_holder/ScrollContainer/skills" to="." method="_on_skills_select_skill"]
+[connection signal="pressed" from="content/skills/aspects/add_aspect" to="." method="add_aspect"]
+[connection signal="pressed" from="content/skills/stunts/add_stunt" to="." method="add_stunt"]
+[connection signal="pressed" from="content/skills/stresses/add_stress" to="." method="add_stress"]
 [connection signal="result" from="content/skills/VBoxContainer/bar" to="." method="_on_bar_result"]
 [connection signal="roll" from="content/skills/VBoxContainer/roller" to="." method="_on_roller_roll"]
