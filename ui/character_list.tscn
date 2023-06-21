@@ -11,7 +11,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
 font_size = 32
 
-[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "aspects_holder", "stunts_holder", "stresses_holder")]
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "aspects_holder", "stunts_holder", "stresses_holder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +25,7 @@ bar = NodePath("content/skills/VBoxContainer/bar")
 roller = NodePath("content/skills/VBoxContainer/roller")
 stresses = NodePath("content/skills/stresses")
 skills_container = NodePath("content/skills/skills_holder/ScrollContainer/skills")
+character_name = NodePath("content/character/VBoxContainer/upper_tab/character_info/HBoxContainer/editing_line")
 aspects_holder = NodePath("content/skills/aspects/aspects_holder")
 stunts_holder = NodePath("content/skills/stunts/stunts_holder")
 stresses_holder = NodePath("content/skills/stresses/stresses_holder")
@@ -82,6 +83,15 @@ layout_mode = 2
 size_flags_vertical = 1
 text = "Побирушник-вор"
 label_settings = SubResource("LabelSettings_mi3tg")
+
+[node name="save" type="Button" parent="content/character/VBoxContainer/upper_tab"]
+layout_mode = 2
+text = "save"
+
+[node name="load" type="Button" parent="content/character/VBoxContainer/upper_tab"]
+layout_mode = 2
+text = "load
+"
 
 [node name="tabs" type="HBoxContainer" parent="content/character/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
@@ -193,12 +203,14 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="pressed" from="content/character/VBoxContainer/upper_tab/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="content/character/VBoxContainer/upper_tab/load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="content/skills/skills_holder/HBoxContainer/add_skill" to="." method="add_skill"]
 [connection signal="mouse_entered" from="content/skills/skills_holder/HBoxContainer/show_up" to="content/skills/skills_holder/ScrollContainer/skills" method="select_upgradable_skills"]
 [connection signal="mouse_exited" from="content/skills/skills_holder/HBoxContainer/show_up" to="content/skills/skills_holder/ScrollContainer/skills" method="clear_all_modulate"]
 [connection signal="select_skill" from="content/skills/skills_holder/ScrollContainer/skills" to="." method="_on_skills_select_skill"]
-[connection signal="pressed" from="content/skills/aspects/add_aspect" to="." method="add_aspect"]
-[connection signal="pressed" from="content/skills/stunts/add_stunt" to="." method="add_stunt"]
-[connection signal="pressed" from="content/skills/stresses/add_stress" to="." method="add_stress"]
+[connection signal="pressed" from="content/skills/aspects/add_aspect" to="." method="add_new_aspect"]
+[connection signal="pressed" from="content/skills/stunts/add_stunt" to="." method="add_new_stunt"]
+[connection signal="pressed" from="content/skills/stresses/add_stress" to="." method="add_new_stress"]
 [connection signal="result" from="content/skills/VBoxContainer/bar" to="." method="_on_bar_result"]
 [connection signal="roll" from="content/skills/VBoxContainer/roller" to="." method="_on_roller_roll"]

@@ -7,10 +7,10 @@ signal select_skill(skill_data)
 var selected_node = null
 
 func _ready() -> void:
-	add_skill("Сила", 3)
-	add_skill("Ловкость", 2)
-	add_skill("Златоуст")
-	var selected_skill = CharactersSystem.main_character.skills[2]
+#	add_skill("Сила", 3)
+#	add_skill("Ловкость", 2)
+#	add_skill("Златоуст")
+#	var selected_skill = CharactersSystem.main_character.skills[2]
 #	print("skill", selected_skill.id)
 #	select_upgradable_skills()
 	pass
@@ -71,6 +71,8 @@ func clear_all_modulate():
 	pass
 
 func select_upgradable_skills():
+	if get_child_count() == 0:
+		return
 	var skills = {}
 	var all_skills = get_children()
 	for skill_node in all_skills:
@@ -114,7 +116,8 @@ func select_upgradable_skills():
 func _notification(what):
 	if what == NOTIFICATION_SORT_CHILDREN:
 		# Must re-sort the children
-		set_childs_positions()
+		if get_child_count() > 0:
+			set_childs_positions()
 	pass
 
 func drag_cell():

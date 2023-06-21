@@ -64,3 +64,7 @@ func select(flag):
 	focused = flag
 	change.modulate = Color.WHITE if flag else Color.TRANSPARENT 
 	pass
+
+func get_text() -> String:
+	return line_label.text
+	pass

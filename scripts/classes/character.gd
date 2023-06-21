@@ -2,11 +2,11 @@ extends Resource
 
 class_name character
 
-var name                        : String
-var aspects                     : Array[aspect]
-var skills                      : Array[skill]
-var stunts                      : Array[stunt]
-var stresses                    : Array[stress_counter]
+@export var name                        : String
+@export var aspects                     : Array[aspect]
+@export var skills                      : Array[skill]
+@export var stunts                      : Array[stunt]
+@export var stresses                    : Array[stress_counter]
 
 
 func _ready() -> void:
