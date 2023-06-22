@@ -6,6 +6,8 @@ extends Control
 @export var stresses                      : VBoxContainer
 @export var skills_container              : Container
 @export var character_name                : HBoxContainer
+@export var scroll_parameters             : ScrollContainer
+@export var parameters_holder             : HBoxContainer
 
 @export var aspects_holder     : VBoxContainer
 @export var stunts_holder      : VBoxContainer
@@ -142,3 +144,14 @@ func _on_load_pressed() -> void:
 	CharactersSystem.load_save_character()
 	full_load.call_deferred()
 	pass # Replace with function body.
+
+
+func _on_scroll_parameters_resized() -> void:
+	for child in parameters_holder.get_children():
+		child = child as Control
+		child.custom_minimum_size.x = scroll_parameters.size.x - 2
+	pass # Replace with function body.
+
+func set_tab(tab_num : int):
+	scroll_parameters.scroll_horizontal = scroll_parameters.size.x * tab_num
+	pass

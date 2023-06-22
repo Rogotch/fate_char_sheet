@@ -6,10 +6,12 @@ class_name skill
 @export var value       : int        : set = set_value
 @export var id          : int        : set = set_id
 
-@export var overcome    : String
-@export var advantage   : String
-@export var attack      : String
-@export var defend      : String
+@export var overcome        : String
+@export var advantage       : String
+@export var attack          : String
+@export var defend          : String
+
+@export var modulation      := Color.WHITE
 
 func _init(new_name = "", new_value = 0):
 	name   = new_name

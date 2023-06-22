@@ -2,13 +2,14 @@ extends HBoxContainer
 
 signal select(flag : bool)
 
-@export var points          : HBoxContainer
-@export var buttons         : HBoxContainer
-@export var name_label      : Label
-@export var edit_label      : LineEdit
-@export var edit_button     : TextureButton
-@export var _delete_button  : TextureButton
-@export var skill_name      : HBoxContainer
+@export var points                 : HBoxContainer
+@export var buttons                : HBoxContainer
+@export var name_label             : Label
+@export var edit_label             : LineEdit
+@export var edit_button            : TextureButton
+@export var _delete_button         : TextureButton
+@export var skill_name             : HBoxContainer
+@export var color_picker_button    : ColorPickerButton
 
 @export var offset  : int
 @export var cross   : Texture2D
@@ -91,14 +92,18 @@ func _on_substract_point_pressed() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		var focused_color   = Color.WHITE
+		var unfocused_color = Color.TRANSPARENT
 		if get_global_rect().has_point(get_global_mouse_position()):
-			buttons.modulate = Color.WHITE
-			_delete_button.modulate = Color.WHITE
-			edit_button.modulate = Color.WHITE
+			buttons.modulate                  = focused_color
+			_delete_button.modulate           = focused_color
+			edit_button.modulate              = focused_color
+			color_picker_button.modulate      = focused_color
 		else:
-			buttons.modulate = Color.TRANSPARENT
-			_delete_button.modulate = Color.TRANSPARENT
-			edit_button.modulate = Color.TRANSPARENT
+			buttons.modulate                  = unfocused_color
+			_delete_button.modulate           = unfocused_color
+			edit_button.modulate              = unfocused_color
+			color_picker_button.modulate      = unfocused_color
 			change_delete_flag(false)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:

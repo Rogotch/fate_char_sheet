@@ -1,6 +1,11 @@
-Button
+ColorPickerButton
+ColorPicker
+MarginContainer
 VBoxContainer
 HBoxContainer
+ScrollContainer
+VFlowContainer
+Button
 TextureButton
 LineEdit
 OptionButton
@@ -8,13 +13,11 @@ Label
 Control
 GraphNode
 GraphEdit
-MarginContainer
 TextureRect
 CheckBox
 add_button
 RichTextLabel
 TextEdit
-ScrollContainer
 editing_line
 Container
 Panel

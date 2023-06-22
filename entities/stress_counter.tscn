@@ -17,9 +17,10 @@ atlas = ExtResource("5_47m10")
 region = Rect2(0, 96, 16, 16)
 
 [node name="stress_counter" type="VBoxContainer" node_paths=PackedStringArray("all_params", "base_boxes", "params_boxes", "settings_button", "additionals", "all_buttons", "line_label", "edit", "change")]
+custom_minimum_size = Vector2(0, 70)
 offset_right = 133.0
 offset_bottom = 40.0
-size_flags_horizontal = 2
+size_flags_horizontal = 3
 script = ExtResource("1_2ko8x")
 all_params = NodePath("additionals/all_params")
 base_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/base_boxes")

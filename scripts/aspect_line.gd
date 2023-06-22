@@ -57,3 +57,9 @@ func change_delete_flag(new_flag : bool):
 	delete_button.modulate = Color.WHITE if !delete_flag else Color.RED
 #	delete_button.texture_normal = 
 	pass
+
+func submit_text(new_text : String):
+	set_text_from_edit()
+	set_edit_mod(false)
+	redacted_mode = false
+	pass

@@ -84,3 +84,5 @@ text = "edit
 "
 
 [connection signal="pressed" from="delete_button" to="." method="_on_delete_button_pressed"]
+[connection signal="text_submitted" from="texts/edit/LineEdit" to="." method="submit_text"]
+[connection signal="text_submitted" from="texts/edit/LineEdit2" to="." method="submit_text"]

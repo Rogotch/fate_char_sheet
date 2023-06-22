@@ -14,16 +14,24 @@ offset_right = 180.0
 offset_bottom = 70.0
 alignment = 1
 script = ExtResource("1_m8wvp")
-pool = NodePath("content/pool")
-info = NodePath("content/info")
+pool = NodePath("content_holder/content/pool")
+info = NodePath("content_holder/content/info")
 text = NodePath("results/text")
 
-[node name="content" type="Panel" parent="."]
+[node name="content_holder" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_right = 3
+
+[node name="content" type="Panel" parent="content_holder"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="info" type="Label" parent="content"]
+[node name="info" type="Label" parent="content_holder/content"]
 modulate = Color(1, 1, 1, 0.498039)
 layout_mode = 1
 anchors_preset = 15
@@ -37,7 +45,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="pool" type="HBoxContainer" parent="content"]
+[node name="pool" type="HBoxContainer" parent="content_holder/content"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +55,7 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="transparent_button" type="TextureButton" parent="content"]
+[node name="transparent_button" type="TextureButton" parent="content_holder/content"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,4 +78,4 @@ label_settings = SubResource("LabelSettings_2h614")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="content/transparent_button" to="." method="_on_transparent_button_pressed"]
+[connection signal="pressed" from="content_holder/content/transparent_button" to="." method="_on_transparent_button_pressed"]

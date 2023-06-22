@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://twa5dbcfk637"]
+[gd_scene load_steps=15 format=3 uid="uid://twa5dbcfk637"]
 
 [ext_resource type="PackedScene" uid="uid://dbk8rdqkccp1y" path="res://entities/bar.tscn" id="1_3i6yc"]
 [ext_resource type="Script" path="res://scripts/character_list.gd" id="1_ag6tl"]
@@ -11,7 +11,30 @@
 [sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
 font_size = 32
 
-[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "aspects_holder", "stunts_holder", "stresses_holder")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qirb0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yo6vb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2mb2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvxh8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sqkc5"]
+
+[sub_resource type="Theme" id="Theme_g41dn"]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/decrement_pressed = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/icons/increment_pressed = null
+HScrollBar/styles/grabber = SubResource("StyleBoxEmpty_qirb0")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_yo6vb")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_w2mb2")
+HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_fvxh8")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sqkc5")
+
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "aspects_holder", "stunts_holder", "stresses_holder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,16 +42,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ag6tl")
-actions_descriptions = NodePath("content/skills/actions_descriptions")
-skills = NodePath("content/skills/skills_holder/ScrollContainer/skills")
-bar = NodePath("content/skills/VBoxContainer/bar")
-roller = NodePath("content/skills/VBoxContainer/roller")
-stresses = NodePath("content/skills/stresses")
-skills_container = NodePath("content/skills/skills_holder/ScrollContainer/skills")
+actions_descriptions = NodePath("content/all_parameters/scroll_parameters/parameters_holder/dice_roller/actions_descriptions")
+skills = NodePath("content/all_parameters/skills_holder/ScrollContainer/skills")
+bar = NodePath("content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller/bar")
+roller = NodePath("content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller/roller")
+stresses = NodePath("content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses")
+skills_container = NodePath("content/all_parameters/skills_holder/ScrollContainer/skills")
 character_name = NodePath("content/character/VBoxContainer/upper_tab/character_info/HBoxContainer/editing_line")
-aspects_holder = NodePath("content/skills/aspects/aspects_holder")
-stunts_holder = NodePath("content/skills/stunts/stunts_holder")
-stresses_holder = NodePath("content/skills/stresses/stresses_holder")
+scroll_parameters = NodePath("content/all_parameters/scroll_parameters")
+parameters_holder = NodePath("content/all_parameters/scroll_parameters/parameters_holder")
+aspects_holder = NodePath("content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/aspects_scroll/aspects/aspects_holder")
+stunts_holder = NodePath("content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/stunts_scroll/stunts/stunts_holder")
+stresses_holder = NodePath("content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses/stresses_holder")
 
 [node name="content" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -97,38 +122,43 @@ text = "load
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="content/character/VBoxContainer/tabs"]
+[node name="tab_1" type="Button" parent="content/character/VBoxContainer/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Навыки и аспекты"
+text = "Aspects_and_stunts"
 
-[node name="Button2" type="Button" parent="content/character/VBoxContainer/tabs"]
+[node name="tab_2" type="Button" parent="content/character/VBoxContainer/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Skills"
+text = "stresses_and_consequenceы"
 
-[node name="Button3" type="Button" parent="content/character/VBoxContainer/tabs"]
+[node name="tab_3" type="Button" parent="content/character/VBoxContainer/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Skills"
+text = "Dice roller"
 
-[node name="skills" type="HBoxContainer" parent="content"]
+[node name="tab_4" type="Button" parent="content/character/VBoxContainer/tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "notes"
+
+[node name="all_parameters" type="HBoxContainer" parent="content"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="skills_holder" type="VBoxContainer" parent="content/skills"]
+[node name="skills_holder" type="VBoxContainer" parent="content/all_parameters"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="content/skills/skills_holder"]
+[node name="HBoxContainer" type="HBoxContainer" parent="content/all_parameters/skills_holder"]
 layout_mode = 2
 
-[node name="add_skill" type="Button" parent="content/skills/skills_holder/HBoxContainer"]
+[node name="add_skill" type="Button" parent="content/all_parameters/skills_holder/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+Добавить"
 
-[node name="show_up" type="TextureButton" parent="content/skills/skills_holder/HBoxContainer"]
+[node name="show_up" type="TextureButton" parent="content/all_parameters/skills_holder/HBoxContainer"]
 texture_filter = 2
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
@@ -136,81 +166,160 @@ texture_normal = ExtResource("3_qy2i2")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="content/skills/skills_holder"]
+[node name="ScrollContainer" type="ScrollContainer" parent="content/all_parameters/skills_holder"]
 clip_contents = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="skills" parent="content/skills/skills_holder/ScrollContainer" instance=ExtResource("4_c0feu")]
+[node name="skills" parent="content/all_parameters/skills_holder/ScrollContainer" instance=ExtResource("4_c0feu")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="aspects" type="VBoxContainer" parent="content/skills"]
+[node name="scroll_parameters" type="ScrollContainer" parent="content/all_parameters"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
+theme = SubResource("Theme_g41dn")
+vertical_scroll_mode = 0
 
-[node name="add_aspect" type="Button" parent="content/skills/aspects"]
+[node name="parameters_holder" type="HBoxContainer" parent="content/all_parameters/scroll_parameters"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="aspects_and_stunts" type="HBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder"]
+custom_minimum_size = Vector2(830, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="aspects_scroll" type="ScrollContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+horizontal_scroll_mode = 0
+
+[node name="aspects" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/aspects_scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="add_aspect" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/aspects_scroll/aspects"]
 layout_mode = 2
 text = "Add aspect"
 
-[node name="aspects_holder" type="VBoxContainer" parent="content/skills/aspects"]
+[node name="aspects_holder" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/aspects_scroll/aspects"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="stunts" type="VBoxContainer" parent="content/skills"]
+[node name="stunts_scroll" type="ScrollContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts"]
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.65
+horizontal_scroll_mode = 0
 
-[node name="add_stunt" type="Button" parent="content/skills/stunts"]
+[node name="stunts" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/stunts_scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.65
+
+[node name="add_stunt" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/stunts_scroll/stunts"]
 layout_mode = 2
 text = "Add stunt"
 
-[node name="stunts_holder" type="VBoxContainer" parent="content/skills/stunts"]
+[node name="stunts_holder" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/stunts_scroll/stunts"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="stresses" type="VBoxContainer" parent="content/skills"]
+[node name="stresses_and_consequenceы" type="HBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder"]
+custom_minimum_size = Vector2(830, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="stresses_scroll" type="ScrollContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="stresses" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="add_stress" type="Button" parent="content/skills/stresses"]
+[node name="add_stress" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses"]
 layout_mode = 2
 text = "Add stress"
 
-[node name="stresses_holder" type="VBoxContainer" parent="content/skills/stresses"]
+[node name="stresses_holder" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="content/skills"]
-visible = false
+[node name="consequences_scroll" type="ScrollContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="consequences" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/consequences_scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="add_stress" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
+layout_mode = 2
+text = "Add stress"
+
+[node name="stresses_holder" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="dice_roller" type="HBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder"]
+custom_minimum_size = Vector2(830, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="roller" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller"]
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 
-[node name="bar" parent="content/skills/VBoxContainer" instance=ExtResource("1_3i6yc")]
+[node name="bar" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller" instance=ExtResource("1_3i6yc")]
 custom_minimum_size = Vector2(90, 396)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
 size_flags_stretch_ratio = 3.0
 
-[node name="roller" parent="content/skills/VBoxContainer" instance=ExtResource("5_okjfn")]
+[node name="roller" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller" instance=ExtResource("5_okjfn")]
 custom_minimum_size = Vector2(90, 70)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="actions_descriptions" parent="content/skills" instance=ExtResource("3_b4j05")]
-visible = false
+[node name="actions_descriptions" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller" instance=ExtResource("3_b4j05")]
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
 [connection signal="pressed" from="content/character/VBoxContainer/upper_tab/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="content/character/VBoxContainer/upper_tab/load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="content/skills/skills_holder/HBoxContainer/add_skill" to="." method="add_skill"]
-[connection signal="mouse_entered" from="content/skills/skills_holder/HBoxContainer/show_up" to="content/skills/skills_holder/ScrollContainer/skills" method="select_upgradable_skills"]
-[connection signal="mouse_exited" from="content/skills/skills_holder/HBoxContainer/show_up" to="content/skills/skills_holder/ScrollContainer/skills" method="clear_all_modulate"]
-[connection signal="select_skill" from="content/skills/skills_holder/ScrollContainer/skills" to="." method="_on_skills_select_skill"]
-[connection signal="pressed" from="content/skills/aspects/add_aspect" to="." method="add_new_aspect"]
-[connection signal="pressed" from="content/skills/stunts/add_stunt" to="." method="add_new_stunt"]
-[connection signal="pressed" from="content/skills/stresses/add_stress" to="." method="add_new_stress"]
-[connection signal="result" from="content/skills/VBoxContainer/bar" to="." method="_on_bar_result"]
-[connection signal="roll" from="content/skills/VBoxContainer/roller" to="." method="_on_roller_roll"]
+[connection signal="pressed" from="content/character/VBoxContainer/tabs/tab_1" to="." method="set_tab" binds= [0]]
+[connection signal="pressed" from="content/character/VBoxContainer/tabs/tab_2" to="." method="set_tab" binds= [1]]
+[connection signal="pressed" from="content/character/VBoxContainer/tabs/tab_3" to="." method="set_tab" binds= [2]]
+[connection signal="pressed" from="content/character/VBoxContainer/tabs/tab_4" to="." method="set_tab" binds= [3]]
+[connection signal="pressed" from="content/all_parameters/skills_holder/HBoxContainer/add_skill" to="." method="add_skill"]
+[connection signal="mouse_entered" from="content/all_parameters/skills_holder/HBoxContainer/show_up" to="content/all_parameters/skills_holder/ScrollContainer/skills" method="select_upgradable_skills"]
+[connection signal="mouse_exited" from="content/all_parameters/skills_holder/HBoxContainer/show_up" to="content/all_parameters/skills_holder/ScrollContainer/skills" method="clear_all_modulate"]
+[connection signal="select_skill" from="content/all_parameters/skills_holder/ScrollContainer/skills" to="." method="_on_skills_select_skill"]
+[connection signal="resized" from="content/all_parameters/scroll_parameters" to="." method="_on_scroll_parameters_resized"]
+[connection signal="pressed" from="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/aspects_scroll/aspects/add_aspect" to="." method="add_new_aspect"]
+[connection signal="pressed" from="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/stunts_scroll/stunts/add_stunt" to="." method="add_new_stunt"]
+[connection signal="pressed" from="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses/add_stress" to="." method="add_new_stress"]
+[connection signal="pressed" from="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences/add_stress" to="." method="add_new_stress"]
+[connection signal="result" from="content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller/bar" to="." method="_on_bar_result"]
+[connection signal="roll" from="content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller/roller" to="." method="_on_roller_roll"]
