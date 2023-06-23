@@ -1,7 +1,8 @@
+MarginContainer
+Label
+VBoxContainer
 ColorPickerButton
 ColorPicker
-MarginContainer
-VBoxContainer
 HBoxContainer
 ScrollContainer
 VFlowContainer
@@ -9,7 +10,6 @@ Button
 TextureButton
 LineEdit
 OptionButton
-Label
 Control
 GraphNode
 GraphEdit

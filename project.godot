@@ -23,7 +23,7 @@ CharactersSystem="*res://scripts/characters_system.gd"
 [gui]
 
 theme/custom="res://Main_theme/main_theme.tres"
-theme/custom_font="res://Fonts/cc.yal.6w3.tres"
+theme/custom_font="res://Fonts/Oswald/Oswald-VariableFont_wght.ttf"
 theme/default_font_antialiasing=0
 common/drop_mouse_on_gui_input_disabled=true
 

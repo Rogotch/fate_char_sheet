@@ -28,6 +28,5 @@ max_value = 13.0
 
 [node name="numbers" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 0
 
 [connection signal="value_changed" from="slider/VSlider" to="." method="_on_v_slider_value_changed"]

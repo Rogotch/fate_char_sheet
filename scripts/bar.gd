@@ -4,6 +4,7 @@ signal result(value)
 
 @export var slider_left  : HBoxContainer
 @export var slider_right : HBoxContainer
+@export var content      : HBoxContainer
 
 var value_left  : int
 var value_right : int
@@ -43,3 +44,8 @@ func set_value(value : int, left_flag : bool):
 	else:
 		slider_right.set_value(value)
 	pass
+
+
+func _on_h_box_container_resized() -> void:
+	custom_minimum_size.y = content.get_combined_minimum_size().y + 4
+	pass # Replace with function body.

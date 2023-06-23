@@ -19,7 +19,7 @@ func _ready() -> void:
 	if slider_alignment == "right":
 		move_child(numbers, 0)
 	label_settings = LabelSettings.new()
-	label_settings.font_size = 32
+	label_settings.font_size = 12
 	fill_numbers()
 	v_slider.min_value = min_value
 	v_slider.max_value = max_value
@@ -32,7 +32,9 @@ func fill_numbers():
 		var new_label = Label.new()
 		numbers.add_child(new_label)
 		new_label.label_settings = label_settings
-		new_label.custom_minimum_size.y = 22
+#		new_label.custom_minimum_size.y = 14
+		new_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		new_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		new_label.set_meta("value", i)
 		new_label.text = ("%2d" % i) if slider_alignment == "left" else get_right_value_string(i)
 		pass

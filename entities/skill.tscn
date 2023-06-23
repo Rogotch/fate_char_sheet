@@ -19,7 +19,7 @@ atlas = ExtResource("2_lmxil")
 region = Rect2(2886, 2184, 292, 293)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xnndv"]
-font_size = 32
+font_size = 14
 
 [node name="skill" type="HBoxContainer" node_paths=PackedStringArray("points", "buttons", "name_label", "edit_label", "edit_button", "_delete_button", "skill_name", "color_picker_button")]
 offset_right = 160.0
@@ -116,7 +116,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 mouse_filter = 2
 mouse_default_cursor_shape = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 14
 text = "Охота"
 expand_to_text_length = true
 select_all_on_focus = true

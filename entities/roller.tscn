@@ -3,10 +3,8 @@
 [ext_resource type="Script" path="res://scripts/roller.gd" id="1_m8wvp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kp421"]
-font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_2h614"]
-font_size = 32
 
 [node name="roller" type="VBoxContainer" node_paths=PackedStringArray("pool", "info", "text")]
 custom_minimum_size = Vector2(180, 70)

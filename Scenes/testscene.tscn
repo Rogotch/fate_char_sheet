@@ -1,4 +1,72 @@
-[gd_scene format=3 uid="uid://bfayxi5lgf57x"]
+[gd_scene load_steps=30 format=3 uid="uid://bfayxi5lgf57x"]
+
+[ext_resource type="FontFile" uid="uid://bipsevfyoh553" path="res://Fonts/dwarven_stonecraft/DwarvenStonecraftCyr.otf" id="1_1un1t"]
+[ext_resource type="FontFile" uid="uid://bw5ikp0jhwtoj" path="res://Fonts/kurland/Kurland.otf" id="2_85k5v"]
+[ext_resource type="FontFile" uid="uid://j4q5xhs5t4v4" path="res://Fonts/murecho/fonts/ttf/Murecho-Regular.ttf" id="3_mymbs"]
+[ext_resource type="FontFile" uid="uid://c44rcnkqqy8u2" path="res://Fonts/murecho/fonts/ttf/Murecho-Bold.ttf" id="4_lo78y"]
+[ext_resource type="FontFile" uid="uid://ggajnvbfqgw3" path="res://Fonts/never_smile/NeverSmile/NeverSmile.ttf" id="5_bjodk"]
+[ext_resource type="FontFile" uid="uid://d4f6gf8lpddrx" path="res://Fonts/Nunito/static/Nunito-Regular.ttf" id="6_k3dyn"]
+[ext_resource type="FontFile" uid="uid://yg0opa7x0f4m" path="res://Fonts/Nunito_Sans/NunitoSans-Regular.ttf" id="7_y8io4"]
+[ext_resource type="FontFile" uid="uid://bg0b7bbt6apk1" path="res://Fonts/Oswald/Oswald-VariableFont_wght.ttf" id="8_0jxk0"]
+[ext_resource type="FontFile" uid="uid://draw1j4ipk2s5" path="res://Fonts/RobotoCondensed/RobotoCondensed-Regular.ttf" id="9_f1b4k"]
+[ext_resource type="FontFile" uid="uid://6e177ftjdji2" path="res://Fonts/rurik/Rurikvikingfont-Regular.ttf" id="10_jj2nj"]
+[ext_resource type="FontFile" uid="uid://b8wh0ar4fhrhw" path="res://Fonts/skandal/Skandal.ttf" id="11_cabkr"]
+[ext_resource type="FontFile" uid="uid://ny2utbkbrnha" path="res://Fonts/tupo_vyaz/PT/PT/Tupo-Vyaz/Tupo-Vyaz_Regular.ttf" id="12_uv3q5"]
+[ext_resource type="FontFile" uid="uid://bn8u4tymtlt8w" path="res://Fonts/vonwaon-bitmap/VonwaonBitmap-12px.ttf" id="13_bdyh3"]
+[ext_resource type="FontFile" uid="uid://cld8wytir8ess" path="res://Fonts/wizland/Wizland.otf" id="14_ydgd1"]
+[ext_resource type="FontFile" uid="uid://dixkha5xawsqu" path="res://Fonts/Yanone_kaffeesatz/static/YanoneKaffeesatz-Regular.ttf" id="15_wt8rs"]
+[ext_resource type="FontFile" uid="uid://b6f2eqeee7bhl" path="res://Fonts/zametka/Zametka_Parletter.otf" id="16_b40vy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qbxxl"]
+font = ExtResource("8_0jxk0")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_87lfo"]
+font = ExtResource("1_1un1t")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_refsl"]
+font = ExtResource("2_85k5v")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_m2a1l"]
+font = ExtResource("3_mymbs")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_i2lac"]
+font = ExtResource("4_lo78y")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_ylcwj"]
+font = ExtResource("5_bjodk")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_0px2u"]
+font = ExtResource("6_k3dyn")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_bcada"]
+font = ExtResource("7_y8io4")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_ttiu2"]
+font = ExtResource("8_0jxk0")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_o473k"]
+font = ExtResource("9_f1b4k")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_pdtf5"]
+font = ExtResource("10_jj2nj")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6e75"]
+font = ExtResource("11_cabkr")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_o05qn"]
+font_size = 18
 
 [node name="testscene" type="Control"]
 layout_mode = 3
@@ -7,3 +75,134 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_qbxxl")
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_87lfo")
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_refsl")
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_m2a1l")
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_i2lac")
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_ylcwj")
+
+[node name="Label7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_0px2u")
+
+[node name="Label8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_bcada")
+
+[node name="Label9" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_ttiu2")
+
+[node name="Label10" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o473k")
+
+[node name="Label11" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_pdtf5")
+
+[node name="Label12" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_f6e75")
+
+[node name="Label13" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_uv3q5")
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label14" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_bdyh3")
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то,
+ходят ли враги тдо того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label15" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("14_ydgd1")
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне 
+показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label16" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_wt8rs")
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label17" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_b40vy")
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь,
+а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label18" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label19" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label20" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label21" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label22" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")
+
+[node name="Label23" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Когда будешь тестить обрати внимание, пожалуйста, на то, ходят ли враги до того, как ты сходишь, а то мне показалось, что нет"
+label_settings = SubResource("LabelSettings_o05qn")

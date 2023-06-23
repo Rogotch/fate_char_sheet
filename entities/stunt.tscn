@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://h0rejwyqm7ho" path="res://Sprites/Icons/cursor_up.png" id="3_5a0l8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xe7rv"]
-font_size = 32
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdan6"]
 
@@ -31,6 +30,7 @@ VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_eibt1")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sq353")
 
 [sub_resource type="LabelSettings" id="LabelSettings_ey22d"]
+font_size = 14
 
 [node name="stunt" type="VBoxContainer" node_paths=PackedStringArray("stunt_edit_line", "stunt_description_edit_line", "stunt_line", "stunt_description_line", "stunt_description", "_del_button", "expand_button", "line_label", "edit", "change")]
 anchors_preset = 15
@@ -76,7 +76,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 placeholder_text = "Трюк"
 
 [node name="edit_button" type="Button" parent="name"]
@@ -114,6 +114,7 @@ autowrap_mode = 3
 [node name="descr_edit" type="TextEdit" parent="description/scroll/holder"]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
 placeholder_text = "Описание трюка"
 drag_and_drop_selection_enabled = false
 wrap_mode = 1

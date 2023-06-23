@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://2f053bw6qcup" path="res://Sprites/Icons/Icons.png" id="5_47m10"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
-font_size = 32
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qra5"]
 atlas = ExtResource("5_47m10")
@@ -65,7 +64,7 @@ uppercase = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 expand_to_text_length = true
 caret_blink = true
 caret_blink_interval = 0.5

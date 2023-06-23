@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/bar.gd" id="1_8bfan"]
 [ext_resource type="PackedScene" uid="uid://02s1f33rfyc6" path="res://entities/slider.tscn" id="2_2rtgp"]
 
-[node name="bar" type="Control" node_paths=PackedStringArray("slider_left", "slider_right")]
+[node name="bar" type="Control" node_paths=PackedStringArray("slider_left", "slider_right", "content")]
 custom_minimum_size = Vector2(0, 396)
 layout_mode = 3
 anchors_preset = 15
@@ -14,28 +14,35 @@ offset_bottom = -252.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8bfan")
-slider_left = NodePath("HBoxContainer/slider_left")
-slider_right = NodePath("HBoxContainer/slider_right")
+slider_left = NodePath("content_holder/HBoxContainer/slider_left")
+slider_right = NodePath("content_holder/HBoxContainer/slider_right")
+content = NodePath("content_holder/HBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="content_holder" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="content_holder"]
+layout_mode = 2
 alignment = 1
 
-[node name="slider_left" parent="HBoxContainer" instance=ExtResource("2_2rtgp")]
+[node name="slider_left" parent="content_holder/HBoxContainer" instance=ExtResource("2_2rtgp")]
 layout_mode = 2
 slider_alignment = "left"
 
-[node name="separation" type="Control" parent="HBoxContainer"]
+[node name="separation" type="Control" parent="content_holder/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="slider_right" parent="HBoxContainer" instance=ExtResource("2_2rtgp")]
+[node name="slider_right" parent="content_holder/HBoxContainer" instance=ExtResource("2_2rtgp")]
 layout_mode = 2
 
-[connection signal="change_value" from="HBoxContainer/slider_left" to="." method="_on_slider_left_change_value"]
-[connection signal="change_value" from="HBoxContainer/slider_right" to="." method="_on_slider_right_change_value"]
+[connection signal="resized" from="content_holder/HBoxContainer" to="." method="_on_h_box_container_resized"]
+[connection signal="change_value" from="content_holder/HBoxContainer/slider_left" to="." method="_on_slider_left_change_value"]
+[connection signal="change_value" from="content_holder/HBoxContainer/slider_right" to="." method="_on_slider_right_change_value"]

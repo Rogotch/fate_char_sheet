@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfejdc7dcg4lx"]
+
+[ext_resource type="PackedScene" uid="uid://bcar4yym7i47s" path="res://entities/aspect_line.tscn" id="1_1u6f5"]
+[ext_resource type="PackedScene" uid="uid://crfbho4mk0gvo" path="res://entities/stress_box.tscn" id="2_7hw57"]
+[ext_resource type="Script" path="res://scripts/consequence_ui.gd" id="2_y76bw"]
+[ext_resource type="PackedScene" uid="uid://cvrdnq2kte0on" path="res://entities/params.tscn" id="4_8brwc"]
+
+[node name="consequence" instance=ExtResource("1_1u6f5")]
+script = ExtResource("2_y76bw")
+editabled = null
+
+[node name="box" parent="." index="1" instance=ExtResource("2_7hw57")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="stress_params" parent="texts" index="2" instance=ExtResource("4_8brwc")]
+layout_mode = 2
+
+[node name="if" parent="texts/stress_params" index="0"]
+text = "Активно, если"
+
+[node name="then" parent="texts/stress_params" index="4"]
+visible = false
+
+[node name="box" parent="texts/stress_params" index="5"]
+visible = false
+
+[node name="delete_button" parent="texts/stress_params" index="6"]
+visible = false
+
+[editable path="texts/stress_params"]

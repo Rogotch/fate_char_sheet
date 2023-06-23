@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://d1axx6nxihide" path="res://entities/roller.tscn" id="5_okjfn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
-font_size = 32
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qirb0"]
 
@@ -130,7 +129,7 @@ text = "Aspects_and_stunts"
 [node name="tab_2" type="Button" parent="content/character/VBoxContainer/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "stresses_and_consequenceы"
+text = "stresses_and_consequences"
 
 [node name="tab_3" type="Button" parent="content/character/VBoxContainer/tabs"]
 layout_mode = 2
@@ -149,6 +148,7 @@ theme_override_constants/separation = 20
 
 [node name="skills_holder" type="VBoxContainer" parent="content/all_parameters"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="content/all_parameters/skills_holder"]
 layout_mode = 2
@@ -181,6 +181,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme = SubResource("Theme_g41dn")
+scroll_horizontal = 829
 vertical_scroll_mode = 0
 
 [node name="parameters_holder" type="HBoxContainer" parent="content/all_parameters/scroll_parameters"]
@@ -206,6 +207,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 10
 
 [node name="add_aspect" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/aspects_scroll/aspects"]
 layout_mode = 2
@@ -226,6 +228,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.65
+theme_override_constants/separation = 10
 
 [node name="add_stunt" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/aspects_and_stunts/stunts_scroll/stunts"]
 layout_mode = 2
@@ -249,6 +252,7 @@ size_flags_stretch_ratio = 0.3
 [node name="stresses" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 10
 
 [node name="add_stress" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses"]
 layout_mode = 2
@@ -266,6 +270,7 @@ size_flags_stretch_ratio = 0.7
 [node name="consequences" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/consequences_scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 10
 
 [node name="add_stress" type="Button" parent="content/all_parameters/scroll_parameters/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
 layout_mode = 2
@@ -289,22 +294,23 @@ layout_mode = 2
 custom_minimum_size = Vector2(90, 396)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 2
+size_flags_vertical = 10
 size_flags_stretch_ratio = 3.0
 
 [node name="roller" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller/roller" instance=ExtResource("5_okjfn")]
 custom_minimum_size = Vector2(90, 70)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 2
 
 [node name="actions_descriptions" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller" instance=ExtResource("3_b4j05")]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="content/all_parameters/scroll_parameters/parameters_holder/dice_roller"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.4
 
 [connection signal="pressed" from="content/character/VBoxContainer/upper_tab/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="content/character/VBoxContainer/upper_tab/load" to="." method="_on_load_pressed"]

@@ -1,13 +1,14 @@
 extends editing_line
+class_name line_of_aspect
 
 @export var aspect_edit_line        : LineEdit
 @export var aspect_type_edit_line   : LineEdit
 @export var aspect_line             : Label
 @export var aspect_type_line        : Label
-@export var delete_button           : Button
+@export var _delete_button           : Button
 
 var delete_flag   := false
-var my_params     : aspect 
+var my_params     : Resource 
 
 func set_text_from_edit():
 	set_text(aspect_edit_line.text)
@@ -16,7 +17,7 @@ func set_text_from_edit():
 	pass
 
 
-func set_params(aspect_data : aspect):
+func set_params(aspect_data : consequence):
 	my_params = aspect_data
 	pass
 
@@ -30,7 +31,7 @@ func update():
 
 func set_edit_mod(flag):
 	super.set_edit_mod(flag)
-	delete_button.visible = flag
+	_delete_button.visible = flag
 	if !flag:
 		change_delete_flag(false)
 	pass
@@ -54,7 +55,7 @@ func _on_delete_button_pressed() -> void:
 
 func change_delete_flag(new_flag : bool):
 	delete_flag = new_flag
-	delete_button.modulate = Color.WHITE if !delete_flag else Color.RED
+	_delete_button.modulate = Color.WHITE if !delete_flag else Color.RED
 #	delete_button.texture_normal = 
 	pass
 
