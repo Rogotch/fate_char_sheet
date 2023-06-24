@@ -1,10 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1axx6nxihide"]
+[gd_scene load_steps=2 format=3 uid="uid://d1axx6nxihide"]
 
 [ext_resource type="Script" path="res://scripts/roller.gd" id="1_m8wvp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_kp421"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_2h614"]
 
 [node name="roller" type="VBoxContainer" node_paths=PackedStringArray("pool", "info", "text")]
 custom_minimum_size = Vector2(180, 70)
@@ -38,7 +34,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "PRESS_FOR_ROLL_KEY"
-label_settings = SubResource("LabelSettings_kp421")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -72,7 +67,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = SubResource("LabelSettings_2h614")
 horizontal_alignment = 1
 vertical_alignment = 1
 

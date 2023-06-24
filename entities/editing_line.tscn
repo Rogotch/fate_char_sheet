@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bevofxsd70c2"]
+[gd_scene load_steps=2 format=3 uid="uid://bevofxsd70c2"]
 
 [ext_resource type="Script" path="res://scripts/classes/editing_line.gd" id="1_cl5bc"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
 
 [node name="editing_line" type="HBoxContainer" node_paths=PackedStringArray("line_label", "edit", "change")]
 anchors_preset = 15
@@ -27,12 +25,10 @@ text = "edit"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-label_settings = SubResource("LabelSettings_3qe26")
 
 [node name="edit" type="LineEdit" parent="."]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
 select_all_on_focus = true
 caret_blink = true

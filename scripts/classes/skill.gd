@@ -12,6 +12,7 @@ class_name skill
 @export var defend          : String
 
 @export var modulation      := Color.WHITE
+@export var skill_index     := 0
 
 func _init(new_name = "", new_value = 0):
 	name   = new_name

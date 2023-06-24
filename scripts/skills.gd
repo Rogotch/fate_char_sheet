@@ -1,12 +1,15 @@
-extends Container
+extends drag_container
 
 signal select_skill(skill_data)
+signal deselect_skill
 
 @onready var skill_class = preload("res://entities/skill.tscn")
 
 var selected_node = null
+var active_dragging := false
 
 func _ready() -> void:
+	super._ready()
 #	add_skill("Сила", 3)
 #	add_skill("Ловкость", 2)
 #	add_skill("Златоуст")
@@ -20,20 +23,46 @@ func add_skill(skill_name : String, value := 0):
 	var new_skill = skill_class.instantiate()
 	add_child(new_skill)
 	new_skill.size.y = new_skill.get_combined_minimum_size().y
-	new_skill.size.x = get_combined_minimum_size().x
-	new_skill.resized.connect(Callable(self, "set_childs_positions"))
-	new_skill.set_skill_params(skill_data)
-	new_skill.select.connect(Callable(self, "select_skill_node").bind(new_skill))
+#	new_skill.size.x = get_combined_minimum_size().x
+	new_skill.size.x = size.x
+	print_debug(size.x)
+	new_skill.resized.connect(set_childs_positions)
+	new_skill.set_params(skill_data)
+	new_skill.select.connect(select_skill_node.bind(new_skill))
+	new_skill.dragging.connect(drag_cell)
+	new_skill.start_dragging.connect(set_active_dragging_flag.bind(true))
+	new_skill.end_dragging.connect(  set_active_dragging_flag.bind(false))
+	new_skill.end_dragging.connect(set_childs_positions)
+	new_skill.end_dragging.connect(update_indexes)
+	skill_data.skill_index = new_skill.get_index()
 	pass
 
 func load_skill(skill_data : skill):
 	var new_skill = skill_class.instantiate()
 	add_child(new_skill)
 	new_skill.size.y = new_skill.get_combined_minimum_size().y
-	new_skill.size.x = get_combined_minimum_size().x
-	new_skill.resized.connect(Callable(self, "set_childs_positions"))
-	new_skill.set_skill_params(skill_data)
-	new_skill.select.connect(Callable(self, "select_skill_node").bind(new_skill))
+#	new_skill.size.x = get_combined_minimum_size().x
+	new_skill.size.x = size.x
+	new_skill.resized.connect(set_childs_positions)
+	new_skill.set_params(skill_data)
+	new_skill.select.connect(select_skill_node.bind(new_skill))
+	new_skill.dragging.connect(drag_cell)
+	new_skill.start_dragging.connect(set_active_dragging_flag.bind(true))
+	new_skill.end_dragging.connect(  set_active_dragging_flag.bind(false))
+	new_skill.end_dragging.connect(set_childs_positions)
+	new_skill.end_dragging.connect(update_indexes)
+	move_child(new_skill, skill_data.skill_index)
+	pass
+
+func update_indexes():
+	var all_children = get_children()
+	for skill_ui in all_children:
+		var skill_data = skill_ui.skill_params as skill
+		skill_data.skill_index = skill_ui.get_index()
+	pass
+
+func set_active_dragging_flag(flag : bool):
+	active_dragging = flag
 	pass
 
 func set_min_size():
@@ -56,6 +85,8 @@ func select_skill_node(flag : bool, node : Node):
 	if flag:
 		selected_node = node
 		select_skill.emit(node.skill_params)
+	else:
+		deselect_skill.emit()
 	pass
 
 func deselect_all():
@@ -67,7 +98,7 @@ func deselect_all():
 func clear_all_modulate():
 	var all_skills = get_children()
 	for skill_node in all_skills:
-		var skill_size = skill_node.modulate_off()
+		skill_node.update()
 	pass
 
 func select_upgradable_skills():
@@ -113,51 +144,8 @@ func select_upgradable_skills():
 	print(keys)
 	pass
 
-func _notification(what):
-	if what == NOTIFICATION_SORT_CHILDREN:
-		# Must re-sort the children
-		if get_child_count() > 0:
-			set_childs_positions()
+func get_y_step():
+	var childs_count = get_child_count()
+	var y_size = get_parent().size.y
+	return y_size/(childs_count + 1)
 	pass
-
-func drag_cell():
-	var all_children = get_children()
-	var childs_count = all_children.size()
-	var counter = 0
-	var step = all_children[0].get_combined_minimum_size()
-#	print(step)
-	for c in all_children:
-		if c.dragged:
-			var drag_position = (counter * step) + step - c.size.x/2 
-#			prints(c.position.x, drag_position, counter)
-			if  drag_position < c.position.x  && c.position.x - drag_position >= step/2:
-#				print("move right")
-				if counter < childs_count:
-					move_child(c, counter + 1)
-			elif c.position.x < drag_position && drag_position - c.position.x >= step/2:
-#				print("move left")
-				if counter > 0:
-					move_child(c, counter - 1)
-			return
-		counter += 1
-	set_childs_positions()
-	pass
-
-func set_childs_positions():
-	var all_children = get_children()
-	var childs_count = all_children.size()
-	var counter = 0
-	var step = all_children[0].get_combined_minimum_size()
-#	var step = size.x/(childs_count + 1)
-	for c in all_children:
-#		if !c.dragged:
-#			c.position.y = size.y/2 - c.size.y/2 
-		c.size.y = c.get_combined_minimum_size().y
-		c.size.x = get_combined_minimum_size().x
-		c.position.x = 0
-		c.position.y = (counter * step).y
-		counter += 1
-	
-	pass
-
-#get_minimum_size()

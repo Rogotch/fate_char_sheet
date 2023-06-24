@@ -56,8 +56,12 @@ func add_params() -> void:
 	
 	new_terms.changed.connect(update_params_boxes)
 	_new_params.box.params.changed.connect(update_params_boxes)
+	_new_params.deleted.connect(delete_term.bind(_new_params))
 	pass # Replace with function body.
 
+func delete_term(term_ui : Control):
+	my_params.terms.erase(term_ui.params)
+	pass
 
 func apply_params() -> void:
 	pass # Replace with function body.

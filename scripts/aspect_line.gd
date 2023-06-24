@@ -8,7 +8,7 @@ class_name line_of_aspect
 @export var _delete_button           : Button
 
 var delete_flag   := false
-var my_params     : Resource 
+var my_params     : aspect 
 
 func set_text_from_edit():
 	set_text(aspect_edit_line.text)
@@ -17,7 +17,7 @@ func set_text_from_edit():
 	pass
 
 
-func set_params(aspect_data : consequence):
+func set_params(aspect_data : aspect):
 	my_params = aspect_data
 	pass
 

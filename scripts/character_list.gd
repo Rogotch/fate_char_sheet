@@ -12,11 +12,12 @@ extends Control
 @export var aspects_holder     : VBoxContainer
 @export var stunts_holder      : VBoxContainer
 @export var stresses_holder    : VBoxContainer
+@export var consequence_holder : VBoxContainer
 
-@onready var aspect_class = preload("res://entities/aspect_line.tscn")
-@onready var stress_class = preload("res://entities/stress_counter.tscn")
-@onready var stunt_class  = preload("res://entities/stunt.tscn")
-
+@onready var aspect_class        = preload("res://entities/aspect_line.tscn")
+@onready var stress_class        = preload("res://entities/stress_counter.tscn")
+@onready var stunt_class         = preload("res://entities/stunt.tscn")
+@onready var consenqunce_class   = preload("res://entities/consequence.tscn")
 
 var roll_result := 0
 var selecting_skill : skill
@@ -55,6 +56,12 @@ func _on_skills_select_skill(skill_data : skill) -> void:
 	set_bar_value()
 	pass # Replace with function body.
 
+func _on_skills_deselect_skill() -> void:
+	selecting_skill = null
+	roller.set_skill(0)
+	set_bar_value()
+	pass # Replace with function body.
+
 func set_bar_value():
 	var skill_value = selecting_skill.value if selecting_skill != null else 0
 	bar.set_value(skill_value + roll_result, true)
@@ -84,6 +91,13 @@ func add_new_aspect() -> void:
 	var new_aspect_data = aspect.new()
 	char.aspects.append(new_aspect_data)
 	_add_entity(new_aspect_data, aspect_class, aspects_holder)
+	pass # Replace with function body.
+
+func add_new_consenqunce() -> void:
+	var char = CharactersSystem.main_character as character
+	var new_consequence_data = consequence.new()
+	char.consequences.append(new_consequence_data)
+	_add_entity(new_consequence_data, consenqunce_class, consequence_holder)
 	pass # Replace with function body.
 
 func _add_entity(entity_data : Resource, entity_class : PackedScene, holder : Container):
@@ -126,6 +140,14 @@ func load_aspects() -> void:
 		_add_entity(loaded_aspect, aspect_class, aspects_holder)
 	pass
 
+func load_consenqunces() -> void:
+	Global.delete_children(aspects_holder)
+	var char = CharactersSystem.main_character as character
+	for loaded_consequence in char.consequences:
+		loaded_consequence = loaded_consequence as consequence
+		_add_entity(loaded_consequence, consenqunce_class, consequence_holder)
+	pass
+
 
 func _on_save_pressed() -> void:
 	CharactersSystem.write_save_character()
@@ -134,9 +156,10 @@ func _on_save_pressed() -> void:
 func full_load():
 	load_character_name()
 	load_aspects()
-	load_skills()
+	load_skills.call_deferred()
 	load_stresses()
 	load_stunts()
+	load_consenqunces()
 	pass
 
 
@@ -155,3 +178,4 @@ func _on_scroll_parameters_resized() -> void:
 func set_tab(tab_num : int):
 	scroll_parameters.scroll_horizontal = scroll_parameters.size.x * tab_num
 	pass
+

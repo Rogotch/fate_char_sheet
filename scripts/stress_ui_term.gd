@@ -1,6 +1,7 @@
 extends HBoxContainer
 
 signal accept_params(selected_params : stress_term)
+signal deleted
 
 @export var options       : OptionButton
 @export var edit          : LineEdit
@@ -23,7 +24,7 @@ func new_params():
 
 func update():
 	box.set_params(params.final_box)
-	edit.text = params.stress_value
+	edit.text = str(params.skill_value)
 #	options.select(params.skill_id)
 	pass
 
@@ -74,5 +75,6 @@ func accept_skill_params():
 
 
 func _on_delete_button_delete() -> void:
+	deleted.emit()
 	queue_free()
 	pass # Replace with function body.

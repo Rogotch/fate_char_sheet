@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgs6rjryy4laq"]
+[gd_scene load_steps=11 format=3 uid="uid://cgs6rjryy4laq"]
 
 [ext_resource type="Script" path="res://scripts/stunt.gd" id="1_gkgyd"]
 [ext_resource type="Texture2D" uid="uid://br43d1hbfcwjg" path="res://Sprites/Icons/cursor_down.png" id="2_ab83y"]
 [ext_resource type="Texture2D" uid="uid://h0rejwyqm7ho" path="res://Sprites/Icons/cursor_up.png" id="3_5a0l8"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_xe7rv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdan6"]
 
@@ -68,7 +66,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "Трюк"
-label_settings = SubResource("LabelSettings_xe7rv")
 autowrap_mode = 3
 
 [node name="name_edit" type="LineEdit" parent="name"]
@@ -76,7 +73,6 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-theme_override_font_sizes/font_size = 16
 placeholder_text = "Трюк"
 
 [node name="edit_button" type="Button" parent="name"]
@@ -114,7 +110,6 @@ autowrap_mode = 3
 [node name="descr_edit" type="TextEdit" parent="description/scroll/holder"]
 visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 placeholder_text = "Описание трюка"
 drag_and_drop_selection_enabled = false
 wrap_mode = 1

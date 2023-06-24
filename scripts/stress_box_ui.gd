@@ -9,6 +9,7 @@ signal updated
 var edit_mode_flag  := false
 var check_flag      := false
 var edit_flag       := false
+var disabled_flag   := false
 var stress_value    : String
 var params          : stress_box
 
@@ -42,7 +43,8 @@ func pressed() -> void:
 	if edit_mode_flag:
 		edit_mode(!edit_flag)
 	else:
-		set_check(!check_flag)
+		if !disabled_flag:
+			set_check(!check_flag)
 pass # Replace with function body.
 
 func set_check(flag) -> void:

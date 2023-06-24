@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtkcq3xldi68s"]
+[gd_scene load_steps=7 format=3 uid="uid://dtkcq3xldi68s"]
 
 [ext_resource type="Script" path="res://scripts/stress_counter_ui.gd" id="1_2ko8x"]
 [ext_resource type="Texture2D" uid="uid://cneue66sphgl" path="res://Sprites/Icons/notepad.png" id="3_bfcfn"]
 [ext_resource type="Texture2D" uid="uid://dvtlykyesp6xd" path="res://Sprites/Icons/settings_3.png" id="4_fils6"]
 [ext_resource type="Texture2D" uid="uid://2f053bw6qcup" path="res://Sprites/Icons/Icons.png" id="5_47m10"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3qe26"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qra5"]
 atlas = ExtResource("5_47m10")
@@ -55,7 +53,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Стресс силы"
-label_settings = SubResource("LabelSettings_3qe26")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -64,7 +61,6 @@ uppercase = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
 expand_to_text_length = true
 caret_blink = true
 caret_blink_interval = 0.5
@@ -80,6 +76,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="all_buttons" type="VBoxContainer" parent="stress_counter"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 alignment = 1
 

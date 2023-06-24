@@ -88,7 +88,6 @@ stretch_mode = 5
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "- rtgbdfdfgdfgdfgdfgdfgdfgdf dfg dfg dfg dfgdfgdfgdfgdfgdfg
 - rtgbdfdfgdfgdfgdfgdfgdfgdf dfg dfg dfg dfgdfgdfgdfgdfgdfg

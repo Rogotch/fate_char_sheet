@@ -1,14 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcar4yym7i47s"]
+[gd_scene load_steps=3 format=3 uid="uid://bcar4yym7i47s"]
 
 [ext_resource type="Script" path="res://scripts/aspect_line.gd" id="1_e7xxm"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_qo8l6"]
-line_spacing = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_2b5du"]
 font_size = 12
 
-[node name="aspect_line" type="HBoxContainer" node_paths=PackedStringArray("aspect_edit_line", "aspect_type_edit_line", "aspect_line", "aspect_type_line", "line_label", "edit", "change")]
+[node name="aspect_line" type="HBoxContainer" node_paths=PackedStringArray("aspect_edit_line", "aspect_type_edit_line", "aspect_line", "aspect_type_line", "_delete_button", "line_label", "edit", "change")]
 custom_minimum_size = Vector2(0, 40)
 offset_right = 311.0
 offset_bottom = 32.0
@@ -17,6 +14,7 @@ aspect_edit_line = NodePath("texts/edit/LineEdit")
 aspect_type_edit_line = NodePath("texts/edit/LineEdit2")
 aspect_line = NodePath("texts/labels/Label")
 aspect_type_line = NodePath("texts/labels/Control/Label2")
+_delete_button = NodePath("delete_button")
 editabled = true
 line_label = NodePath("texts/labels")
 edit = NodePath("texts/edit")
@@ -36,13 +34,12 @@ theme_override_constants/separation = 0
 [node name="labels" type="VBoxContainer" parent="texts"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = -5
+theme_override_constants/separation = -10
 
 [node name="Label" type="Label" parent="texts/labels"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Аспект"
-label_settings = SubResource("LabelSettings_qo8l6")
 
 [node name="Control" type="Control" parent="texts/labels"]
 custom_minimum_size = Vector2(0, 20)
@@ -68,7 +65,6 @@ theme_override_constants/separation = 0
 
 [node name="LineEdit" type="LineEdit" parent="texts/edit"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
 placeholder_text = "Аспект"
 
 [node name="LineEdit2" type="LineEdit" parent="texts/edit"]

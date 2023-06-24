@@ -7,6 +7,7 @@ class_name character
 @export var skills                      : Array[skill]
 @export var stunts                      : Array[stunt]
 @export var stresses                    : Array[stress_counter]
+@export var consequences                : Array[consequence]
 
 
 func _ready() -> void:

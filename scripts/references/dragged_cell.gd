@@ -1,5 +1,5 @@
-extends Control
-#class_name drag_container_cell
+extends HBoxContainer
+class_name drag_container_cell
 
 signal dragging
 signal end_dragging
@@ -7,13 +7,13 @@ signal start_dragging
 
 var dragged := false
 var offset : Vector2
-var left_border  : float
-var right_border : float
+var top_border  : float
+var down_border : float
 
 var drag_timer := Timer.new()
 
 func _ready() -> void:
-	set_borders()
+	set_borders.call_deferred()
 	add_child(drag_timer)
 	drag_timer.one_shot = true
 	drag_timer.autostart = false
@@ -21,25 +21,16 @@ func _ready() -> void:
 	pass
 
 func set_borders():
-	var parent_node = get_parent_control()
-	left_border = parent_node.global_position.x
-	right_border = parent_node.global_position.x + parent_node.size.x
+	var parent_node = get_parent_control().get_parent_control()
+	top_border = parent_node.global_position.y
+	down_border = parent_node.global_position.y + parent_node.size.y
 	pass
 
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion && dragged:
-		var next_position = get_global_mouse_position().x - offset.x
-#		print(next_position)
-#		var _left_border = get_pare
-		if next_position <= left_border:
-			global_position.x = left_border
-		elif next_position >= right_border - size.x:
-			global_position.x = right_border - size.x
-		else:
-			global_position.x = next_position
-		dragging.emit()
+		_dragging()
 		
 	if event is InputEventMouseButton:
 		if !event.pressed:
@@ -50,9 +41,23 @@ func _input(event: InputEvent) -> void:
 			z_index = 0
 	pass
 
+func _dragging():
+	var next_position = get_global_mouse_position().y - offset.y
+#		print(next_position)
+#		var _left_border = get_pare
+	if next_position <= top_border:
+		global_position.y = top_border
+	elif next_position >= down_border - size.y:
+		global_position.y = down_border - size.y
+	else:
+		global_position.y = next_position
+#	print_debug(global_position.y, " ", top_border, " ", down_border - size.y)
+	dragging.emit()
+	pass
+
 
 func start_drag():
-	print("drag")
+#	print("drag")
 	dragged = true
 	z_index = 2
 	offset = get_local_mouse_position()
