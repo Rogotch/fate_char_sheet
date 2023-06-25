@@ -8,6 +8,9 @@ extends Control
 @export var character_name                : HBoxContainer
 @export var scroll_parameters             : ScrollContainer
 @export var parameters_holder             : HBoxContainer
+@export var concept                       : HBoxContainer
+@export var main_stress                   : VBoxContainer
+@export var fate_points_ui                : VBoxContainer
 
 @export var aspects_holder     : VBoxContainer
 @export var stunts_holder      : VBoxContainer
@@ -121,6 +124,8 @@ func load_stresses() -> void:
 	var char = CharactersSystem.main_character as character
 	for loaded_stress in char.stresses:
 		loaded_stress = loaded_stress as stress_counter
+		if loaded_stress.main:
+			select_main_stress(loaded_stress)
 		_add_entity(loaded_stress, stress_class, stresses_holder)
 	pass
 
@@ -137,29 +142,39 @@ func load_aspects() -> void:
 	var char = CharactersSystem.main_character as character
 	for loaded_aspect in char.aspects:
 		loaded_aspect = loaded_aspect as aspect
+		if loaded_aspect.main:
+			select_main_aspect(loaded_aspect)
 		_add_entity(loaded_aspect, aspect_class, aspects_holder)
 	pass
 
 func load_consenqunces() -> void:
-	Global.delete_children(aspects_holder)
+	Global.delete_children(consequence_holder)
 	var char = CharactersSystem.main_character as character
 	for loaded_consequence in char.consequences:
 		loaded_consequence = loaded_consequence as consequence
 		_add_entity(loaded_consequence, consenqunce_class, consequence_holder)
 	pass
 
+func load_points():
+	var char = CharactersSystem.main_character as character
+	fate_points_ui.set_params(char.points)
+	pass
 
 func _on_save_pressed() -> void:
 	CharactersSystem.write_save_character()
 	pass # Replace with function body.
 
 func full_load():
+	var main_character = CharactersSystem.main_character as character
+	main_character.new_main_aspect.connect(select_main_aspect)
+	main_character.new_main_stress.connect(select_main_stress)
 	load_character_name()
 	load_aspects()
 	load_skills.call_deferred()
 	load_stresses()
 	load_stunts()
 	load_consenqunces()
+	load_points()
 	pass
 
 
@@ -179,3 +194,12 @@ func set_tab(tab_num : int):
 	scroll_parameters.scroll_horizontal = scroll_parameters.size.x * tab_num
 	pass
 
+func select_main_aspect(selected_aspect : aspect):
+	concept.set_params(selected_aspect)
+	concept.update()
+	pass
+
+func select_main_stress(selected_stress : stress_counter):
+	main_stress.set_params(selected_stress)
+	main_stress.update()
+	pass

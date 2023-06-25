@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://twa5dbcfk637"]
+[gd_scene load_steps=18 format=3 uid="uid://twa5dbcfk637"]
 
 [ext_resource type="PackedScene" uid="uid://dbk8rdqkccp1y" path="res://entities/bar.tscn" id="1_3i6yc"]
 [ext_resource type="Script" path="res://scripts/character_list.gd" id="1_ag6tl"]
 [ext_resource type="PackedScene" uid="uid://bevofxsd70c2" path="res://entities/editing_line.tscn" id="2_0rgqi"]
 [ext_resource type="PackedScene" uid="uid://clydxjt8wj3yg" path="res://entities/skill_check_helper.tscn" id="3_b4j05"]
+[ext_resource type="PackedScene" uid="uid://dtkcq3xldi68s" path="res://entities/stress_counter.tscn" id="3_fajwi"]
+[ext_resource type="PackedScene" uid="uid://bcar4yym7i47s" path="res://entities/aspect_line.tscn" id="3_pwd4a"]
 [ext_resource type="Texture2D" uid="uid://srh566rjau4r" path="res://Sprites/Icons/info.png" id="3_qy2i2"]
+[ext_resource type="PackedScene" uid="uid://cfafss2yk8j2t" path="res://entities/fate_points.tscn" id="4_28m1f"]
 [ext_resource type="PackedScene" uid="uid://c37tj6cmi34qp" path="res://entities/skills.tscn" id="4_c0feu"]
 [ext_resource type="PackedScene" uid="uid://d1axx6nxihide" path="res://entities/roller.tscn" id="5_okjfn"]
 
@@ -33,7 +36,7 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_w2mb2")
 HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_fvxh8")
 HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sqkc5")
 
-[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "aspects_holder", "stunts_holder", "stresses_holder", "consequence_holder")]
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "concept", "main_stress", "fate_points_ui", "aspects_holder", "stunts_holder", "stresses_holder", "consequence_holder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +53,9 @@ skills_container = NodePath("character_holder/content/all_parameters/skills_hold
 character_name = NodePath("character_holder/content/character/VBoxContainer/upper_tab/character_info/HBoxContainer/editing_line")
 scroll_parameters = NodePath("character_holder/content/all_parameters/scroll_parameters")
 parameters_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder")
+concept = NodePath("character_holder/content/character/VBoxContainer/upper_tab/character_info/aspect_line")
+main_stress = NodePath("character_holder/content/character/VBoxContainer/upper_tab/additional_data/stress_counter")
+fate_points_ui = NodePath("character_holder/content/character/VBoxContainer/upper_tab/additional_data/fate_points_UI")
 aspects_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/aspects_scroll/aspects/aspects_holder")
 stunts_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/stunts_scroll/stunts/stunts_holder")
 stresses_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses/stresses_holder")
@@ -113,17 +119,35 @@ layout_mode = 2
 size_flags_vertical = 1
 
 [node name="concept" type="Label" parent="character_holder/content/character/VBoxContainer/upper_tab/character_info"]
+visible = false
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Побирушник-вор"
 label_settings = SubResource("LabelSettings_mi3tg")
 
-[node name="save" type="Button" parent="character_holder/content/character/VBoxContainer/upper_tab"]
+[node name="aspect_line" parent="character_holder/content/character/VBoxContainer/upper_tab/character_info" instance=ExtResource("3_pwd4a")]
+layout_mode = 2
+editabled = false
+
+[node name="additional_data" type="HBoxContainer" parent="character_holder/content/character/VBoxContainer/upper_tab"]
+layout_mode = 2
+
+[node name="stress_counter" parent="character_holder/content/character/VBoxContainer/upper_tab/additional_data" instance=ExtResource("3_fajwi")]
+layout_mode = 2
+editabled = false
+
+[node name="fate_points_UI" parent="character_holder/content/character/VBoxContainer/upper_tab/additional_data" instance=ExtResource("4_28m1f")]
+layout_mode = 2
+
+[node name="buttons" type="HBoxContainer" parent="character_holder/content/character/VBoxContainer/upper_tab"]
+layout_mode = 2
+
+[node name="save" type="Button" parent="character_holder/content/character/VBoxContainer/upper_tab/buttons"]
 layout_mode = 2
 text = "save"
 
-[node name="load" type="Button" parent="character_holder/content/character/VBoxContainer/upper_tab"]
+[node name="load" type="Button" parent="character_holder/content/character/VBoxContainer/upper_tab/buttons"]
 layout_mode = 2
 text = "load
 "
@@ -331,8 +355,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
-[connection signal="pressed" from="character_holder/content/character/VBoxContainer/upper_tab/save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="character_holder/content/character/VBoxContainer/upper_tab/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="character_holder/content/character/VBoxContainer/upper_tab/buttons/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="character_holder/content/character/VBoxContainer/upper_tab/buttons/load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="character_holder/content/character/VBoxContainer/tabs/tab_1" to="." method="set_tab" binds= [0]]
 [connection signal="pressed" from="character_holder/content/character/VBoxContainer/tabs/tab_2" to="." method="set_tab" binds= [1]]
 [connection signal="pressed" from="character_holder/content/character/VBoxContainer/tabs/tab_3" to="." method="set_tab" binds= [2]]

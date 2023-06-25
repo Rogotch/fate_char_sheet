@@ -5,7 +5,8 @@ class_name line_of_aspect
 @export var aspect_type_edit_line   : LineEdit
 @export var aspect_line             : Label
 @export var aspect_type_line        : Label
-@export var _delete_button           : Button
+@export var _delete_button          : Button
+@export var set_as_main             : Button
 
 var delete_flag   := false
 var my_params     : aspect 
@@ -19,6 +20,7 @@ func set_text_from_edit():
 
 func set_params(aspect_data : aspect):
 	my_params = aspect_data
+	my_params.changed.connect(update)
 	pass
 
 func update():
@@ -32,6 +34,7 @@ func update():
 func set_edit_mod(flag):
 	super.set_edit_mod(flag)
 	_delete_button.visible = flag
+	set_as_main.visible = flag
 	if !flag:
 		change_delete_flag(false)
 	pass
@@ -64,3 +67,8 @@ func submit_text(new_text : String):
 	set_edit_mod(false)
 	redacted_mode = false
 	pass
+
+
+func _on_set_as_main_pressed() -> void:
+	CharactersSystem.main_character.set_main_aspect(my_params)
+	pass # Replace with function body.

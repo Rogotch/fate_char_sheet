@@ -170,6 +170,7 @@ stretch_mode = 5
 [connection signal="pressed" from="skill_name/delete_holder/delete_button" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="skill_name/edit_holder/edit_button" to="." method="set_edit"]
 [connection signal="color_changed" from="skill_name/color_picker_holder/color_picker_button" to="." method="_color_changed"]
+[connection signal="text_submitted" from="skill_name/edit_skill" to="." method="_on_edit_skill_text_submitted"]
 [connection signal="pressed" from="skill_name/buttons/add_point" to="." method="_on_add_point_pressed"]
 [connection signal="pressed" from="skill_name/buttons/substract_point" to="." method="_on_substract_point_pressed"]
 [connection signal="gui_input" from="drag_button_holder/drag_button" to="." method="_on_drag_button_gui_input"]

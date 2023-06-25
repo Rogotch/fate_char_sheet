@@ -214,3 +214,8 @@ func start_drag():
 		offset = drag_button.size/2
 	start_dragging.emit()
 	pass
+
+
+func _on_edit_skill_text_submitted(new_text: String) -> void:
+	set_edit()
+	pass # Replace with function body.

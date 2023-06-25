@@ -25,12 +25,14 @@ func _ready() -> void:
 func new_params():
 	my_params  = stress_counter.new()
 	box_counts = my_params.boxes.size()
+	my_params.changed.connect(update)
 	update()
 	pass
 
 func set_params(new_params : stress_counter):
 	my_params  = new_params
 	box_counts = my_params.boxes.size()
+	my_params.changed.connect(update)
 	update()
 	pass
 
@@ -115,4 +117,9 @@ func update_params_boxes():
 
 func _on_set_new_text():
 	my_params.name = line_label.text
+	pass # Replace with function body.
+
+
+func _on_make_main_pressed() -> void:
+	CharactersSystem.main_character.set_main_stress(my_params)
 	pass # Replace with function body.

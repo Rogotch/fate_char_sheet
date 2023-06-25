@@ -1,0 +1,127 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfafss2yk8j2t"]
+
+[ext_resource type="Texture2D" uid="uid://dhywwaekmnei" path="res://Sprites/Icons/award.png" id="1_tfx6v"]
+[ext_resource type="Script" path="res://scripts/fate_points_ui.gd" id="1_xffkm"]
+[ext_resource type="FontFile" uid="uid://ciektgqow2o2k" path="res://Fonts/Nunito/static/Nunito-Black.ttf" id="2_f0t5r"]
+[ext_resource type="Texture2D" uid="uid://bmj6v85i4nukv" path="res://Sprites/Icons/thin_star.png" id="2_rtay0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qt16t"]
+font_size = 26
+
+[node name="fate_points_UI" type="VBoxContainer" node_paths=PackedStringArray("counter_text", "points", "max_counter", "edit_max", "buttons", "edit_max_button")]
+custom_minimum_size = Vector2(250, 0)
+offset_right = 253.0
+offset_bottom = 42.0
+alignment = 1
+script = ExtResource("1_xffkm")
+fate_point_size = Vector2(32, 32)
+fate_point_texture = ExtResource("2_rtay0")
+counter_text = NodePath("content/counter_text")
+points = NodePath("content/points")
+max_counter = NodePath("content/max_counter")
+edit_max = NodePath("content/edit_max")
+buttons = NodePath("buttons")
+edit_max_button = NodePath("content/max_counter/edit_max_button")
+
+[node name="content" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="add" type="Button" parent="content"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("2_f0t5r")
+theme_override_font_sizes/font_size = 24
+text = "+"
+
+[node name="counter_text" type="Label" parent="content"]
+visible = false
+layout_mode = 2
+text = "(3)"
+label_settings = SubResource("LabelSettings_qt16t")
+
+[node name="points" type="HBoxContainer" parent="content"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="content/points"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_tfx6v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="content/points"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_tfx6v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="content/points"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_tfx6v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="separator" type="Label" parent="content"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_qt16t")
+
+[node name="max_counter" type="Label" parent="content"]
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_qt16t")
+
+[node name="edit_max_button" type="TextureButton" parent="content/max_counter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="edit_max" type="LineEdit" parent="content"]
+visible = false
+layout_mode = 2
+max_length = 2
+virtual_keyboard_type = 2
+select_all_on_focus = true
+
+[node name="remove" type="Button" parent="content"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_f0t5r")
+theme_override_font_sizes/font_size = 24
+text = "-"
+
+[node name="buttons" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="count_buttons" type="HBoxContainer" parent="buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="edit_max_button" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit max"
+
+[connection signal="pressed" from="content/add" to="." method="change_points_count" binds= [1]]
+[connection signal="pressed" from="content/max_counter/edit_max_button" to="." method="_on_edit_max_button_pressed"]
+[connection signal="text_changed" from="content/edit_max" to="." method="_on_edit_max"]
+[connection signal="text_submitted" from="content/edit_max" to="." method="_on_edit_max_text_submitted"]
+[connection signal="pressed" from="content/remove" to="." method="change_points_count" binds= [-1]]
+[connection signal="pressed" from="buttons/edit_max_button" to="." method="_on_edit_max_button_pressed"]

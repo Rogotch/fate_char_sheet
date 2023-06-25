@@ -1,9 +1,10 @@
 extends Resource
 class_name stress_counter
 
-@export var name  := tr("STRESS_KEY")
-@export var boxes : Array[stress_box]
-@export var terms : Array[stress_term]
+@export var name  := tr("STRESS_KEY")  : set = set_stress_name
+@export var boxes : Array[stress_box]  : set = set_boxes
+@export var terms : Array[stress_term] : set = set_terms
+@export var main  : bool
 
 func _init() -> void:
 	check_labels()
@@ -26,4 +27,25 @@ func remove_last_box():
 func check_labels():
 	if name.is_empty():
 		name = tr("BASE_STRESS_NAME")
+	pass
+
+func set_stress_name(new_stress_name : String):
+	name = new_stress_name
+	emit_changed()
+	pass
+
+func set_boxes(new_boxes : Array[stress_box]):
+	boxes = new_boxes
+	for box in boxes:
+		if !box.is_connected("changed", emit_changed):
+			box.changed.connect(emit_changed)
+	emit_changed()
+	pass
+
+func set_terms(new_terms : Array[stress_term]):
+	terms = new_terms
+	for term in terms:
+		if !term.is_connected("changed", emit_changed):
+			term.changed.connect(emit_changed)
+	emit_changed()
 	pass
