@@ -1,4 +1,5 @@
 extends Control
+@export_group("Nodes")
 @export var actions_descriptions          : ScrollContainer
 @export var skills                        : VBoxContainer
 @export var bar                           : Control
@@ -11,16 +12,20 @@ extends Control
 @export var concept                       : HBoxContainer
 @export var main_stress                   : VBoxContainer
 @export var fate_points_ui                : VBoxContainer
+@export var history                       : VBoxContainer
 
+@export_group("Holders")
 @export var aspects_holder     : VBoxContainer
 @export var stunts_holder      : VBoxContainer
 @export var stresses_holder    : VBoxContainer
 @export var consequence_holder : VBoxContainer
+@export var notes_holder       : VBoxContainer
 
 @onready var aspect_class        = preload("res://entities/aspect_line.tscn")
 @onready var stress_class        = preload("res://entities/stress_counter.tscn")
 @onready var stunt_class         = preload("res://entities/stunt.tscn")
 @onready var consenqunce_class   = preload("res://entities/consequence.tscn")
+@onready var notes_class         = preload("res://entities/note.tscn")
 
 var roll_result := 0
 var selecting_skill : skill
@@ -33,35 +38,31 @@ func _ready() -> void:
 	pass
 
 func set_character_name():
-	var char = CharactersSystem.main_character as character
-	char.name = character_name.get_text()
-	print_debug(char.name.is_valid_filename(), " ", char.name.validate_filename())
+	var _character = CharactersSystem.main_character as character
+	_character.name = character_name.get_text()
+	print_debug(_character.name.is_valid_filename(), " ", _character.name.validate_filename())
 	pass
 
 func load_character_name():
-	var char = CharactersSystem.main_character as character
-	character_name.set_text(char.name)
+	var _character = CharactersSystem.main_character as character
+	character_name.set_text(_character.name)
 	
 	pass
 
 func _on_bar_result(value) -> void:
 	actions_descriptions.action_result(value)
 	pass # Replace with function body.
-
-func _on_roller_roll(value) -> void:
-	roll_result = value
-	set_bar_value()
-	pass # Replace with function body.
+\
 
 func _on_skills_select_skill(skill_data : skill) -> void:
 	selecting_skill = skill_data
-	roller.set_skill(skill_data.value)
+	roller.set_skill(skill_data)
 	set_bar_value()
 	pass # Replace with function body.
 
 func _on_skills_deselect_skill() -> void:
 	selecting_skill = null
-	roller.set_skill(0)
+	roller.set_skill(null)
 	set_bar_value()
 	pass # Replace with function body.
 
@@ -75,33 +76,45 @@ func add_skill() -> void:
 	pass # Replace with function body.
 
 func add_new_stress() -> void:
-	var char = CharactersSystem.main_character as character
+	var _character = CharactersSystem.main_character as character
 	var new_stress_data = stress_counter.new()
-	char.stresses.append(new_stress_data)
+	_character.stresses.append(new_stress_data)
 	_add_entity(new_stress_data, stress_class, stresses_holder)
 #	add_stress(new_stress_data)
 	pass # Replace with function body.
 
 func add_new_stunt() -> void:
-	var char = CharactersSystem.main_character as character
+	var _character = CharactersSystem.main_character as character
 	var new_stunt_data = stunt.new()
-	char.stunts.append(new_stunt_data)
+	_character.stunts.append(new_stunt_data)
 	_add_entity(new_stunt_data, stunt_class, stunts_holder)
 	pass # Replace with function body.
 
 func add_new_aspect() -> void:
-	var char = CharactersSystem.main_character as character
+	var _character = CharactersSystem.main_character as character
 	var new_aspect_data = aspect.new()
-	char.aspects.append(new_aspect_data)
+	_character.aspects.append(new_aspect_data)
 	_add_entity(new_aspect_data, aspect_class, aspects_holder)
 	pass # Replace with function body.
 
 func add_new_consenqunce() -> void:
-	var char = CharactersSystem.main_character as character
+	var _character = CharactersSystem.main_character as character
 	var new_consequence_data = consequence.new()
-	char.consequences.append(new_consequence_data)
+	_character.consequences.append(new_consequence_data)
 	_add_entity(new_consequence_data, consenqunce_class, consequence_holder)
 	pass # Replace with function body.
+
+func add_new_note() -> void:
+	_add_note("")
+	pass
+
+func _add_note(text : String):
+	var note = notes_class.instantiate()
+	notes_holder.add_child(note)
+	
+	note.set_params(text)
+	note.update()
+	pass
 
 func _add_entity(entity_data : Resource, entity_class : PackedScene, holder : Container):
 	var new_entity = entity_class.instantiate()
@@ -113,16 +126,16 @@ func _add_entity(entity_data : Resource, entity_class : PackedScene, holder : Co
 
 func load_skills():
 	Global.delete_children(skills_container)
-	var char = CharactersSystem.main_character as character
-	for loaded_skill in char.skills:
+	var _character = CharactersSystem.main_character as character
+	for loaded_skill in _character.skills:
 		loaded_skill = loaded_skill as skill
 		skills_container.load_skill(loaded_skill)
 	pass
 
 func load_stresses() -> void:
 	Global.delete_children(stresses_holder)
-	var char = CharactersSystem.main_character as character
-	for loaded_stress in char.stresses:
+	var _character = CharactersSystem.main_character as character
+	for loaded_stress in _character.stresses:
 		loaded_stress = loaded_stress as stress_counter
 		if loaded_stress.main:
 			select_main_stress(loaded_stress)
@@ -131,16 +144,16 @@ func load_stresses() -> void:
 
 func load_stunts() -> void:
 	Global.delete_children(stunts_holder)
-	var char = CharactersSystem.main_character as character
-	for loaded_stunts in char.stunts:
+	var _character = CharactersSystem.main_character as character
+	for loaded_stunts in _character.stunts:
 		loaded_stunts = loaded_stunts as stunt
 		_add_entity(loaded_stunts, stunt_class, stunts_holder)
 	pass
 
 func load_aspects() -> void:
 	Global.delete_children(aspects_holder)
-	var char = CharactersSystem.main_character as character
-	for loaded_aspect in char.aspects:
+	var _character = CharactersSystem.main_character as character
+	for loaded_aspect in _character.aspects:
 		loaded_aspect = loaded_aspect as aspect
 		if loaded_aspect.main:
 			select_main_aspect(loaded_aspect)
@@ -149,15 +162,21 @@ func load_aspects() -> void:
 
 func load_consenqunces() -> void:
 	Global.delete_children(consequence_holder)
-	var char = CharactersSystem.main_character as character
-	for loaded_consequence in char.consequences:
+	var _character = CharactersSystem.main_character as character
+	for loaded_consequence in _character.consequences:
 		loaded_consequence = loaded_consequence as consequence
 		_add_entity(loaded_consequence, consenqunce_class, consequence_holder)
 	pass
 
 func load_points():
-	var char = CharactersSystem.main_character as character
-	fate_points_ui.set_params(char.points)
+	var _character = CharactersSystem.main_character as character
+	fate_points_ui.set_params(_character.points)
+	pass
+
+func load_notes():
+	var _character = CharactersSystem.main_character as character
+	for loaded_note in _character.notes:
+		_add_note(loaded_note)
 	pass
 
 func _on_save_pressed() -> void:
@@ -175,6 +194,7 @@ func full_load():
 	load_stunts()
 	load_consenqunces()
 	load_points()
+	load_notes()
 	pass
 
 
@@ -203,3 +223,21 @@ func select_main_stress(selected_stress : stress_counter):
 	main_stress.set_params(selected_stress)
 	main_stress.update()
 	pass
+
+
+func _on_roller_roll(skill_data : skill, value : int) -> void:
+	roll_result = value
+	
+	var final_skill_value = 0 if skill_data == null else skill_data.value
+	var skill_line = 0 if skill_data == null else skill_data.name + "(%d)" % skill_data.value
+	var final_line = "{roll} + {skill} = {result}".format({"roll" : roll_result, "skill" : skill_line, "result" : final_skill_value + roll_result})
+	
+	var history_line = Label.new()
+	history.add_child(history_line)
+	history_line.text = final_line
+	history.move_child(history_line, 0)
+	history_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+#	history.horizontal_alignment = 
+	
+	set_bar_value()
+	pass # Replace with function body.

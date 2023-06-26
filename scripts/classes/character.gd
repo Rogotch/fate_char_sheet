@@ -11,6 +11,7 @@ signal new_main_stress(new_stress : stress_counter)
 @export var stunts                      : Array[stunt]
 @export var stresses                    : Array[stress_counter]
 @export var consequences                : Array[consequence]
+@export var notes                       : Array[String]
 @export var points                      := fate_points.new()
 
 

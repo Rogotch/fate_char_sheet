@@ -36,7 +36,7 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_w2mb2")
 HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_fvxh8")
 HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sqkc5")
 
-[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "concept", "main_stress", "fate_points_ui", "aspects_holder", "stunts_holder", "stresses_holder", "consequence_holder")]
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "concept", "main_stress", "fate_points_ui", "history", "aspects_holder", "stunts_holder", "stresses_holder", "consequence_holder", "notes_holder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,10 +56,12 @@ parameters_holder = NodePath("character_holder/content/all_parameters/scroll_par
 concept = NodePath("character_holder/content/character/VBoxContainer/upper_tab/character_info/aspect_line")
 main_stress = NodePath("character_holder/content/character/VBoxContainer/upper_tab/additional_data/stress_counter")
 fate_points_ui = NodePath("character_holder/content/character/VBoxContainer/upper_tab/additional_data/fate_points_UI")
+history = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/history")
 aspects_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/aspects_scroll/aspects/aspects_holder")
 stunts_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/stunts_scroll/stunts/stunts_holder")
 stresses_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses/stresses_holder")
 consequence_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences/consequence_holder")
+notes_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes/margin_notes/scroll_notes/notes_holder")
 
 [node name="character_holder" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -123,7 +125,6 @@ visible = false
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_vertical = 1
-text = "Побирушник-вор"
 label_settings = SubResource("LabelSettings_mi3tg")
 
 [node name="aspect_line" parent="character_holder/content/character/VBoxContainer/upper_tab/character_info" instance=ExtResource("3_pwd4a")]
@@ -317,7 +318,7 @@ theme_override_constants/separation = 10
 
 [node name="add_consequence" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
 layout_mode = 2
-text = "Add stress"
+text = "Add consequence"
 
 [node name="consequence_holder" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
 layout_mode = 2
@@ -350,10 +351,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller"]
+[node name="history" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+
+[node name="notes" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder"]
+custom_minimum_size = Vector2(830, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="add_note" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes"]
+layout_mode = 2
+text = "Add note"
+
+[node name="margin_notes" type="MarginContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="scroll_notes" type="ScrollContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes/margin_notes"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="notes_holder" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes/margin_notes/scroll_notes"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="pressed" from="character_holder/content/character/VBoxContainer/upper_tab/buttons/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="character_holder/content/character/VBoxContainer/upper_tab/buttons/load" to="." method="_on_load_pressed"]
@@ -373,3 +401,4 @@ size_flags_stretch_ratio = 0.4
 [connection signal="pressed" from="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences/add_consequence" to="." method="add_new_consenqunce"]
 [connection signal="result" from="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/roller/bar" to="." method="_on_bar_result"]
 [connection signal="roll" from="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/roller/roller" to="." method="_on_roller_roll"]
+[connection signal="pressed" from="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes/add_note" to="." method="add_new_note"]

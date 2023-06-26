@@ -140,6 +140,8 @@ func select_upgradable_skills():
 				_skill.set_label_modulate(Color.LIGHT_CORAL)
 			elif upgradable_skills.has(key):
 				_skill.set_label_modulate(Color.LIGHT_GREEN)
+			else:
+				_skill.set_label_modulate(Color.WHITE)
 	
 	print(keys)
 	pass

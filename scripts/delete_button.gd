@@ -39,7 +39,7 @@ func delete_object():
 func set_deleting_mode(delete_flag : bool):
 	deleting_flag = delete_flag
 	modulate = Color.RED if delete_flag else Color.WHITE
-	texture_normal = apply_texture if delete_flag else delete_texture
+#	texture_normal = apply_texture if delete_flag else delete_texture
 	if delete_flag:
 		timer.start(3)
 	pass

@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://drajowmfhcjxa"]
+
+[ext_resource type="Script" path="res://scripts/note.gd" id="1_l3ib1"]
+[ext_resource type="Script" path="res://scripts/delete_button.gd" id="2_8wl2b"]
+[ext_resource type="Texture2D" uid="uid://csowvicix6mmp" path="res://Sprites/Icons/trashcan.png" id="2_qhwq6"]
+[ext_resource type="Texture2D" uid="uid://fuhncya7jspa" path="res://Sprites/Icons/trashcanOpen.png" id="3_4an68"]
+[ext_resource type="Texture2D" uid="uid://cneue66sphgl" path="res://Sprites/Icons/notepad.png" id="5_re44j"]
+[ext_resource type="Texture2D" uid="uid://cp6852esn1dqn" path="res://Sprites/Icons/notepad_write.png" id="6_dbcft"]
+
+[node name="note" type="VBoxContainer" node_paths=PackedStringArray("text", "edit", "edit_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l3ib1")
+text = NodePath("text")
+edit = NodePath("edit")
+edit_button = NodePath("buttons/edit_button")
+
+[node name="text" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "фывафывапфывпаывапывапывапывапывапывапывапывп"
+fit_content = true
+
+[node name="edit" type="TextEdit" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="delete_button" type="TextureButton" parent="buttons"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture_normal = ExtResource("2_qhwq6")
+texture_pressed = ExtResource("3_4an68")
+texture_hover = ExtResource("3_4an68")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_8wl2b")
+
+[node name="edit_button" type="TextureButton" parent="buttons"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture_normal = ExtResource("5_re44j")
+texture_pressed = ExtResource("6_dbcft")
+texture_hover = ExtResource("6_dbcft")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="delete" from="buttons/delete_button" to="." method="_on_delete_button_delete"]
+[connection signal="pressed" from="buttons/edit_button" to="." method="_on_edit_button_pressed"]
