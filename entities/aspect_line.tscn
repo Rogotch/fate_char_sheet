@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcar4yym7i47s"]
+[gd_scene load_steps=7 format=3 uid="uid://bcar4yym7i47s"]
 
 [ext_resource type="Script" path="res://scripts/aspect_line.gd" id="1_e7xxm"]
 [ext_resource type="Texture2D" uid="uid://fuhncya7jspa" path="res://Sprites/Icons/trashcanOpen.png" id="2_75rmx"]
+[ext_resource type="Texture2D" uid="uid://csowvicix6mmp" path="res://Sprites/Icons/trashcan.png" id="2_kwamm"]
 [ext_resource type="Texture2D" uid="uid://cp2xct41fy5bv" path="res://Sprites/Icons/crown_a.png" id="3_d0hnc"]
+[ext_resource type="Script" path="res://scripts/delete_button.gd" id="4_xv6ci"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2b5du"]
 font_size = 12
@@ -23,13 +25,16 @@ line_label = NodePath("texts/labels")
 edit = NodePath("texts/edit")
 change = NodePath("Edit_button")
 
-[node name="delete_button" type="Button" parent="."]
+[node name="delete_button" type="TextureButton" parent="."]
 visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-icon = ExtResource("2_75rmx")
-icon_alignment = 1
-expand_icon = true
+texture_normal = ExtResource("2_kwamm")
+texture_pressed = ExtResource("2_75rmx")
+texture_hover = ExtResource("2_75rmx")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_xv6ci")
 
 [node name="set_as_main" type="Button" parent="."]
 visible = false
@@ -91,7 +96,7 @@ layout_mode = 2
 text = "edit
 "
 
-[connection signal="pressed" from="delete_button" to="." method="_on_delete_button_pressed"]
+[connection signal="delete" from="delete_button" to="." method="_on_delete_button_delete"]
 [connection signal="pressed" from="set_as_main" to="." method="_on_set_as_main_pressed"]
 [connection signal="text_submitted" from="texts/edit/LineEdit" to="." method="submit_text"]
 [connection signal="text_submitted" from="texts/edit/LineEdit2" to="." method="submit_text"]

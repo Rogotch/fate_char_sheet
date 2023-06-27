@@ -13,6 +13,8 @@ extends Control
 @export var main_stress                   : VBoxContainer
 @export var fate_points_ui                : VBoxContainer
 @export var history                       : VBoxContainer
+@export var portrait                      : TextureRect
+@export var file_dialog                   : FileDialog
 
 @export_group("Holders")
 @export var aspects_holder     : VBoxContainer
@@ -124,6 +126,9 @@ func _add_entity(entity_data : Resource, entity_class : PackedScene, holder : Co
 	new_entity.update()
 	pass
 
+#func delete_entity(params : Resource, character_holder : Array):
+#	pass
+
 func load_skills():
 	Global.delete_children(skills_container)
 	var _character = CharactersSystem.main_character as character
@@ -174,9 +179,10 @@ func load_points():
 	pass
 
 func load_notes():
+	Global.delete_children(notes_holder)
 	var _character = CharactersSystem.main_character as character
 	for loaded_note in _character.notes:
-		_add_note(loaded_note)
+		_add_note.call_deferred(loaded_note)
 	pass
 
 func _on_save_pressed() -> void:
@@ -195,6 +201,7 @@ func full_load():
 	load_consenqunces()
 	load_points()
 	load_notes()
+	load_portrait()
 	pass
 
 
@@ -240,4 +247,21 @@ func _on_roller_roll(skill_data : skill, value : int) -> void:
 #	history.horizontal_alignment = 
 	
 	set_bar_value()
+	pass # Replace with function body.
+
+func load_portrait():
+	if CharactersSystem.main_character.portrait != null:
+		portrait.texture = CharactersSystem.main_character.portrait
+	pass
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	var portrait_texture = load(path)
+#	var portrait = load(path).get_image()
+	CharactersSystem.main_character.portrait = portrait_texture
+	portrait.texture = portrait_texture
+	pass # Replace with function body.
+
+
+func _on_select_image_pressed() -> void:
+	file_dialog.popup_centered()
 	pass # Replace with function body.

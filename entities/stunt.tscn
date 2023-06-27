@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgs6rjryy4laq"]
+[gd_scene load_steps=14 format=3 uid="uid://cgs6rjryy4laq"]
 
 [ext_resource type="Script" path="res://scripts/stunt.gd" id="1_gkgyd"]
 [ext_resource type="Texture2D" uid="uid://br43d1hbfcwjg" path="res://Sprites/Icons/cursor_down.png" id="2_ab83y"]
 [ext_resource type="Texture2D" uid="uid://h0rejwyqm7ho" path="res://Sprites/Icons/cursor_up.png" id="3_5a0l8"]
+[ext_resource type="Texture2D" uid="uid://csowvicix6mmp" path="res://Sprites/Icons/trashcan.png" id="4_irkli"]
+[ext_resource type="Texture2D" uid="uid://fuhncya7jspa" path="res://Sprites/Icons/trashcanOpen.png" id="5_44tg0"]
+[ext_resource type="Script" path="res://scripts/delete_button.gd" id="6_5g0o7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdan6"]
 
@@ -55,17 +58,23 @@ change = NodePath("name/edit_button")
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="delete_button" type="Button" parent="name"]
+[node name="delete_button" type="TextureButton" parent="name"]
 visible = false
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-text = "delete
-"
+texture_normal = ExtResource("4_irkli")
+texture_pressed = ExtResource("5_44tg0")
+texture_hover = ExtResource("5_44tg0")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("6_5g0o7")
 
 [node name="name" type="Label" parent="name"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "Трюк"
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="name_edit" type="LineEdit" parent="name"]
@@ -115,6 +124,6 @@ drag_and_drop_selection_enabled = false
 wrap_mode = 1
 scroll_fit_content_height = true
 
-[connection signal="pressed" from="name/delete_button" to="." method="_on_delete_button_pressed"]
+[connection signal="delete" from="name/delete_button" to="." method="_on_delete_button_delete"]
 [connection signal="pressed" from="name/expand" to="." method="expand_button_press"]
 [connection signal="resized" from="description/scroll/holder/descr_edit" to="." method="_on_descr_edit_resized"]

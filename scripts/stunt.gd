@@ -1,11 +1,13 @@
 extends editing_line
 
+signal delete
+
 @export var stunt_edit_line               : LineEdit
 @export var stunt_description_edit_line   : TextEdit
 @export var stunt_line                    : Label
 @export var stunt_description_line        : Label
 @export var stunt_description             : ScrollContainer
-@export var _del_button                   : Button
+@export var _del_button                   : TextureButton
 @export var expand_button                 : Button
 @export var expand_down_texture           : Texture2D
 @export var expand_up_texture             : Texture2D
@@ -95,3 +97,10 @@ func expand_description(flag):
 		expant_to(0)
 	expand_button.icon = expand_up_texture if expanded_flag else expand_down_texture
 	pass
+
+func _on_delete_button_delete() -> void:
+	var _character = CharactersSystem.main_character as character
+	_character.stunts.erase(my_params)
+	delete.emit()
+	queue_free()
+	pass # Replace with function body.

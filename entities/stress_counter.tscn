@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtkcq3xldi68s"]
+[gd_scene load_steps=11 format=3 uid="uid://dtkcq3xldi68s"]
 
 [ext_resource type="Script" path="res://scripts/stress_counter_ui.gd" id="1_2ko8x"]
 [ext_resource type="Texture2D" uid="uid://cneue66sphgl" path="res://Sprites/Icons/notepad.png" id="3_bfcfn"]
 [ext_resource type="Texture2D" uid="uid://dvtlykyesp6xd" path="res://Sprites/Icons/settings_3.png" id="4_fils6"]
+[ext_resource type="Texture2D" uid="uid://csowvicix6mmp" path="res://Sprites/Icons/trashcan.png" id="5_6s7gp"]
 [ext_resource type="Texture2D" uid="uid://2f053bw6qcup" path="res://Sprites/Icons/Icons.png" id="5_47m10"]
 [ext_resource type="Texture2D" uid="uid://cp2xct41fy5bv" path="res://Sprites/Icons/crown_a.png" id="5_qotc5"]
+[ext_resource type="Texture2D" uid="uid://fuhncya7jspa" path="res://Sprites/Icons/trashcanOpen.png" id="6_aedkc"]
+[ext_resource type="Script" path="res://scripts/delete_button.gd" id="7_bkkb0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qra5"]
 atlas = ExtResource("5_47m10")
@@ -14,7 +17,7 @@ region = Rect2(112, 80, 16, 16)
 atlas = ExtResource("5_47m10")
 region = Rect2(0, 96, 16, 16)
 
-[node name="stress_counter" type="VBoxContainer" node_paths=PackedStringArray("all_params", "base_boxes", "params_boxes", "settings_button", "additionals", "all_buttons", "line_label", "edit", "change")]
+[node name="stress_counter" type="VBoxContainer" node_paths=PackedStringArray("all_params", "base_boxes", "params_boxes", "settings_button", "additionals", "add", "remove", "all_buttons", "line_label", "edit", "change")]
 custom_minimum_size = Vector2(0, 70)
 offset_right = 133.0
 offset_bottom = 40.0
@@ -25,6 +28,8 @@ base_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/base_boxes")
 params_boxes = NodePath("stress_counter/VBoxContainer/HBoxContainer/params_boxes")
 settings_button = NodePath("stress_counter/all_buttons/settings")
 additionals = NodePath("additionals")
+add = NodePath("stress_counter/VBoxContainer/HBoxContainer/add")
+remove = NodePath("stress_counter/VBoxContainer/HBoxContainer/remove")
 all_buttons = NodePath("stress_counter/all_buttons")
 editabled = true
 line_label = NodePath("stress_counter/VBoxContainer/editing_line/line_label")
@@ -70,11 +75,33 @@ caret_blink_interval = 0.5
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="add" type="TextureButton" parent="stress_counter/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = SubResource("AtlasTexture_2qra5")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="base_boxes" type="HBoxContainer" parent="stress_counter/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="params_boxes" type="HBoxContainer" parent="stress_counter/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="remove" type="TextureButton" parent="stress_counter/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_0mc5u")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="all_buttons" type="VBoxContainer" parent="stress_counter"]
 modulate = Color(1, 1, 1, 0)
@@ -82,7 +109,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="edit" type="TextureButton" parent="stress_counter/all_buttons"]
-custom_minimum_size = Vector2(12, 12)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -91,7 +118,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="settings" type="TextureButton" parent="stress_counter/all_buttons"]
-custom_minimum_size = Vector2(12, 12)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -99,23 +126,15 @@ texture_normal = ExtResource("4_fils6")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="add" type="TextureButton" parent="stress_counter/all_buttons"]
-custom_minimum_size = Vector2(12, 12)
+[node name="delete_button" type="TextureButton" parent="stress_counter/all_buttons"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture_normal = SubResource("AtlasTexture_2qra5")
+texture_normal = ExtResource("5_6s7gp")
+texture_pressed = ExtResource("6_aedkc")
+texture_hover = ExtResource("6_aedkc")
 ignore_texture_size = true
-stretch_mode = 3
-
-[node name="remove" type="TextureButton" parent="stress_counter/all_buttons"]
-custom_minimum_size = Vector2(12, 12)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture_normal = SubResource("AtlasTexture_0mc5u")
-ignore_texture_size = true
-stretch_mode = 3
+stretch_mode = 5
+script = ExtResource("7_bkkb0")
 
 [node name="additionals" type="VBoxContainer" parent="."]
 visible = false
@@ -147,9 +166,10 @@ size_flags_horizontal = 3
 text = "Принять"
 
 [connection signal="set_new_text" from="." to="." method="_on_set_new_text"]
+[connection signal="pressed" from="stress_counter/VBoxContainer/HBoxContainer/add" to="." method="add_box" binds= [1]]
+[connection signal="pressed" from="stress_counter/VBoxContainer/HBoxContainer/remove" to="." method="add_box" binds= [-1]]
 [connection signal="pressed" from="stress_counter/all_buttons/settings" to="." method="change_settings"]
-[connection signal="pressed" from="stress_counter/all_buttons/add" to="." method="add_box" binds= [1]]
-[connection signal="pressed" from="stress_counter/all_buttons/remove" to="." method="add_box" binds= [-1]]
+[connection signal="delete" from="stress_counter/all_buttons/delete_button" to="." method="_on_delete_button_delete"]
 [connection signal="pressed" from="additionals/HBoxContainer/add_params" to="." method="add_params"]
 [connection signal="pressed" from="additionals/HBoxContainer/make_main" to="." method="_on_make_main_pressed"]
 [connection signal="pressed" from="additionals/HBoxContainer/apply_params" to="." method="apply_params"]

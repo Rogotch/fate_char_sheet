@@ -1,5 +1,7 @@
-res://entities
 res://scripts
+res://entities
+res://Sprites/Icons
+res://scripts/references
 res://Fonts/Oswald
 res://Scenes
 res://Main_theme

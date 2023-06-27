@@ -52,7 +52,7 @@ func _on_edit_button_pressed() -> void:
 	pass # Replace with function body.
 
 func set_params(new_text : String):
-	var _character = CharactersSystem.main_character as character
+#	var _character = CharactersSystem.main_character as character
 	set_text(new_text)
 	note_text = new_text
 	update()

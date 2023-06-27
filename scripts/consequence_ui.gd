@@ -1,10 +1,12 @@
 extends editing_line
 
+signal delete
+
 @export var aspect_edit_line        : LineEdit
 @export var aspect_type_edit_line   : LineEdit
 @export var aspect_line             : Label
 @export var aspect_type_line        : Label
-@export var _delete_button          : Button
+@export var _delete_button          : TextureButton
 @export var cons_stress_box         : TextureRect
 @export var terms                   : VBoxContainer
 @export var all_terms               : VBoxContainer
@@ -141,3 +143,10 @@ func load_terms():
 func delete_term(term_ui : Control):
 	my_params.terms.erase(term_ui.params)
 	pass
+
+func _on_delete_button_delete() -> void:
+	var _character = CharactersSystem.main_character as character
+	_character.consequences.erase(my_params)
+	delete.emit()
+	queue_free()
+	pass # Replace with function body.

@@ -1,6 +1,7 @@
 extends drag_container_cell
 
 signal select(flag : bool)
+signal delete
 
 @export var points                 : HBoxContainer
 @export var buttons                : HBoxContainer
@@ -114,7 +115,7 @@ func _input(event: InputEvent) -> void:
 			edit_button.modulate              = unfocused_color
 			color_picker_button.modulate      = unfocused_color
 			drag_button.modulate              = unfocused_color
-			change_delete_flag(false)
+#			change_delete_flag(false)
 		
 		if dragged:
 			_dragging()
@@ -137,21 +138,6 @@ func _input(event: InputEvent) -> void:
 				end_dragging.emit()
 			dragged = false
 			z_index = 0
-	pass
-
-
-func _on__delete_button_pressed() -> void:
-	if delete_flag:
-		set_select(false)
-		queue_free()
-	else:
-		change_delete_flag(true)
-	pass # Replace with function body.
-
-func change_delete_flag(new_flag : bool):
-	delete_flag = new_flag
-	_delete_button.texture_normal = cross if !delete_flag else check
-#	_delete_button.texture_normal = 
 	pass
 
 func set_select(flag : bool):
@@ -218,4 +204,12 @@ func start_drag():
 
 func _on_edit_skill_text_submitted(new_text: String) -> void:
 	set_edit()
+	pass # Replace with function body.
+
+
+func _on_delete_button_delete() -> void:
+	var _character = CharactersSystem.main_character as character
+	_character.skills.erase(skill_params)
+	delete.emit()
+	queue_free()
 	pass # Replace with function body.

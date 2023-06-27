@@ -1,11 +1,14 @@
+PopupMenu
+FileDialog
+Window
+Button
 VBoxContainer
 TextureButton
+delete_button
 HFlowContainer
 VFlowContainer
 ScrollContainer
 MarginContainer
-delete_button
-Button
 HBoxContainer
 TextEdit
 RichTextLabel

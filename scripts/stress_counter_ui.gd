@@ -1,10 +1,14 @@
 extends editing_line
 
+signal delete
+
 @export var all_params      : VBoxContainer
 @export var base_boxes      : HBoxContainer
 @export var params_boxes    : HBoxContainer
 @export var settings_button : TextureButton
 @export var additionals     : VBoxContainer
+@export var add             : TextureButton
+@export var remove          : TextureButton
 
 @export var all_buttons    : Control
 
@@ -20,6 +24,8 @@ func _ready() -> void:
 	super._ready()
 	new_params()
 	SignalsBus.skills_changed.connect(update_params_boxes)
+	if !editabled:
+		all_buttons.visible = false
 	pass
 
 func new_params():
@@ -38,7 +44,10 @@ func set_params(new_params : stress_counter):
 
 func select(flag):
 	super.select(flag)
-	all_buttons.modulate = Color.WHITE if flag else Color.TRANSPARENT 
+	var final_color = Color.WHITE if flag else Color.TRANSPARENT 
+	all_buttons.modulate = final_color
+	add.modulate = final_color
+	remove.modulate = final_color
 	pass
 
 func update():
@@ -122,4 +131,11 @@ func _on_set_new_text():
 
 func _on_make_main_pressed() -> void:
 	CharactersSystem.main_character.set_main_stress(my_params)
+	pass # Replace with function body.
+
+func _on_delete_button_delete() -> void:
+	var _character = CharactersSystem.main_character as character
+	_character.stresses.erase(my_params)
+	delete.emit()
+	queue_free()
 	pass # Replace with function body.

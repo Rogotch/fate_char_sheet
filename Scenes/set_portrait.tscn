@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt3j5cmorqell"]
+
+[ext_resource type="Script" path="res://scripts/set_portrait.gd" id="1_e2p47"]
+[ext_resource type="Texture2D" uid="uid://br43d1hbfcwjg" path="res://Sprites/Icons/cursor_down.png" id="2_nqdmt"]
+
+[node name="set_portrait" type="Control" node_paths=PackedStringArray("main_texture", "preview", "select_portrait", "top_left_button", "down_left_button", "down_right_button", "top_right_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -597.0
+offset_bottom = -338.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e2p47")
+main_texture = NodePath("background/main_texture")
+preview = NodePath("preview")
+select_portrait = NodePath("select_portrait")
+top_left_button = NodePath("select_portrait/top_left_button")
+down_left_button = NodePath("select_portrait/down_left_button")
+down_right_button = NodePath("select_portrait/down_right_button")
+top_right_button = NodePath("select_portrait/top_right_button")
+
+[node name="background" type="ColorRect" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.172549, 0.164706, 0.196078, 1)
+
+[node name="main_texture" type="TextureRect" parent="background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="preview" type="TextureRect" parent="."]
+offset_left = 26.0
+offset_top = 347.0
+offset_right = 184.0
+offset_bottom = 536.0
+expand_mode = 1
+stretch_mode = 7
+
+[node name="select_portrait" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(100, 132)
+offset_left = 196.0
+offset_top = 57.0
+offset_right = 296.0
+offset_bottom = 189.0
+border_color = Color(0.501961, 0.501961, 0.501961, 1)
+editor_only = false
+
+[node name="top_left_button" type="TextureButton" parent="select_portrait"]
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+pivot_offset = Vector2(32, 32)
+texture_normal = ExtResource("2_nqdmt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="down_left_button" type="TextureButton" parent="select_portrait"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_vertical = 0
+pivot_offset = Vector2(32, 0)
+texture_normal = ExtResource("2_nqdmt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="down_right_button" type="TextureButton" parent="select_portrait"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("2_nqdmt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="top_right_button" type="TextureButton" parent="select_portrait"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = -32.0
+offset_right = 32.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_nqdmt")
+ignore_texture_size = true
+stretch_mode = 5

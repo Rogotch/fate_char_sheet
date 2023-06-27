@@ -13,7 +13,7 @@ signal new_main_stress(new_stress : stress_counter)
 @export var consequences                : Array[consequence]
 @export var notes                       : Array[String]
 @export var points                      := fate_points.new()
-
+@export var portrait                    : Texture2D
 
 func _ready() -> void:
 	pass

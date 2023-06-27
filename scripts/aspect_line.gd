@@ -1,11 +1,13 @@
 extends editing_line
 class_name line_of_aspect
 
+signal delete
+
 @export var aspect_edit_line        : LineEdit
 @export var aspect_type_edit_line   : LineEdit
 @export var aspect_line             : Label
 @export var aspect_type_line        : Label
-@export var _delete_button          : Button
+@export var _delete_button          : TextureButton
 @export var set_as_main             : Button
 
 var delete_flag   := false
@@ -71,4 +73,11 @@ func submit_text(new_text : String):
 
 func _on_set_as_main_pressed() -> void:
 	CharactersSystem.main_character.set_main_aspect(my_params)
+	pass # Replace with function body.
+
+func _on_delete_button_delete() -> void:
+	var _character = CharactersSystem.main_character as character
+	_character.aspects.erase(my_params)
+	delete.emit()
+	queue_free()
 	pass # Replace with function body.
