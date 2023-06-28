@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://twa5dbcfk637"]
+[gd_scene load_steps=20 format=3 uid="uid://twa5dbcfk637"]
 
 [ext_resource type="PackedScene" uid="uid://dbk8rdqkccp1y" path="res://entities/bar.tscn" id="1_3i6yc"]
 [ext_resource type="Script" path="res://scripts/character_list.gd" id="1_ag6tl"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cfafss2yk8j2t" path="res://entities/fate_points.tscn" id="4_28m1f"]
 [ext_resource type="PackedScene" uid="uid://c37tj6cmi34qp" path="res://entities/skills.tscn" id="4_c0feu"]
 [ext_resource type="PackedScene" uid="uid://d1axx6nxihide" path="res://entities/roller.tscn" id="5_okjfn"]
+[ext_resource type="Texture2D" uid="uid://d0vy7u4dyxvuh" path="res://Sprites/Icons/pawn_clockwise.png" id="7_m7vla"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
 
@@ -37,7 +38,7 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_w2mb2")
 HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_fvxh8")
 HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_sqkc5")
 
-[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "concept", "main_stress", "fate_points_ui", "history", "portrait", "file_dialog", "aspects_holder", "stunts_holder", "stresses_holder", "consequence_holder", "notes_holder")]
+[node name="character_sheet" type="Control" node_paths=PackedStringArray("actions_descriptions", "skills", "bar", "roller", "stresses", "skills_container", "character_name", "scroll_parameters", "parameters_holder", "concept", "main_stress", "fate_points_ui", "history", "portrait", "file_dialog", "popup", "select_button", "aspects_holder", "stunts_holder", "stresses_holder", "consequence_holder", "notes_holder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,11 +61,22 @@ fate_points_ui = NodePath("character_holder/content/character/character_title_an
 history = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/history")
 portrait = NodePath("character_holder/content/character/avatar_background/portrait")
 file_dialog = NodePath("select_image")
+popup = NodePath("popup")
+select_button = NodePath("character_holder/content/character/avatar_background/portrait/select_button")
 aspects_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/aspects_scroll/aspects/aspects_holder")
 stunts_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/stunts_scroll/stunts/stunts_holder")
 stresses_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses/stresses_holder")
 consequence_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences/consequence_holder")
 notes_holder = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes/margin_notes/scroll_notes/notes_holder")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.203922, 0.231373, 0.313726, 1)
 
 [node name="character_holder" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -106,13 +118,14 @@ tooltip_text = "Иконка вашего персонажа"
 expand_mode = 1
 stretch_mode = 6
 
-[node name="select_image" type="TextureButton" parent="character_holder/content/character/avatar_background/portrait"]
+[node name="select_button" type="TextureButton" parent="character_holder/content/character/avatar_background/portrait"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+button_mask = 3
 texture_normal = ExtResource("2_dlp3a")
 ignore_texture_size = true
 stretch_mode = 3
@@ -168,13 +181,22 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="save" type="Button" parent="character_holder/content/character/character_title_and_buttons/upper_tab/buttons"]
+visible = false
 layout_mode = 2
 text = "save"
 
 [node name="load" type="Button" parent="character_holder/content/character/character_title_and_buttons/upper_tab/buttons"]
+visible = false
 layout_mode = 2
 text = "load
 "
+
+[node name="change" type="Button" parent="character_holder/content/character/character_title_and_buttons/upper_tab/buttons"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+icon = ExtResource("7_m7vla")
+icon_alignment = 1
+expand_icon = true
 
 [node name="tabs" type="HBoxContainer" parent="character_holder/content/character/character_title_and_buttons"]
 custom_minimum_size = Vector2(0, 30)
@@ -415,11 +437,12 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*png", "*jpeg")
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="popup" type="PopupMenu" parent="."]
 
-[connection signal="pressed" from="character_holder/content/character/avatar_background/portrait/select_image" to="." method="_on_select_image_pressed"]
+[connection signal="pressed" from="character_holder/content/character/avatar_background/portrait/select_button" to="." method="_on_select_image_pressed"]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/upper_tab/buttons/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/upper_tab/buttons/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/upper_tab/buttons/change" to="." method="_on_change_pressed"]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/tabs/tab_1" to="." method="set_tab" binds= [0]]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/tabs/tab_2" to="." method="set_tab" binds= [1]]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/tabs/tab_3" to="." method="set_tab" binds= [2]]
@@ -438,3 +461,4 @@ filters = PackedStringArray("*png", "*jpeg")
 [connection signal="roll" from="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/roller/roller" to="." method="_on_roller_roll"]
 [connection signal="pressed" from="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes/add_note" to="." method="add_new_note"]
 [connection signal="file_selected" from="select_image" to="." method="_on_file_dialog_file_selected"]
+[connection signal="id_pressed" from="popup" to="." method="_on_popup_id_pressed"]

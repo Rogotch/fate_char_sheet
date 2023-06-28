@@ -15,6 +15,8 @@ extends Control
 @export var history                       : VBoxContainer
 @export var portrait                      : TextureRect
 @export var file_dialog                   : FileDialog
+@export var popup                         : PopupMenu
+@export var select_button                 : TextureButton
 
 @export_group("Holders")
 @export var aspects_holder     : VBoxContainer
@@ -264,4 +266,17 @@ func _on_file_dialog_file_selected(path: String) -> void:
 
 func _on_select_image_pressed() -> void:
 	file_dialog.popup_centered()
+	pass # Replace with function body.
+
+
+func _on_change_pressed() -> void:
+	popup.clear()
+	for _character in CharactersSystem.scanned_characters:
+		popup.add_icon_item(_character.portrait, _character.name)
+	popup.popup(Rect2(get_global_mouse_position(), Vector2.ZERO))
+	pass # Replace with function body.
+
+
+func _on_popup_id_pressed(id: int) -> void:
+	print("select ", id)
 	pass # Replace with function body.

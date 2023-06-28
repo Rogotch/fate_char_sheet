@@ -43,6 +43,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="preview" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 347.0
 offset_right = 184.0
@@ -52,6 +53,7 @@ stretch_mode = 7
 
 [node name="select_portrait" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(100, 132)
+layout_mode = 0
 offset_left = 196.0
 offset_top = 57.0
 offset_right = 296.0
