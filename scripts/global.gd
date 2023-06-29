@@ -8,7 +8,13 @@ func _ready() -> void:
 	pass
 
 func drop_file(files):
-	print_debug(files[0])
+	CharactersSystem.load_save_character(files[0])
+	reload_character.call_deferred()
+#	print_debug(files[0])
+	pass
+
+func reload_character():
+	SignalsBus.reload_character.emit()
 	pass
 
 func get_outcome_type_by_value(result_value : int):

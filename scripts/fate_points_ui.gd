@@ -49,6 +49,8 @@ func update():
 	pass
 
 func change_points_count(additional_value : int):
+	if CharactersSystem.main_character == null:
+		return
 	params.value = params.value + additional_value if params.value + additional_value > 0 else 0
 	update()
 	pass

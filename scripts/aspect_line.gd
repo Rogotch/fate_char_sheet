@@ -30,6 +30,7 @@ func update():
 	aspect_edit_line.text        = my_params.name
 	aspect_type_line.text        = my_params.effect
 	aspect_type_edit_line.text   = my_params.effect
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 

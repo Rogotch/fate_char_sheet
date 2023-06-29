@@ -22,7 +22,6 @@ edit_button = NodePath("buttons/edit_button")
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "фывафывапфывпаывапывапывапывапывапывапывапывп"
 fit_content = true
 
 [node name="edit" type="TextEdit" parent="."]

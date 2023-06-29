@@ -15,7 +15,7 @@ signal new_main_stress(new_stress : stress_counter)
 @export var points                      := fate_points.new()
 @export var portrait                    : Texture2D
 
-var last_save_path                      := ""
+@export var last_save_path                      := ""
 
 func _ready() -> void:
 	pass

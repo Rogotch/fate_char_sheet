@@ -73,7 +73,7 @@ script = ExtResource("6_5g0o7")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "Трюк"
+text = "BASE_STUNT_NAME"
 vertical_alignment = 1
 autowrap_mode = 3
 
@@ -113,6 +113,7 @@ size_flags_vertical = 3
 
 [node name="descr" type="Label" parent="description/scroll/holder"]
 layout_mode = 2
+text = "BASE_STUNT_DESCRIPTION"
 label_settings = SubResource("LabelSettings_ey22d")
 autowrap_mode = 3
 

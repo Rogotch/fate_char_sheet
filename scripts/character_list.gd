@@ -1,4 +1,7 @@
 extends Control
+@export_group("", "")
+@export var add_character_icon : Texture2D
+
 @export_group("Nodes")
 @export var actions_descriptions          : ScrollContainer
 @export var skills                        : VBoxContainer
@@ -35,16 +38,23 @@ var roll_result := 0
 var selecting_skill : skill
 
 func _ready() -> void:
-	if CharactersSystem.main_character == null: 
-		CharactersSystem.new_character()
 	character_name.set_new_text.connect(set_character_name)
-	full_load()
+	SignalsBus.reload_character.connect(try_load_character)
+	try_load_character()
+	pass
+
+func try_load_character():
+	if CharactersSystem.main_character != null: 
+		full_load()
 	pass
 
 func set_character_name():
+	if CharactersSystem.main_character == null:
+		return
 	var _character = CharactersSystem.main_character as character
 	_character.name = character_name.get_text()
-	print_debug(_character.name.is_valid_filename(), " ", _character.name.validate_filename())
+#	print_debug(_character.name.is_valid_filename(), " ", _character.name.validate_filename())
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 func load_character_name():
@@ -56,7 +66,7 @@ func load_character_name():
 func _on_bar_result(value) -> void:
 	actions_descriptions.action_result(value)
 	pass # Replace with function body.
-\
+
 
 func _on_skills_select_skill(skill_data : skill) -> void:
 	selecting_skill = skill_data
@@ -71,48 +81,70 @@ func _on_skills_deselect_skill() -> void:
 	pass # Replace with function body.
 
 func set_bar_value():
+#	if CharactersSystem.main_character == null:
+#		return
 	var skill_value = selecting_skill.value if selecting_skill != null else 0
 	bar.set_value(skill_value + roll_result, true)
 	pass
 
 func add_skill() -> void:
-	skills_container.add_skill("Навык", 0)
+	if CharactersSystem.main_character == null:
+		return
+	skills_container.add_skill(tr("SKILL_BASE_NAME"), 0)
+	CharactersSystem.write_save_character.call_deferred()
 	pass # Replace with function body.
 
 func add_new_stress() -> void:
+	if CharactersSystem.main_character == null:
+		return
 	var _character = CharactersSystem.main_character as character
 	var new_stress_data = stress_counter.new()
 	_character.stresses.append(new_stress_data)
 	_add_entity(new_stress_data, stress_class, stresses_holder)
+	CharactersSystem.write_save_character.call_deferred()
 #	add_stress(new_stress_data)
 	pass # Replace with function body.
 
 func add_new_stunt() -> void:
+	if CharactersSystem.main_character == null:
+		return
 	var _character = CharactersSystem.main_character as character
 	var new_stunt_data = stunt.new()
 	_character.stunts.append(new_stunt_data)
 	_add_entity(new_stunt_data, stunt_class, stunts_holder)
+	CharactersSystem.write_save_character.call_deferred()
 	pass # Replace with function body.
 
 func add_new_aspect() -> void:
+	if CharactersSystem.main_character == null:
+		return
 	var _character = CharactersSystem.main_character as character
 	var new_aspect_data = aspect.new()
 	_character.aspects.append(new_aspect_data)
 	_add_entity(new_aspect_data, aspect_class, aspects_holder)
+	CharactersSystem.write_save_character.call_deferred()
 	pass # Replace with function body.
 
 func add_new_consenqunce() -> void:
+	if CharactersSystem.main_character == null:
+		return
 	var _character = CharactersSystem.main_character as character
 	var new_consequence_data = consequence.new()
 	_character.consequences.append(new_consequence_data)
 	_add_entity(new_consequence_data, consenqunce_class, consequence_holder)
+	CharactersSystem.write_save_character.call_deferred()
 	pass # Replace with function body.
 
 func add_new_note() -> void:
+	if CharactersSystem.main_character == null:
+		return
 	_add_note("")
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 func _add_note(text : String):
+	if CharactersSystem.main_character == null:
+		return
 	var note = notes_class.instantiate()
 	notes_holder.add_child(note)
 	
@@ -188,7 +220,7 @@ func load_notes():
 	pass
 
 func _on_save_pressed() -> void:
-	CharactersSystem.write_save_character()
+	CharactersSystem.write_save_character.call_deferred()
 	pass # Replace with function body.
 
 func full_load():
@@ -208,8 +240,8 @@ func full_load():
 
 
 func _on_load_pressed() -> void:
-	CharactersSystem.load_save_character()
-	full_load.call_deferred()
+#	CharactersSystem.load_save_character()
+#	full_load.call_deferred()
 	pass # Replace with function body.
 
 
@@ -257,26 +289,55 @@ func load_portrait():
 	pass
 
 func _on_file_dialog_file_selected(path: String) -> void:
+	if CharactersSystem.main_character == null:
+		return
 	var portrait_texture = load(path)
 #	var portrait = load(path).get_image()
 	CharactersSystem.main_character.portrait = portrait_texture
 	portrait.texture = portrait_texture
+	CharactersSystem.write_save_character.call_deferred()
 	pass # Replace with function body.
 
 
 func _on_select_image_pressed() -> void:
-	file_dialog.popup_centered()
+	if CharactersSystem.main_character == null:
+		return
+	file_dialog.popup_centered.call_deferred()
 	pass # Replace with function body.
 
 
 func _on_change_pressed() -> void:
+	CharactersSystem.scan_characters()
 	popup.clear()
+	var img_add_character_icon = ImageTexture.create_from_image(add_character_icon.get_image())
+	img_add_character_icon.set_size_override(Vector2(32, 32))
+	popup.add_icon_item(img_add_character_icon, tr("ADD_NEW_CHARACTER"))
 	for _character in CharactersSystem.scanned_characters:
-		popup.add_icon_item(_character.portrait, _character.name)
+		var character_icon = null
+		if _character.portrait != null:
+			character_icon = ImageTexture.create_from_image(_character.portrait.get_image())
+		if character_icon != null:
+			character_icon.set_size_override(Vector2(32, 32))
+		popup.add_icon_item(character_icon, _character.name)
 	popup.popup(Rect2(get_global_mouse_position(), Vector2.ZERO))
 	pass # Replace with function body.
 
 
 func _on_popup_id_pressed(id: int) -> void:
-	print("select ", id)
+	if id == 0:
+		CharactersSystem.new_character()
+	else:
+		CharactersSystem.select_scanned_character(id-1)
+	full_load()
+#	print("select ", id-1)
+	pass # Replace with function body.
+
+
+func _on_select_button_mouse_entered() -> void:
+	select_button.modulate = Color.WHITE
+	pass # Replace with function body.
+
+
+func _on_select_button_mouse_exited() -> void:
+	select_button.modulate = Color.TRANSPARENT
 	pass # Replace with function body.

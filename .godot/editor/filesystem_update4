@@ -1,7 +1,4 @@
 res://ui/character_list.tscn
-res://Scenes/references/CreatePortrait.tscn
-res://Scenes/set_portrait.tscn
-res://entities/note.tscn
-res://scripts/classes/character.gd
-res://scripts/characters_system.gd
-res://scripts/character_list.gd
+res://entities/slider.tscn
+res://entities/stress_counter.tscn
+res://entities/stunt.tscn

@@ -57,7 +57,7 @@ theme_override_constants/separation = -10
 [node name="Label" type="Label" parent="texts/labels"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Аспект"
+text = "BASE_ASPECT_NAME"
 
 [node name="Control" type="Control" parent="texts/labels"]
 custom_minimum_size = Vector2(0, 20)
@@ -72,7 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Тип аспекта"
+text = "BASE_ASPECT_TYPE"
 label_settings = SubResource("LabelSettings_2b5du")
 
 [node name="edit" type="VBoxContainer" parent="texts"]
@@ -93,8 +93,7 @@ placeholder_text = "Тип аспекта"
 [node name="Edit_button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "edit
-"
+text = "EDIT_KEY"
 
 [connection signal="delete" from="delete_button" to="." method="_on_delete_button_delete"]
 [connection signal="pressed" from="set_as_main" to="." method="_on_set_as_main_pressed"]

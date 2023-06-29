@@ -1,3 +1,5 @@
+Label
+TextureRect
 ColorRect
 PopupMenu
 FileDialog
@@ -14,8 +16,6 @@ HBoxContainer
 TextEdit
 RichTextLabel
 LineEdit
-TextureRect
-Label
 ColorPickerButton
 ColorPicker
 OptionButton

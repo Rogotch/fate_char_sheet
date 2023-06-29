@@ -61,6 +61,7 @@ func set_params(new_text : String):
 func update():
 	edit.text = note_text
 	text.text = note_text
+	CharactersSystem.write_save_character.call_deferred()
 #	set_min_x_size()
 	pass
 

@@ -54,6 +54,7 @@ func update():
 	line_label.text = my_params.name
 	update_boxes()
 	update_params_boxes()
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 func add_params() -> void:
@@ -88,7 +89,7 @@ func add_box(count):
 		else:
 			my_params.add_box()
 		actual_boxes = my_params.boxes.size()
-	update_boxes()
+	my_params.emit_changed()
 	pass
 
 func change_settings():

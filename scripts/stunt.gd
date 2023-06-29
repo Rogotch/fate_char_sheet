@@ -30,6 +30,7 @@ func update():
 	stunt_edit_line.text              = my_params.name
 	stunt_description_line.text       = my_params.description
 	stunt_description_edit_line.text  = my_params.description
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 func set_text_from_edit():

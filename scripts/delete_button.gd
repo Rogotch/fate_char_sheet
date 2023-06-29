@@ -5,7 +5,7 @@ class_name delete_button
 signal delete
 
 @onready var delete_texture = preload("res://Sprites/Icons/cross.png")
-@onready var apply_texture  = preload("res://Sprites/Icons/tick.png")
+#@onready var apply_texture  = preload("res://Sprites/Icons/tick.png")
 @onready var timer          = Timer.new()
 
 var deleting_flag := false

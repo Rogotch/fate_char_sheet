@@ -1,9 +1,9 @@
 extends Resource
 class_name stress_counter
 
-@export var name  := tr("STRESS_KEY")  : set = set_stress_name
-@export var boxes : Array[stress_box]  : set = set_boxes
-@export var terms : Array[stress_term] : set = set_terms
+@export var name  := tr("BASE_STRESS_NAME")  : set = set_stress_name
+@export var boxes : Array[stress_box]        : set = set_boxes
+@export var terms : Array[stress_term]       : set = set_terms
 @export var main  : bool
 
 func _init() -> void:

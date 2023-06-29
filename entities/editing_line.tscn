@@ -19,7 +19,7 @@ change = NodePath("change")
 [node name="change" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-text = "edit"
+text = "EDIT_KEY"
 
 [node name="line_label" type="Label" parent="."]
 layout_mode = 2

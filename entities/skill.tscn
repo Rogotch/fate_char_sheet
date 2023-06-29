@@ -105,7 +105,7 @@ edit_alpha = false
 [node name="name" type="Label" parent="skill_name"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Навык"
+text = "BASE_SKILL_NAME"
 label_settings = SubResource("LabelSettings_xnndv")
 horizontal_alignment = 1
 vertical_alignment = 1

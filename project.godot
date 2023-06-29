@@ -30,7 +30,7 @@ common/drop_mouse_on_gui_input_disabled=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localization/fate_localization.ru.translation", "res://Localization/fate_localization.en.translation")
+locale/translations=PackedStringArray("res://Localization/localization.ru.translation", "res://Localization/localization.en.translation")
 
 [physics]
 
@@ -39,4 +39,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
 environment/default_environment="res://default_env.tres"

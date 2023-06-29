@@ -28,6 +28,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
-text = "Добавить условия"
+text = "ADD_TERMS_KEY"
 
 [connection signal="pressed" from="texts/terms/buttons/add_params" to="." method="add_params"]

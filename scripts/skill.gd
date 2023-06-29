@@ -39,6 +39,7 @@ func update():
 	color_picker_button.color = skill_params.modulation
 	points.modulate = skill_params.modulation
 	name_label.modulate = Color.ORANGE if selecting_flag else skill_params.modulation
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 func get_name_size():

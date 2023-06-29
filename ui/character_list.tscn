@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://twa5dbcfk637"]
+[gd_scene load_steps=22 format=3 uid="uid://twa5dbcfk637"]
 
 [ext_resource type="PackedScene" uid="uid://dbk8rdqkccp1y" path="res://entities/bar.tscn" id="1_3i6yc"]
 [ext_resource type="Script" path="res://scripts/character_list.gd" id="1_ag6tl"]
 [ext_resource type="PackedScene" uid="uid://bevofxsd70c2" path="res://entities/editing_line.tscn" id="2_0rgqi"]
-[ext_resource type="Texture2D" uid="uid://nlk7grs81mi7" path="res://Sprites/Icon03.png" id="2_dlp3a"]
+[ext_resource type="Texture2D" uid="uid://bpajdqm7f1vbm" path="res://Sprites/Icons/profile.png" id="2_h7m3g"]
+[ext_resource type="FontFile" uid="uid://ddai7728bu3ip" path="res://Fonts/Nunito/Nunito-VariableFont_wght.ttf" id="3_4jqg2"]
 [ext_resource type="PackedScene" uid="uid://clydxjt8wj3yg" path="res://entities/skill_check_helper.tscn" id="3_b4j05"]
 [ext_resource type="PackedScene" uid="uid://dtkcq3xldi68s" path="res://entities/stress_counter.tscn" id="3_fajwi"]
 [ext_resource type="PackedScene" uid="uid://bcar4yym7i47s" path="res://entities/aspect_line.tscn" id="3_pwd4a"]
@@ -11,7 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://cfafss2yk8j2t" path="res://entities/fate_points.tscn" id="4_28m1f"]
 [ext_resource type="PackedScene" uid="uid://c37tj6cmi34qp" path="res://entities/skills.tscn" id="4_c0feu"]
 [ext_resource type="PackedScene" uid="uid://d1axx6nxihide" path="res://entities/roller.tscn" id="5_okjfn"]
-[ext_resource type="Texture2D" uid="uid://d0vy7u4dyxvuh" path="res://Sprites/Icons/pawn_clockwise.png" id="7_m7vla"]
+[ext_resource type="Texture2D" uid="uid://cf3c5vpcnnal" path="res://Sprites/Icons/pawns.png" id="8_lx7oe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kepon"]
+font = ExtResource("3_4jqg2")
+font_size = 82
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi3tg"]
 
@@ -46,6 +51,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ag6tl")
+add_character_icon = ExtResource("2_h7m3g")
 actions_descriptions = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/actions_descriptions")
 skills = NodePath("character_holder/content/all_parameters/skills_holder/ScrollContainer/skills")
 bar = NodePath("character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/roller/bar")
@@ -119,17 +125,29 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="select_button" type="TextureButton" parent="character_holder/content/character/avatar_background/portrait"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-button_mask = 3
-texture_normal = ExtResource("2_dlp3a")
 ignore_texture_size = true
-stretch_mode = 3
-flip_h = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="character_holder/content/character/avatar_background/portrait/select_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_kepon")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="character_title_and_buttons" type="VBoxContainer" parent="character_holder/content/character"]
 layout_mode = 2
@@ -148,7 +166,7 @@ layout_mode = 2
 [node name="name" type="Label" parent="character_holder/content/character/character_title_and_buttons/upper_tab/character_info/name_line"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Имя: "
+text = "NAME_KEY"
 label_settings = SubResource("LabelSettings_mi3tg")
 
 [node name="editing_line" parent="character_holder/content/character/character_title_and_buttons/upper_tab/character_info/name_line" instance=ExtResource("2_0rgqi")]
@@ -194,7 +212,7 @@ text = "load
 [node name="change" type="Button" parent="character_holder/content/character/character_title_and_buttons/upper_tab/buttons"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-icon = ExtResource("7_m7vla")
+icon = ExtResource("8_lx7oe")
 icon_alignment = 1
 expand_icon = true
 
@@ -205,22 +223,22 @@ layout_mode = 2
 [node name="tab_1" type="Button" parent="character_holder/content/character/character_title_and_buttons/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Aspects_and_stunts"
+text = "ASPECTS_AND_STUNTS_TAB"
 
 [node name="tab_2" type="Button" parent="character_holder/content/character/character_title_and_buttons/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "stresses_and_consequences"
+text = "STRESSES_AND_CONSEQUENCES_TAB"
 
 [node name="tab_3" type="Button" parent="character_holder/content/character/character_title_and_buttons/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Dice roller"
+text = "DICE_ROLLER_TAB"
 
 [node name="tab_4" type="Button" parent="character_holder/content/character/character_title_and_buttons/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "notes"
+text = "NOTES_TAB"
 
 [node name="all_parameters" type="HBoxContainer" parent="character_holder/content"]
 layout_mode = 2
@@ -239,7 +257,7 @@ layout_mode = 2
 [node name="add_skill" type="Button" parent="character_holder/content/all_parameters/skills_holder/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+Добавить"
+text = "ADD_SKILL"
 
 [node name="show_up" type="TextureButton" parent="character_holder/content/all_parameters/skills_holder/HBoxContainer"]
 texture_filter = 2
@@ -268,6 +286,7 @@ vertical_scroll_mode = 0
 
 [node name="margin_holder" type="MarginContainer" parent="character_holder/content/all_parameters/scroll_parameters"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
@@ -276,14 +295,12 @@ theme_override_constants/margin_bottom = 2
 [node name="parameters_holder" type="HBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/separation = 2
 
 [node name="aspects_and_stunts" type="HBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder"]
 custom_minimum_size = Vector2(830, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="aspects_scroll" type="ScrollContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts"]
 clip_contents = false
@@ -300,7 +317,7 @@ theme_override_constants/separation = 10
 
 [node name="add_aspect" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/aspects_scroll/aspects"]
 layout_mode = 2
-text = "Add aspect"
+text = "ADD_ASPECT"
 
 [node name="aspects_holder" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/aspects_scroll/aspects"]
 layout_mode = 2
@@ -321,7 +338,7 @@ theme_override_constants/separation = 10
 
 [node name="add_stunt" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/stunts_scroll/stunts"]
 layout_mode = 2
-text = "Add stunt"
+text = "ADD_STUNT"
 
 [node name="stunts_holder" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/aspects_and_stunts/stunts_scroll/stunts"]
 layout_mode = 2
@@ -337,6 +354,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
+horizontal_scroll_mode = 0
 
 [node name="stresses" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/stresses_scroll"]
 layout_mode = 2
@@ -345,7 +363,7 @@ theme_override_constants/separation = 10
 
 [node name="add_stress" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses"]
 layout_mode = 2
-text = "Add stress"
+text = "ADD_STRESS"
 
 [node name="stresses_holder" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/stresses_scroll/stresses"]
 layout_mode = 2
@@ -355,6 +373,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
+horizontal_scroll_mode = 0
 
 [node name="consequences" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll"]
 layout_mode = 2
@@ -363,7 +382,7 @@ theme_override_constants/separation = 10
 
 [node name="add_consequence" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
 layout_mode = 2
-text = "Add consequence"
+text = "ADD_CONSEQUENCE"
 
 [node name="consequence_holder" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/stresses_and_consequenceы/consequences_scroll/consequences"]
 layout_mode = 2
@@ -373,28 +392,28 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(830, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="roller" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller"]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 
 [node name="bar" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/roller" instance=ExtResource("1_3i6yc")]
-custom_minimum_size = Vector2(90, 396)
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 10
+size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="roller" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller/roller" instance=ExtResource("5_okjfn")]
 custom_minimum_size = Vector2(90, 70)
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 0
 
 [node name="actions_descriptions" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller" instance=ExtResource("3_b4j05")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
+horizontal_scroll_mode = 0
 
 [node name="history" type="VBoxContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/dice_roller"]
 layout_mode = 2
@@ -409,7 +428,7 @@ size_flags_vertical = 3
 
 [node name="add_note" type="Button" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes"]
 layout_mode = 2
-text = "Add note"
+text = "ADD_NOTE"
 
 [node name="margin_notes" type="MarginContainer" parent="character_holder/content/all_parameters/scroll_parameters/margin_holder/parameters_holder/notes"]
 layout_mode = 2
@@ -438,7 +457,12 @@ access = 2
 filters = PackedStringArray("*png", "*jpeg")
 
 [node name="popup" type="PopupMenu" parent="."]
+size = Vector2i(412, 506)
+content_scale_mode = 1
+content_scale_aspect = 4
 
+[connection signal="mouse_entered" from="character_holder/content/character/avatar_background/portrait/select_button" to="." method="_on_select_button_mouse_entered"]
+[connection signal="mouse_exited" from="character_holder/content/character/avatar_background/portrait/select_button" to="." method="_on_select_button_mouse_exited"]
 [connection signal="pressed" from="character_holder/content/character/avatar_background/portrait/select_button" to="." method="_on_select_image_pressed"]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/upper_tab/buttons/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="character_holder/content/character/character_title_and_buttons/upper_tab/buttons/load" to="." method="_on_load_pressed"]

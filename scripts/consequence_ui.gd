@@ -48,6 +48,7 @@ func update():
 	aspect_type_edit_line.text   = my_params.type
 	cons_stress_box.set_params(my_params.stress)
 	update_terms()
+	CharactersSystem.write_save_character.call_deferred()
 	pass
 
 func set_text(new_text):
